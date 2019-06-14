@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "sphinx_gherkindoc"
+version = "3.0.0"
+description = "A tool to convert Gherkin into Sphinx documentation"
+authors = ["Rackspace QE <qe-tools-contributors@rackspace.com>"]
+license = "MIT"
+
+[[tool.poetry.source]]
+name = "artifactory"
+url = "https://artifacts.rackspace.net/artifactory/api/pypi/pypi/simple/"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Sphinx = ">=1.3"
+sphinx_rtd_theme = ">=0.3.1"
+behave = ">=1.2.6"
+qecommon_tools = ">=1.0.0"
+recommonmark = ">=0.4.0"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+sphinx-gherkindoc = 'sphinx_gherkindoc:main'
+sphinx-gherkinconfig = 'sphinx_gherkindoc:config'
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
