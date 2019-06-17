@@ -31,7 +31,7 @@ release = version
 ######################################################
 
 # General information about your project.
-project = "QE Common Tools - A library of shared helpers"
+project = "Sphinx - Gherkindoc"
 copyright = "2018, Rackspace Quality Engineering"  # noqa
 author = "QE Engineering"
 
