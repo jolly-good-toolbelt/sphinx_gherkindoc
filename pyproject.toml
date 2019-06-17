@@ -4,7 +4,6 @@ version = "3.0.0"
 description = "A tool to convert Gherkin into Sphinx documentation"
 authors = ["Rackspace QE <qe-tools-contributors@rackspace.com>"]
 license = "MIT"
-include = ["sphinx_gherkindoc/sample-conf.py"]
 
 [[tool.poetry.source]]
 name = "artifactory"
