@@ -18,6 +18,8 @@ qecommon_tools = ">=1.0.0"
 recommonmark = ">=0.4.0"
 
 [tool.poetry.dev-dependencies]
+pre-commit = "^1.15"
+ghp-import = "^0.5.5"
 tomlkit = "^0.5.3"
 
 [tool.poetry.scripts]
