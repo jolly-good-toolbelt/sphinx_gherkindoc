@@ -1,0 +1,17 @@
+[flake8]
+max-line-length = 88
+inline-quotes = "
+# Ignore Notes
+#
+# Black-Related Ignores:
+#    D202 No blank lines allowed after docstring
+#    E203 Blank space before ':'
+#    W503 line break before binay operator
+#
+# Napoleon-Related Ignores:
+#
+#    D107 Missing docstring in __init__ (Google style says doc either the class or the __init__; not both)
+#
+ignore = D107, D202, E203, W503
+per-file-ignores =
+    tests/*:D103

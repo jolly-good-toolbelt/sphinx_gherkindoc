@@ -1,25 +1,41 @@
-"""Sample Sphinx config file for use with behave-based testing repositories."""
-
+"""Configure sphinx for package doc publication."""
 import os
 
+import tomlkit
+
+PYPROJECT_FILE = "pyproject.toml"
+EXPLANATION = "- needed to extract version information."
+file_path = os.path.join(
+    os.path.abspath(os.path.join(__file__, os.path.pardir, os.path.pardir)),
+    PYPROJECT_FILE,
+)
+
+try:
+    with open(file_path) as f:
+        toml_data = tomlkit.parse(f.read())
+except FileNotFoundError as e:
+    print(f"Cannot find config file {file_path} {EXPLANATION}")
+    print(e)
+    exit(-1)
+
+try:
+    version = str(toml_data["tool"]["poetry"]["version"])
+except KeyError as e:
+    print(f"The [tool.poetry] 'version' key was not found {EXPLANATION}")
+    print(e)
+    exit(-1)
+
+release = version
 
 # PLEASE EDIT THE FOLLOWING CONFIGURATION INFORMATION:
+######################################################
 
 # General information about your project.
-project = "%%PROJECT%%"
+project = "Sphinx - Gherkindoc"
 copyright = "2018, Rackspace Quality Engineering"  # noqa
-author = "%%AUTHOR%%"
+author = "QE Engineering"
 
-# The version info for the project you're documenting, acts as replacement for
-# |version| and |release|, also used in various other places throughout the
-# built documents.
-#
-# The short X.Y version.
-version = "%%VERSION%%"
-
-# The full version, including alpha/beta/rc tags.
-release = "%%RELEASE%%"
-
+######################################################
 # BELOW HERE YOU SHOULD BE ABLE TO LEAVE AS-IS.
 
 
@@ -31,15 +47,19 @@ extensions = [
     "sphinx.ext.ifconfig",
     "sphinx.ext.viewcode",
     "sphinx.ext.githubpages",
+    "sphinx.ext.inheritance_diagram",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
-from recommonmark.parser import CommonMarkParser  # noqa
+html_theme_options = {
+    "style_external_links": True,
+    "titles_only": False,
+    "collapse_navigation": False,
+}
 
-source_parsers = {".md": CommonMarkParser}
-source_suffix = [".rst", ".md"]
+source_suffix = [".rst"]
 
 # The master toctree document.
 master_doc = "index"
@@ -83,8 +103,8 @@ if not base_url:
     if "GIT_ORIGIN_URL" not in os.environ:
         base_url = ""  # If this is non-empty, sphinx will make it clickable.
     else:
-        owner_name = os.path.splitext(os.environ.get("GIT_ORIGIN_URL").split(":")[1])[0]
-        base_url = "https://github.rackspace.com/{}/tree/{}".format(
-            owner_name, commit_id
-        )
+        owner_name = os.path.splitext(
+            os.environ.get("GIT_ORIGIN_URL", "").split(":")[1]
+        )[0]
+        base_url = f"https://github.rackspace.com/{owner_name}/tree/{commit_id}"
 html_context = {"build_id": commit_id, "build_url": base_url}
