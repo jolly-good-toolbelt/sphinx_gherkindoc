@@ -695,7 +695,7 @@ type = "legacy"
 url = "https://artifacts.rackspace.net/artifactory/api/pypi/pypi/simple"
 
 [metadata]
-content-hash = "b9259515dd21c3203c3cd9a68da994ec9d39459c2e3ba16bf905fd7aa9472416"
+content-hash = "b365cfc3577f36e1e9bf9132ca946bcbb3cde065c9c39d08a7df3a2187982a3f"
 python-versions = "^3.6"
 
 [metadata.hashes]
