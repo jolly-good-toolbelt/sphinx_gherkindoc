@@ -4,6 +4,7 @@ version = "3.0.0"
 description = "A tool to convert Gherkin into Sphinx documentation"
 authors = ["Rackspace QE <qe-tools-contributors@rackspace.com>"]
 license = "MIT"
+include = ["sphinx_gherkindoc/sample-conf.py"]
 
 [[tool.poetry.source]]
 name = "artifactory"
@@ -19,8 +20,6 @@ recommonmark = ">=0.4.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^1.15"
-sphinx = "^2.0"
-sphinx-rtd-theme = "^0.4.3"
 ghp-import = "^0.5.5"
 tomlkit = "^0.5.3"
 
