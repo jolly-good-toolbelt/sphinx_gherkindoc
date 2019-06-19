@@ -213,7 +213,7 @@ def wanted_source_files(files, exclude_pattern_list):
 
 # Simplified this from a class, for various reasons.
 # Additional simplification work is needed!!!!
-def feature_to_rst(source_path):
+def feature_to_rst(source_path, root_path):
     """Return a SphinxWriter containing the rST for the given feature file."""
     output_file = SphinxWriter()
 
@@ -273,7 +273,7 @@ def feature_to_rst(source_path):
     def steps(steps):
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
-                step.name, step.filename, step.line
+                step.name, os.path.relpath(step.filename, root_path), step.line
             )
             bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
             output_file.add_output(u"- {} {}".format(step.keyword, bold_step))
@@ -351,7 +351,7 @@ def make_flat_name(path_list, filename_root=None, is_dir=False, ext=".rst"):
 #   either empty or have empty children.
 
 
-def toctree(path_list, subdirs, files, maxtocdepth):
+def toctree(path_list, subdirs, files, maxtocdepth, root_path):
     """
     Return a SphinxWriter for one level of a directory tree.
 
@@ -378,13 +378,14 @@ def toctree(path_list, subdirs, files, maxtocdepth):
 
         source_name_list = path_list + [a_file]
         source_name = os.path.join(*source_name_list)
+        source_path = os.path.join(root_path, source_name)
         verbose("Copying content from: {}".format(source_name))
-        of.add_output(get_file_contents(source_name), line_breaks=2)
+        of.add_output(get_file_contents(source_path), line_breaks=2)
         need_header = False
 
     if need_header:
         # We're just adding a boiler plate heading.
-        temp_path_list = path_list or [os.curdir]
+        temp_path_list = [root_path] + path_list if path_list else [os.curdir]
         of.create_section(1, display_name(os.path.join(*temp_path_list)))
 
     of.add_output(".. toctree::")
@@ -415,12 +416,12 @@ def scan_tree(starting_point, private, exclude_patterns):
     """
     result = []
 
-    for me, dirs, files in sphinx.util.osutil.walk(starting_point):
+    for me, dirs, files in os.walk(os.path.abspath(starting_point)):
         if is_excluded(me, exclude_patterns):
             dirs[:] = []
             continue
 
-        me_list = me.split(os.sep)
+        me_list = os.path.relpath(me, os.path.dirname(starting_point)).split(os.sep)
 
         # This prevents creating "dot" files in the output directory, which can be very
         # confusing.
@@ -449,6 +450,7 @@ def process_args(args):
     toc_name = args.toc_name
     step_glossary_name = args.step_glossary_name
     doc_project = args.doc_project
+    root_path = os.path.dirname(os.path.abspath(args.gherkin_path))
 
     top_level_toc_filename = os.path.join(output_path, toc_name) + ".rst"
 
@@ -470,7 +472,7 @@ def process_args(args):
         if DRY_RUN:
             continue
 
-        toc_file = toctree(a_dir_list, new_subdirs, files, maxtocdepth)
+        toc_file = toctree(a_dir_list, new_subdirs, files, maxtocdepth, root_path)
         # Check to see if we are at the last item to be processed
         # (which has already been popped)
         # to write the asked for master TOC file name.
@@ -485,11 +487,12 @@ def process_args(args):
         for a_file in files:
             a_file_list = a_dir_list + [a_file]
             source_name = os.path.join(*a_file_list)
+            source_path = os.path.join(root_path, source_name)
             if is_feature_file(a_file):
                 dest_name = os.path.join(
                     output_path, make_flat_name(a_file_list, is_dir=False)
                 )
-                feature_rst_file = feature_to_rst(source_name)
+                feature_rst_file = feature_to_rst(source_path, root_path)
                 verbose('converting "{}" to "{}"'.format(source_name, dest_name))
                 feature_rst_file.write_to_file(dest_name)
             elif not is_rst_file(a_file):
@@ -497,7 +500,7 @@ def process_args(args):
                     output_path, make_flat_name(a_file_list, is_dir=False, ext=None)
                 )
                 verbose('copying "{}" to "{}"'.format(source_name, dest_name))
-                shutil.copy(source_name, dest_name)
+                shutil.copy(source_path, dest_name)
 
     if step_glossary_name:
         glossary_filename = os.path.join(
