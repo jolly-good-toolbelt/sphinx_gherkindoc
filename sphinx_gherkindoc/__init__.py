@@ -273,7 +273,7 @@ def feature_to_rst(source_path, root_path):
     def steps(steps):
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
-                step.name, os.path.relpath(step.filename, root_path), step.line
+                step.name, os.path.relpath(step.filename, start=root_path), step.line
             )
             bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
             output_file.add_output(u"- {} {}".format(step.keyword, bold_step))
@@ -421,7 +421,8 @@ def scan_tree(starting_point, private, exclude_patterns):
             dirs[:] = []
             continue
 
-        me_list = os.path.relpath(me, os.path.dirname(starting_point)).split(os.sep)
+        root_path = os.path.dirname(starting_point)
+        me_list = os.path.relpath(me, start=root_path).split(os.sep)
 
         # This prevents creating "dot" files in the output directory, which can be very
         # confusing.
