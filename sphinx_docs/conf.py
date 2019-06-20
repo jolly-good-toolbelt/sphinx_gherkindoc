@@ -31,9 +31,9 @@ release = version
 ######################################################
 
 # General information about your project.
-project = "Sphinx - Gherkindoc"
-copyright = "2018, Rackspace Quality Engineering"  # noqa
-author = "QE Engineering"
+project = "sphinx-gherkindoc"
+copyright = "2018, Doug Philips"  # noqa
+author = "Doug Philips"
 
 ######################################################
 # BELOW HERE YOU SHOULD BE ABLE TO LEAVE AS-IS.
