@@ -16,10 +16,6 @@ from .utils import make_flat_name, verbose
 from .writer import feature_to_rst, toctree
 
 
-# Must be lowercase.
-FEATURE_FILE_SUFFIX = ".feature"
-SOURCE_SUFFICIES = (FEATURE_FILE_SUFFIX, ".md", ".rst")
-
 # This is a pretty arbitrary number controlling how much detail
 # will show up in the various TOCs.
 DEFAULT_TOC_DEPTH = 4
