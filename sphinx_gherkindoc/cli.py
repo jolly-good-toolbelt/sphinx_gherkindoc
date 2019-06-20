@@ -3,6 +3,7 @@
 import argparse
 import os.path
 import shutil
+from typing import Set
 
 import sphinx
 from qecommon_tools import get_file_contents
@@ -17,7 +18,7 @@ from .writer import feature_to_rst, toctree
 DEFAULT_TOC_DEPTH = 4
 
 
-def process_args(args):
+def process_args(args: argparse.Namespace) -> None:
     """Process the supplied CLI args."""
     work_to_do = scan_tree(args.gherkin_path, args.private, args.exclude_patterns)
     maxtocdepth = args.maxtocdepth
@@ -29,7 +30,7 @@ def process_args(args):
 
     top_level_toc_filename = os.path.join(output_path, toc_name) + ".rst"
 
-    non_empty_dirs = set()
+    non_empty_dirs: Set[str] = set()
 
     while work_to_do:
         a_dir, a_dir_list, subdirs, files = work_to_do.pop()
@@ -95,7 +96,7 @@ def process_args(args):
         glossary.write_to_file(glossary_filename)
 
 
-def main():
+def main() -> None:
     """Convert a directory-tree of Gherkin Feature files to rST files."""
     description = (
         "Look recursively in <gherkin_path> for Gherkin files and create one "
@@ -177,7 +178,7 @@ def main():
     process_args(args)
 
 
-def config():
+def config() -> None:
     """Emit a customized version of the sample sphinx config file."""
     description = (
         "Create a default Sphinx configuration for producing nice"
