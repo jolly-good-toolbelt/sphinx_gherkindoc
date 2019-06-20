@@ -9,7 +9,7 @@ from qecommon_tools import get_file_contents
 
 from .files import is_feature_file, is_rst_file, scan_tree
 from .glossary import make_steps_glossary
-from .utils import DRY_RUN, make_flat_name, verbose
+from .utils import make_flat_name, set_dry_run, set_verbose, verbose
 from .writer import feature_to_rst, toctree
 
 # This is a pretty arbitrary number controlling how much detail
@@ -44,7 +44,7 @@ def process_args(args):
 
         non_empty_dirs.add(a_dir)
 
-        if DRY_RUN:
+        if args.dry_run:
             continue
 
         toc_file = toctree(a_dir_list, new_subdirs, files, maxtocdepth, root_path)
@@ -83,7 +83,7 @@ def process_args(args):
         )
         glossary = make_steps_glossary(doc_project)
 
-        if DRY_RUN:
+        if args.dry_run:
             verbose("No glossary generated")
             return
 
@@ -160,12 +160,10 @@ def main():
         )
 
     if args.dry_run:
-        global DRY_RUN
-        DRY_RUN = True
+        set_dry_run(True)
 
     if args.verbose:
-        global VERBOSE
-        VERBOSE = True
+        set_verbose(True)
 
     if args.doc_project is None:
         args.doc_project = os.path.abspath(args.gherkin_path).split(os.path.sep)[-1]
@@ -175,7 +173,7 @@ def main():
 
     args.output_path = os.path.abspath(args.output_path)
     if not os.path.isdir(args.output_path):
-        if not DRY_RUN:
+        if not args.dry_run:
             verbose("creating directory: {}".format(args.output_path))
             os.makedirs(args.output_path)
 
