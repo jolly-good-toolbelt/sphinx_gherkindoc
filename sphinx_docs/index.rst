@@ -24,7 +24,7 @@ Command-Line/Utility Documentation
 
 ``sphinx_gherkindoc`` supplies command-line utilities:
 
-- ``sphinx-gherkindoc``: Convert a directory-tree of Gherking Feature files to
+- ``sphinx-gherkindoc``: Convert a directory-tree of Gherkin Feature files to
   rST files.
 
 - ``sphinx-gherkinconfig``: Emit a customized version of the sample sphinx
