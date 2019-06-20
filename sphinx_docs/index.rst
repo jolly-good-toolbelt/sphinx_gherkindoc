@@ -41,7 +41,6 @@ Maintainer's Documentation
    :caption: Maintainers
 
    MAINTAINER
-   CONTRIBUTING
    CONTRIBUTORS
 
 
