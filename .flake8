@@ -6,7 +6,7 @@ inline-quotes = "
 # Black-Related Ignores:
 #    D202 No blank lines allowed after docstring
 #    E203 Blank space before ':'
-#    W503 line break before binay operator
+#    W503 line break before binary operator
 #
 # Napoleon-Related Ignores:
 #
