@@ -22,6 +22,18 @@ def verbose(message):
     print(message)
 
 
+def set_dry_run(value):
+    """Set the value for DRY_RUN outside this module."""
+    global DRY_RUN
+    DRY_RUN = value
+
+
+def set_verbose(value):
+    """Set the value for VERBOSE outside this module."""
+    global VERBOSE
+    VERBOSE = value
+
+
 # Build up dictionary of characters that need escaping
 _escape_mappings = {ord(x): u"\\{}".format(x) for x in ("*", '"', "#", ":", "<", ">")}
 _advanced_escape_mappings = _escape_mappings.copy()
