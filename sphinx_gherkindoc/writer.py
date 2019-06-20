@@ -2,8 +2,11 @@
 import itertools
 import os
 import re
+from typing import List, Union
 
 import behave.parser
+import behave.model
+import behave.model_core
 from qecommon_tools import display_name, get_file_contents, list_from, url_if_ticket
 
 from .files import is_rst_file
@@ -31,7 +34,13 @@ QUOTE = "\u201C"
 #   either empty or have empty children.
 
 
-def toctree(path_list, subdirs, files, maxtocdepth, root_path):
+def toctree(
+    path_list: List[str],
+    subdirs: List[str],
+    files: List[str],
+    maxtocdepth: int,
+    root_path: str,
+) -> SphinxWriter:
     """
     Return a SphinxWriter for one level of a directory tree.
 
@@ -75,7 +84,7 @@ def toctree(path_list, subdirs, files, maxtocdepth, root_path):
 
     for a_file in sorted(non_included_files):
         # For MarkDown file content to be properly processed we
-        # need toleave the file name extension unchanged.
+        # need to leave the file name extension unchanged.
         ext = None if a_file.lower().endswith(".md") else ""
         name = make_flat_name(path_list, filename_root=a_file, is_dir=False, ext=ext)
         of.add_output(name, indent_by=INDENT_DEPTH)
@@ -89,15 +98,15 @@ def toctree(path_list, subdirs, files, maxtocdepth, root_path):
 
 # Simplified this from a class, for various reasons.
 # Additional simplification work is needed!!!!
-def feature_to_rst(source_path, root_path):
+def feature_to_rst(source_path: str, root_path: str) -> SphinxWriter:
     """Return a SphinxWriter containing the rST for the given feature file."""
     output_file = SphinxWriter()
 
-    def section(level, obj):
+    def section(level: int, obj: behave.model_core.BasicStatement) -> None:
         section_name = u"{}: {}".format(obj.keyword, rst_escape(obj.name))
         output_file.create_section(level, section_name.rstrip(": "))
 
-    def description(description):
+    def description(description: Union[str, List[str]]) -> None:
         if not description:
             return
         for line in list_from(description):
@@ -107,7 +116,7 @@ def feature_to_rst(source_path, root_path):
             if line[-1] == "." or line == description[-1]:
                 output_file.blank_line()
 
-    def text(text):
+    def text(text: Union[str, List[str]]) -> None:
         if not text:
             return
         output_file.blank_line()
@@ -122,7 +131,7 @@ def feature_to_rst(source_path, root_path):
 
     # Reference link here because it's too long to put inside the function itself.
     # http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#embedded-uris-and-aliases
-    def ticket_url_or_tag(tag):
+    def ticket_url_or_tag(tag: str) -> str:
         """Get a URL or tag.
 
         If tag is a ticket, return an anonymous embedded hyperlink for it,
@@ -133,7 +142,7 @@ def feature_to_rst(source_path, root_path):
             return "`{} <{}>`__".format(tag, url)
         return tag
 
-    def tags(tags, *parent_objs):
+    def tags(tags: List[str], *parent_objs: behave.model_core.BasicStatement) -> None:
         parent_with_tags = tuple(x for x in parent_objs if x.tags)
         if not (tags or parent_with_tags):
             return
@@ -146,7 +155,7 @@ def feature_to_rst(source_path, root_path):
             u"Tagged: {}".format(tag_str.strip()), line_breaks=2, indent_by=INDENT_DEPTH
         )
 
-    def steps(steps):
+    def steps(steps: List[behave.model.Step]) -> None:
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
                 step.name, os.path.relpath(step.filename, start=root_path), step.line
@@ -160,14 +169,16 @@ def feature_to_rst(source_path, root_path):
                 text(step.text)
         output_file.blank_line()
 
-    def examples(scenario, feature):
+    def examples(
+        scenario: behave.model.Scenario, feature: behave.model.Feature
+    ) -> None:
         for example in getattr(scenario, "examples", []):
             section(3, example)
             tags(example.tags, scenario, feature)
             table(example.table)
             output_file.blank_line()
 
-    def table(table, inline=False):
+    def table(table: behave.model.Table, inline: bool = False) -> None:
         indent_by = INDENT_DEPTH if inline else 0
         directive = ".. csv-table::"
         output_file.add_output(directive, indent_by=indent_by)
