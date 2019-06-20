@@ -96,7 +96,7 @@ def process_args(args):
 
 
 def main():
-    """Convert a directory-tree of Gherking Feature files to rST files."""
+    """Convert a directory-tree of Gherkin Feature files to rST files."""
     description = (
         "Look recursively in <gherkin_path> for Gherkin files and create one "
         "reST file for each. Other rST files found along the way will be included "
