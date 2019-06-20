@@ -4,7 +4,6 @@
 from __future__ import print_function
 import argparse
 from collections import defaultdict
-import fnmatch
 import itertools
 import os.path
 import re
@@ -15,6 +14,7 @@ from qecommon_tools import display_name, get_file_contents, list_from, url_if_ti
 import sphinx
 import sphinx.util
 
+from .files import is_feature_file, is_rst_file, scan_tree
 from .utils import INDENT_DEPTH, make_flat_name, rst_escape, SphinxWriter, verbose
 
 
@@ -98,46 +98,6 @@ def make_steps_glossary(project_name):
         glossary.blank_line()
 
     return glossary
-
-
-def not_private(filename):
-    """Check if a filename is private (using underscore prefix)."""
-    return not filename.startswith("_")
-
-
-def is_rst_file(filename):
-    """Determine if the given filename is a rST file."""
-    return filename.lower().endswith(".rst")
-
-
-def is_feature_file(filename):
-    """Determine if the given filename is a feature file."""
-    return filename.lower().endswith(FEATURE_FILE_SUFFIX)
-
-
-def is_wanted_file(filename):
-    """Wanted as in: We know how to process it."""
-    return filename.lower().endswith(SOURCE_SUFFICIES)
-
-
-def is_excluded(filename, exclude_pattern_list):
-    """Determine if the given filename should be excluded, based on the pattern list."""
-    return any(map(lambda x: fnmatch.fnmatch(filename, x), exclude_pattern_list))
-
-
-def not_hidden(name):
-    """Determine if the filename is not hidden."""
-    return not name.startswith(".")
-
-
-def wanted_source_files(files, exclude_pattern_list):
-    """Get list of wanted sorce files, excluding unwanted files."""
-    wanted_files = filter(is_wanted_file, files)
-    return [
-        a_file
-        for a_file in wanted_files
-        if not is_excluded(a_file, exclude_pattern_list)
-    ]
 
 
 # Simplified this from a class, for various reasons.
@@ -320,42 +280,6 @@ def toctree(path_list, subdirs, files, maxtocdepth, root_path):
         of.add_output(name, indent_by=INDENT_DEPTH)
 
     return of
-
-
-def scan_tree(starting_point, private, exclude_patterns):
-    """
-    Return list of entities to proces, in top-down orders.
-
-    the list can easily be processed with `.pop` to get a bottom-up
-    directory ordering.
-    """
-    result = []
-
-    for me, dirs, files in os.walk(os.path.abspath(starting_point)):
-        if is_excluded(me, exclude_patterns):
-            dirs[:] = []
-            continue
-
-        root_path = os.path.dirname(starting_point)
-        me_list = os.path.relpath(me, start=root_path).split(os.sep)
-
-        # This prevents creating "dot" files in the output directory, which can be very
-        # confusing.
-        if me_list[0] == os.path.curdir:
-            me_list = me_list[1:]
-
-        # Remove all hidden directories on principle.
-        # This stops scanning into version control directories such as .git, ,hg, etc.
-        dirs[:] = filter(not_hidden, dirs)
-
-        if not private:
-            dirs[:] = filter(not_private, dirs)
-
-        files = wanted_source_files(files, exclude_patterns)
-
-        result.append((me, me_list, dirs[:], files))
-
-    return result
 
 
 def process_args(args):
