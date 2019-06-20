@@ -24,8 +24,11 @@ Command-Line/Utility Documentation
 
 ``sphinx_gherkindoc`` supplies command-line utilities:
 
-- ``uuid-replacer``: Take a given file and replace all found UUIDs
-  with easy-to-read placeholders and a glossary.
+- ``sphinx-gherkindoc``: Convert a directory-tree of Gherking Feature files to
+  rST files.
+
+- ``sphinx-gherkinconfig``: Emit a customized version of the sample sphinx
+  config file.
 
 .. note::
     See the ``--help`` flag for full command arguments.
