@@ -159,11 +159,8 @@ def main():
             message="Sphinx (sphinx-gherkindoc) {}".format(sphinx.__display_version__)
         )
 
-    if args.dry_run:
-        set_dry_run(True)
-
-    if args.verbose:
-        set_verbose(True)
+    set_dry_run(args.dry_run)
+    set_verbose(args.verbose)
 
     if args.doc_project is None:
         args.doc_project = os.path.abspath(args.gherkin_path).split(os.path.sep)[-1]
