@@ -83,7 +83,7 @@ if not base_url:
     if "GIT_ORIGIN_URL" not in os.environ:
         base_url = ""  # If this is non-empty, sphinx will make it clickable.
     else:
-        owner_name = os.path.splitext(os.environ.get("GIT_ORIGIN_URL").split(":")[1])[0]
+        owner_name = os.path.splitext(os.environ["GIT_ORIGIN_URL"].split(":")[1])[0]
         base_url = "https://github.rackspace.com/{}/tree/{}".format(
             owner_name, commit_id
         )
