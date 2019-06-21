@@ -1,6 +1,6 @@
 """Module specific to building the steps glossary."""
 from collections import defaultdict
-from typing import DefaultDict, Set, Tuple
+from typing import DefaultDict, Optional, Set, Tuple
 
 from .utils import INDENT_DEPTH, rst_escape, SphinxWriter
 
@@ -42,7 +42,7 @@ class GlossaryEntry(object):
 step_glossary: DefaultDict[str, GlossaryEntry] = defaultdict(GlossaryEntry)
 
 
-def make_steps_glossary(project_name: str):
+def make_steps_glossary(project_name: str) -> Optional[SphinxWriter]:
     """Return SphinxWriter containing the step glossary information, if any."""
 
     if not step_glossary:
