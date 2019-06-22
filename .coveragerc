@@ -1,0 +1,3 @@
+[run]
+omit =
+    sphinx_gherkindoc/sample-conf.py
