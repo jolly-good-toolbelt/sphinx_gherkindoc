@@ -80,10 +80,11 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 commit_id = os.environ.get("ghprbPullId") or os.environ.get("GIT_COMMIT_ID")
 base_url = os.environ.get("ghprbPullLink")
 if not base_url:
-    if "GIT_ORIGIN_URL" not in os.environ:
+    owner_name = os.environ.get("GIT_ORIGIN_URL", "")
+    if not owner_name:
         base_url = ""  # If this is non-empty, sphinx will make it clickable.
     else:
-        owner_name = os.path.splitext(os.environ["GIT_ORIGIN_URL"].split(":")[1])[0]
+        owner_name = os.path.splitext(owner_name.split(":")[1])[0]
         base_url = "https://github.rackspace.com/{}/tree/{}".format(
             owner_name, commit_id
         )

@@ -43,7 +43,8 @@ _advanced_escape_mappings[ord("\\")] = u"\\\\\\"
 
 
 def rst_escape(unescaped: str, slash_escape: bool = False) -> str:
-    """Escape reST-ful characters to prevent parsing errors.
+    """
+    Escape reST-ful characters to prevent parsing errors.
 
     Args:
         unescaped: A string that potentially contains characters needing escaping
@@ -59,7 +60,7 @@ def rst_escape(unescaped: str, slash_escape: bool = False) -> str:
 
 
 def make_flat_name(
-    path_list: list,
+    path_list: List[str],
     filename_root: str = None,
     is_dir: bool = False,
     ext: Optional[str] = ".rst",
