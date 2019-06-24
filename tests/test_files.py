@@ -67,14 +67,14 @@ def test_not_private_blank():
 
 
 # files._is_wanted_file
-def test_is_wanted_file():
-    for extension in EXTENSION_LIST:
-        assert files._is_wanted_file(f"test{extension}") is True
+@pytest.mark.parametrize("extension", EXTENSION_LIST)
+def test_is_wanted_file(extension):
+    assert files._is_wanted_file(f"test{extension}") is True
 
 
-def test_is_wanted_file_caps():
-    for extension in (x.upper() for x in EXTENSION_LIST):
-        assert files._is_wanted_file(f"test{extension}") is True
+@pytest.mark.parametrize("extension", EXTENSION_LIST)
+def test_is_wanted_file_caps(extension):
+    assert files._is_wanted_file(f"test{extension.upper()}") is True
 
 
 def test_is_wanted_file_not():

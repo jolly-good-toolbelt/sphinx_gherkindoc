@@ -7,6 +7,7 @@ from sphinx_gherkindoc import utils
 TEST_MESSAGE = "This is a test message"
 PATH_LIST = ["a", "b", "c"]
 PATH_ROOT = ".".join(PATH_LIST)
+ESCAPE_LIST = ("*", '"', "#", ":", "<", ">")
 
 
 @pytest.fixture()
@@ -82,9 +83,9 @@ def test_rst_escape_unmodified():
     assert utils.rst_escape(TEST_MESSAGE) == TEST_MESSAGE
 
 
-def test_rst_escape_nonslash():
-    for char in ("*", '"', "#", ":", "<", ">"):
-        assert utils.rst_escape(char) == f"\\{char}"
+@pytest.mark.parametrize("char", ESCAPE_LIST)
+def test_rst_escape_nonslash(char):
+    assert utils.rst_escape(char) == f"\\{char}"
 
 
 def test_rst_escape_unmodified_slash():
