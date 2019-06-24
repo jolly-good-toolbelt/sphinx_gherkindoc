@@ -41,15 +41,14 @@ def test_glossary_entry_tuple_len(entry):
 
 @pytest.mark.usefixtures("step_glossary")
 def test_glossary_gt():
-    assert glossary.step_glossary["Step one"].__gt__(glossary.step_glossary["Step two"])
+    assert glossary.step_glossary["Step one"] > glossary.step_glossary["Step two"]
 
 
 @pytest.mark.usefixtures("step_glossary")
 def test_glossary_eq():
     assert (
-        glossary.step_glossary["Step one"].__eq__(glossary.step_glossary["Step two"])
-        is False
-    )
+        glossary.step_glossary["Step one"] == glossary.step_glossary["Step two"]
+    ) is False
 
 
 # glossary.make_step_glossary
