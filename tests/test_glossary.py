@@ -46,9 +46,7 @@ def test_glossary_gt():
 
 @pytest.mark.usefixtures("step_glossary")
 def test_glossary_eq():
-    assert (
-        glossary.step_glossary["Step one"] == glossary.step_glossary["Step two"]
-    ) is False
+    assert glossary.step_glossary["Step one"] != glossary.step_glossary["Step two"]
 
 
 # glossary.make_step_glossary
