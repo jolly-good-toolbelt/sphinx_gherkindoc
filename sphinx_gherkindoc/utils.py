@@ -1,4 +1,6 @@
 """Generic utils used throughout the module."""
+from typing import List, Optional
+
 import sphinx.util
 
 # Increments of how much we indent Sphinx rST content when indenting.
@@ -13,7 +15,7 @@ DRY_RUN = False
 VERBOSE = False
 
 
-def verbose(message):
+def verbose(message: str) -> None:
     """Print message only if VERBOSE, with a DRY_RUN prefix as appropriate."""
     if not VERBOSE:
         return
@@ -22,13 +24,13 @@ def verbose(message):
     print(message)
 
 
-def set_dry_run(value):
+def set_dry_run(value: bool) -> None:
     """Set the value for DRY_RUN outside this module."""
     global DRY_RUN
     DRY_RUN = value
 
 
-def set_verbose(value):
+def set_verbose(value: bool) -> None:
     """Set the value for VERBOSE outside this module."""
     global VERBOSE
     VERBOSE = value
@@ -40,18 +42,41 @@ _advanced_escape_mappings = _escape_mappings.copy()
 _advanced_escape_mappings[ord("\\")] = u"\\\\\\"
 
 
-def rst_escape(unescaped, slash_escape=False):
-    """Escape reST-ful characters to prevent parsing errors."""
+def rst_escape(unescaped: str, slash_escape: bool = False) -> str:
+    """
+    Escape reST-ful characters to prevent parsing errors.
+
+    Args:
+        unescaped: A string that potentially contains characters needing escaping
+        slash_escape: if True, escape slashes found in ``unescaped``
+
+    Returns:
+        A string which has reST-ful characters appropriately escaped
+
+    """
     return unescaped.translate(
         _advanced_escape_mappings if slash_escape else _escape_mappings
     )
 
 
-def make_flat_name(path_list, filename_root=None, is_dir=False, ext=".rst"):
+def make_flat_name(
+    path_list: List[str],
+    filename_root: str = None,
+    is_dir: bool = False,
+    ext: Optional[str] = ".rst",
+) -> str:
     """
-    Flatten file name from a list of directories and an optional filename.
+    Build a flat file name from the provided information.
 
-    As per notes above, this will give us a non-nested directory structure.
+    Args:
+        path_list: Directory hierarchy to flatten
+        filename_root: If provided, the root of the filename to flatten (no extension)
+        is_dir: If True, mark the new filename as a table of contents
+        ext: Optional extension for the new file name
+
+    Returns:
+        A filename containing the full path, separated by periods
+
     """
     if filename_root is not None:
         path_list = path_list + [filename_root]
@@ -66,31 +91,40 @@ class SphinxWriter(object):
 
     sections = ["", "=", "-", "~", ".", "*", "+", "_", "<", ">", "/"]
 
-    def __init__(self):
-        self._output = []
+    def __init__(self) -> None:
+        self._output: List[str] = []
 
-    def add_output(self, line, line_breaks=1, indent_by=0):
+    def add_output(self, line: str, line_breaks: int = 1, indent_by: int = 0) -> None:
         """Add output to be written to file.
 
         Args:
-            line (string): The line to be written
-            line_breaks(integer, optional): The number of line breaks to include
-            indenty_by(integer, optional): The number of spaces to indent the line.
-
+            line: The line to be written
+            line_breaks: The number of line breaks to include
+            indenty_by: The number of spaces to indent the line.
         """
         self._output.append(u"{}{}{}".format(" " * indent_by, line, "\n" * line_breaks))
 
-    def blank_line(self):
+    def blank_line(self) -> None:
         """Write a single blank line."""
         self.add_output("")
 
-    def create_section(self, level, section):
-        """Create a section of <level> (1-10 supported)."""
+    def create_section(self, level: int, section: str) -> None:
+        """
+        Create a reST-formatted section header based on the provided level.
+
+        Args:
+            level: The level depth of the section header (1-10 supported)
+            section: The section title
+        """
         self.add_output(section)
         self.add_output(self.sections[level] * len(section.rstrip()), line_breaks=2)
 
-    def write_to_file(self, filename):
-        """Write the provided output to the given filename."""
+    def write_to_file(self, filename: str) -> None:
+        """Write the provided output to the given filename.
+
+        Args:
+            filename: The full path to write the output
+        """
         verbose("Writing {}".format(filename))
         with sphinx.util.osutil.FileAvoidWrite(filename) as f:
             # All version of Sphinx will accept a string-type,
