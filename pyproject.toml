@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sphinx_gherkindoc"
-version = "3.1.0"
+version = "3.1.1"
 description = "A tool to convert Gherkin into Sphinx documentation"
 authors = ["Rackspace QE <qe-tools-contributors@rackspace.com>"]
 license = "MIT"
