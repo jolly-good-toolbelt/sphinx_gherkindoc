@@ -23,6 +23,8 @@ ghp-import = "^0.5.5"
 tomlkit = "^0.5.3"
 github_tools = "^2.0"
 sphinx-autodoc-typehints = "^1.6"
+pytest = "^4.6"
+pytest-cov = "^2.7"
 
 [tool.poetry.scripts]
 sphinx-gherkindoc = 'sphinx_gherkindoc.cli:main'
