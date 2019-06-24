@@ -113,13 +113,18 @@ def test_not_hidden_is():
 
 # files._wanted_source_files
 def test_wanted_source_files():
-    file_list = ["one.py", "two.feature", "three.md", "subdir/four.feature"]
-    assert files._wanted_source_files(file_list, ["subdir/*"]) == file_list[1:3]
+    wanted_files = ["one.feature", "two.md"]
+    unwanted_files = ["three.py", "subdir/four.feature"]
+    assert (
+        files._wanted_source_files(wanted_files + unwanted_files, ["subdir/*"])
+        == wanted_files
+    )
 
 
 def test_wanted_source_files_empty_exclude():
-    file_list = ["one.py", "two.feature", "three.md", "subdir/four.feature"]
-    assert files._wanted_source_files(file_list, []) == file_list[1:]
+    wanted_files = ["one.feature", "two.md", "subdir/three.feature"]
+    unwanted_files = ["four.py"]
+    assert files._wanted_source_files(wanted_files + unwanted_files, []) == wanted_files
 
 
 def test_wanted_source_files_empty_files():
