@@ -22,6 +22,7 @@ pre-commit = "^1.15"
 ghp-import = "^0.5.5"
 tomlkit = "^0.5.3"
 github_tools = "^2.0"
+sphinx-autodoc-typehints = "^1.6"
 
 [tool.poetry.scripts]
 sphinx-gherkindoc = 'sphinx_gherkindoc.cli:main'
