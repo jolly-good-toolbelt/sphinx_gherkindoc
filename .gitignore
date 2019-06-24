@@ -2,3 +2,4 @@
 *.egg-info
 /docs
 /_docs
+/.mypy_cache
