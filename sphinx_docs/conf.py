@@ -32,8 +32,8 @@ release = version
 
 # General information about your project.
 project = "sphinx-gherkindoc"
-copyright = "2018, Doug Philips"  # noqa
-author = "Doug Philips"
+copyright = "2018, Lewis Franklin & Doug Philips"  # noqa
+author = "Lewis Franklin & Doug Philips"
 
 ######################################################
 # BELOW HERE YOU SHOULD BE ABLE TO LEAVE AS-IS.

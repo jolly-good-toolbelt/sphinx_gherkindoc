@@ -16,6 +16,9 @@ Some notable contributions:
 * Linking to known ticket types was done by Doug Philips `@dgou`_
 * Fixing file writes to work with Sphinx >=2 was done by Brad Brown
   `@bradsbrown`_
+* Conversion to Python 3.6+ and splitting into individual modules
+  for publication was done by Lewis Franklin `@brolewis`_
+* Self tests were added by Lewis Franklin `@brolewis`_
 
 .. _`@brolewis`: https://github.com/brolewis/
 .. _`@dgou`: https://github.com/dgou/
