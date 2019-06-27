@@ -2,7 +2,7 @@
 name = "sphinx_gherkindoc"
 version = "3.1.1"
 description = "A tool to convert Gherkin into Sphinx documentation"
-authors = ["Doug Philips <dgou@mac.com>"]
+authors = ["Lewis Franklin <lewis.franklin@gmail.com", "Doug Philips <dgou@mac.com>"]
 license = "MIT"
 
 [[tool.poetry.source]]
