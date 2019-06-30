@@ -37,13 +37,13 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--clean",
+        "--dirty",
         action="store_true",
-        help="Delete the output directory before starting to build documents",
+        help="Leave the output directory untouched before starting to build documents",
     )
     args = parser.parse_args()
 
-    if args.clean:
+    if not args.dirty:
         shutil.rmtree(DOCS_OUTPUT_DIRECTORY, ignore_errors=True)
         shutil.rmtree(DOCS_WORKING_DIRECTORY, ignore_errors=True)
 
