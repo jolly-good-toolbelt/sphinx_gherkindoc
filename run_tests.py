@@ -13,16 +13,17 @@ __commands_to_run = [
     "poetry run pytest -vv --cov sphinx_gherkindoc --cov-report term-missing"
 ]
 
-
 __doc__ = __doc__.format("\n    ".join(__commands_to_run))
 
 
 def run_tests(do_setup=False, self_check=False, verbose=True):
     """Run code checks."""
     if self_check:
-        __commands_to_run.insert(0, "python self_check.py")
+        check_command = "python self_check.py" + ("" if verbose else " -q")
+        __commands_to_run.insert(0, check_command)
     if do_setup:
-        __commands_to_run.insert(0, "python env_setup.py")
+        setup_command = "python env_setup.py" + (" -v" if verbose else "")
+        __commands_to_run.insert(0, setup_command)
 
     execute_command_list(__commands_to_run, verbose=verbose)
 
