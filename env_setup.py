@@ -27,7 +27,7 @@ def execute_command_list(commands_to_run, verbose=True):
     """
     for command in commands_to_run:
         if verbose:
-            print(command)
+            print(f"+{command}")
         subprocess.run(shlex.split(command), check=True)
 
 
@@ -37,7 +37,7 @@ def env_setup(verbose):
     if os.getenv("VIRTUAL_ENV"):
         print(f"Setting up Virtual Environment: {os.environ['VIRTUAL_ENV']}")
     print()
-    execute_command_list(__commands_to_run)
+    execute_command_list(__commands_to_run, verbose=verbose)
 
 
 def main():

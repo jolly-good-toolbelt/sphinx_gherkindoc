@@ -16,9 +16,6 @@ import argparse
 
 from env_setup import execute_command_list
 
-SETUP_COMMAND = "python ./env_setup.py"
-
-# Fill in with your own project details!!!
 __commands_to_run = ["poetry run pre-commit run -a"]
 
 __doc__ = __doc__.format("\n    ".join(__commands_to_run))
@@ -26,8 +23,9 @@ __doc__ = __doc__.format("\n    ".join(__commands_to_run))
 
 def self_check(do_setup=False, verbose=True):
     """Run code checks."""
+    setup_command = "python env_setup.py" + (" -v" if verbose else "")
     if do_setup:
-        __commands_to_run.insert(0, SETUP_COMMAND)
+        __commands_to_run.insert(0, setup_command)
 
     execute_command_list(__commands_to_run, verbose=verbose)
 
