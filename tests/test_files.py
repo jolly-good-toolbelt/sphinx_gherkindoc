@@ -134,32 +134,28 @@ def test_wanted_source_files_empty_files():
 # files.scan_tree
 def test_scan_tree(tree):
     expected_data = [
-        files.DirData(str(tree), ["root0"], ["subdir"], ["test.feature"]),
+        files.DirData(tree, ["root0"], ["subdir"], ["test.feature"]),
         files.DirData(
-            str(tree / "subdir"), ["root0", "subdir"], [], ["another_test.feature"]
+            tree / "subdir", ["root0", "subdir"], [], ["another_test.feature"]
         ),
     ]
-    assert files.scan_tree(str(tree), False, []) == expected_data
+    assert files.scan_tree(tree, False, []) == expected_data
 
 
 def test_scan_tree_private(tree):
     expected_data = [
+        files.DirData(tree, ["root0"], ["subdir", "_private_dir"], ["test.feature"]),
         files.DirData(
-            str(tree), ["root0"], ["subdir", "_private_dir"], ["test.feature"]
+            tree / "subdir", ["root0", "subdir"], [], ["another_test.feature"]
         ),
-        files.DirData(
-            str(tree / "subdir"), ["root0", "subdir"], [], ["another_test.feature"]
-        ),
-        files.DirData(str(tree / "_private_dir"), ["root0", "_private_dir"], [], []),
+        files.DirData(tree / "_private_dir", ["root0", "_private_dir"], [], []),
     ]
-    assert files.scan_tree(str(tree), True, []) == expected_data
+    assert files.scan_tree(tree, True, []) == expected_data
 
 
 def test_scan_tree_exclude(tree):
     expected_data = [
-        files.DirData(
-            str(tree), ["root0"], ["subdir", "_private_dir"], ["test.feature"]
-        ),
-        files.DirData(str(tree / "_private_dir"), ["root0", "_private_dir"], [], []),
+        files.DirData(tree, ["root0"], ["subdir", "_private_dir"], ["test.feature"]),
+        files.DirData(tree / "_private_dir", ["root0", "_private_dir"], [], []),
     ]
-    assert files.scan_tree(str(tree), True, ["*subdir*"]) == expected_data
+    assert files.scan_tree(tree, True, ["*subdir*"]) == expected_data
