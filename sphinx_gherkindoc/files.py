@@ -1,6 +1,7 @@
 """File-related utils used throughout the module."""
 import fnmatch
 import os
+import pathlib
 from typing import Iterable, List, NamedTuple
 
 
@@ -12,7 +13,7 @@ SOURCE_SUFFICIES = (FEATURE_FILE_SUFFIX, ".md", ".rst")
 class DirData(NamedTuple):
     """Named tuple containing all the modified os.walk parts for a given path."""
 
-    dir_path: str
+    dir_path: pathlib.Path
     path_list: List[str]
     sub_dirs: List[str]
     files: List[str]
@@ -59,7 +60,7 @@ def _wanted_source_files(files: Iterable, exclude_pattern_list: Iterable) -> Lis
 
 
 def scan_tree(
-    starting_point: str, private: bool, exclude_patterns: Iterable
+    starting_point: pathlib.Path, private: bool, exclude_patterns: Iterable
 ) -> List[DirData]:
     """
     Return list of entities to process, in top-down orders.
@@ -69,18 +70,10 @@ def scan_tree(
     """
     result = []
 
-    for me, dirs, files in os.walk(os.path.abspath(starting_point)):
+    for me, dirs, files in os.walk(starting_point.resolve()):
         if _is_excluded(me, exclude_patterns):
             dirs[:] = []
             continue
-
-        root_path = os.path.dirname(starting_point)
-        me_list = os.path.relpath(me, start=root_path).split(os.sep)
-
-        # This prevents creating "dot" files in the output directory, which can be very
-        # confusing.
-        if me_list[0] == os.path.curdir:
-            me_list = me_list[1:]
 
         # Remove all hidden directories on principle.
         # This stops scanning into version control directories such as .git, ,hg, etc.
@@ -89,8 +82,14 @@ def scan_tree(
         if not private:
             dirs[:] = filter(_not_private, dirs)
 
-        files = _wanted_source_files(files, exclude_patterns)
-
-        result.append(DirData(me, me_list, dirs[:], files))
+        me_path = pathlib.Path(me)
+        result.append(
+            DirData(
+                me_path,
+                [str(x) for x in me_path.relative_to(starting_point.parent).parts],
+                dirs[:],
+                _wanted_source_files(files, exclude_patterns),
+            )
+        )
 
     return result
