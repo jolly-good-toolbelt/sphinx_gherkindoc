@@ -131,12 +131,7 @@ class SphinxWriter(object):
         with sphinx.util.osutil.FileAvoidWrite(filename) as f:
             # All version of Sphinx will accept a string-type,
             # but >=2.0 accepts _only_ strings (not bytes)
-            data = "".join(self._output)
-            if not isinstance(data, str):
-                # py3 will recognize unicode as strings natively,
-                # py2 unicode needs to be encoded first
-                data = data.encode("utf8")
-            f.write(data)
+            f.write("".join(self._output))
 
 
 def display_name(path: pathlib.Path, package_name: Optional[str] = "") -> str:
