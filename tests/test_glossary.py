@@ -49,13 +49,13 @@ def test_glossary_eq():
     assert glossary.step_glossary["Step one"] != glossary.step_glossary["Step two"]
 
 
-# glossary.make_step_glossary
-def test_make_step_glossry_empty():
+# glossary.make_steps_glossary
+def test_make_steps_glossry_empty():
     assert glossary.make_steps_glossary("Test") is None
 
 
 @pytest.mark.usefixtures("step_glossary")
-def test_make_step_glossry():
+def test_make_steps_glossary():
     glossary_output = [
         "Test Glossary\n",
         "=============\n\n",
