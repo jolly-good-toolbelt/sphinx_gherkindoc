@@ -80,10 +80,10 @@ def test_toctree_with_subdir(feature_tree):
 
 # writer.feature_to_rst
 def test_feature_to_rst(feature_file):
-    results = writer.feature_to_rst(str(feature_file), feature_file.parent)
+    results = writer.feature_to_rst(feature_file, feature_file.parent)
     assert results._output == rst_output.basic_rst
 
 
 def test_feature_to_rst_inherited_tags(tags_feature_file):
-    results = writer.feature_to_rst(str(tags_feature_file), tags_feature_file.parent)
+    results = writer.feature_to_rst(tags_feature_file, tags_feature_file.parent)
     assert results._output == rst_output.tags_rst
