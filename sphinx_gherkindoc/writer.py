@@ -75,7 +75,7 @@ def toctree(
         source_name_list = path_list + [a_file]
         source_name = pathlib.Path().joinpath(*source_name_list)
         source_path = root_path / source_name
-        verbose("Copying content from: {}".format(source_name))
+        verbose(f"Copying content from: {source_name}")
         with open(source_path, "r") as source_fo:
             of.add_output(source_fo.read(), line_breaks=2)
         need_header = False
@@ -85,9 +85,7 @@ def toctree(
         of.create_section(1, display_name(root_path.joinpath(*path_list)))
 
     of.add_output(".. toctree::")
-    of.add_output(
-        ":maxdepth: {}".format(maxtocdepth), line_breaks=2, indent_by=INDENT_DEPTH
-    )
+    of.add_output(f":maxdepth: {maxtocdepth}", line_breaks=2, indent_by=INDENT_DEPTH)
 
     for a_file in sorted(non_included_files):
         # For MarkDown file content to be properly processed we
@@ -112,7 +110,7 @@ def feature_to_rst(
     output_file = SphinxWriter()
 
     def section(level: int, obj: behave.model_core.BasicStatement) -> None:
-        section_name = u"{}: {}".format(obj.keyword, rst_escape(obj.name))
+        section_name = f"{obj.keyword}: {rst_escape(obj.name)}"
         output_file.create_section(level, section_name.rstrip(": "))
 
     def description(description: Union[str, List[str]]) -> None:
@@ -162,7 +160,7 @@ def feature_to_rst(
         """
         url = url_parser(tag)
         if url:
-            return "`{} <{}>`__".format(tag, url)
+            return f"`{tag} <{url}>`__"
         return tag
 
     def tags(tags: List[str], *parent_objs: behave.model_core.BasicStatement) -> None:
@@ -173,9 +171,9 @@ def feature_to_rst(
         tag_str = ", ".join(map(ticket_url_or_tag, tags))
         for obj in parent_with_tags:
             tags_list = ", ".join(map(ticket_url_or_tag, obj.tags))
-            tag_str += u" (Inherited from {}: {} )".format(obj.keyword, tags_list)
+            tag_str += f" (Inherited from {obj.keyword}: {tags_list} )"
         output_file.add_output(
-            u"Tagged: {}".format(tag_str.strip()), line_breaks=2, indent_by=INDENT_DEPTH
+            f"Tagged: {tag_str.strip()}", line_breaks=2, indent_by=INDENT_DEPTH
         )
 
     def steps(steps: List[behave.model.Step]) -> None:
@@ -186,7 +184,7 @@ def feature_to_rst(
                 step.line,
             )
             bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
-            output_file.add_output(u"- {} {}".format(step.keyword, bold_step))
+            output_file.add_output(f"- {step.keyword} {bold_step}")
             if step.table:
                 output_file.blank_line()
                 table(step.table, inline=True)
@@ -207,15 +205,13 @@ def feature_to_rst(
         indent_by = INDENT_DEPTH if inline else 0
         directive = ".. csv-table::"
         output_file.add_output(directive, indent_by=indent_by)
-        headers = u'", "'.join(table.headings)
+        headers = '", "'.join(table.headings)
         indent_by += INDENT_DEPTH
-        output_file.add_output(u':header: "{}"'.format(headers), indent_by=indent_by)
-        output_file.add_output(
-            u":quote: {}".format(QUOTE), line_breaks=2, indent_by=indent_by
-        )
+        output_file.add_output(f':header: "{headers}"', indent_by=indent_by)
+        output_file.add_output(f":quote: {QUOTE}", line_breaks=2, indent_by=indent_by)
         for row in table.rows:
-            row = u"{0}, {0}".format(QUOTE).join(map(rst_escape, row))
-            output_file.add_output(u"{0}{1}{0}".format(QUOTE, row), indent_by=indent_by)
+            row = f"{QUOTE}, {QUOTE}".join(map(rst_escape, row))
+            output_file.add_output(f"{QUOTE}{row}{QUOTE}", indent_by=indent_by)
 
     feature = behave.parser.parse_file(source_path)
     section(1, feature)
