@@ -1,6 +1,6 @@
 """Helper functions for writing rST files."""
 import itertools
-import os
+import pathlib
 import re
 from typing import List, Union
 
@@ -39,7 +39,7 @@ def toctree(
     subdirs: List[str],
     files: List[str],
     maxtocdepth: int,
-    root_path: str,
+    root_path: pathlib.Path,
 ) -> SphinxWriter:
     """
     Return a SphinxWriter for one level of a directory tree.
@@ -66,16 +66,15 @@ def toctree(
             continue
 
         source_name_list = path_list + [a_file]
-        source_name = os.path.join(*source_name_list)
-        source_path = os.path.join(root_path, source_name)
+        source_name = pathlib.Path().joinpath(*source_name_list)
+        source_path = root_path.joinpath(source_name)
         verbose("Copying content from: {}".format(source_name))
         of.add_output(get_file_contents(source_path), line_breaks=2)
         need_header = False
 
     if need_header:
         # We're just adding a boiler plate heading.
-        temp_path_list = [root_path] + path_list if path_list else [os.curdir]
-        of.create_section(1, display_name(os.path.join(*temp_path_list)))
+        of.create_section(1, display_name(root_path.joinpath(*path_list)))
 
     of.add_output(".. toctree::")
     of.add_output(
@@ -98,7 +97,7 @@ def toctree(
 
 # Simplified this from a class, for various reasons.
 # Additional simplification work is needed!!!!
-def feature_to_rst(source_path: str, root_path: str) -> SphinxWriter:
+def feature_to_rst(source_path: pathlib.Path, root_path: pathlib.Path) -> SphinxWriter:
     """Return a SphinxWriter containing the rST for the given feature file."""
     output_file = SphinxWriter()
 
@@ -158,7 +157,9 @@ def feature_to_rst(source_path: str, root_path: str) -> SphinxWriter:
     def steps(steps: List[behave.model.Step]) -> None:
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
-                step.name, os.path.relpath(step.filename, start=root_path), step.line
+                step.name,
+                pathlib.Path(step.filename).resolve().relative_to(root_path),
+                step.line,
             )
             bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
             output_file.add_output(u"- {} {}".format(step.keyword, bold_step))
