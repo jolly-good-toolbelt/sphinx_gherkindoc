@@ -32,7 +32,7 @@ def process_args(
     doc_project = args.doc_project
     root_path = pathlib.Path(gherkin_path).resolve()
 
-    top_level_toc_filename = output_path.joinpath(f"{toc_name}.rst")
+    top_level_toc_filename = output_path / f"{toc_name}.rst"
 
     non_empty_dirs: Set[pathlib.Path] = set()
 
@@ -40,7 +40,7 @@ def process_args(
         a_dir, a_dir_list, subdirs, files = work_to_do.pop()
         new_subdirs = []
         for subdir in subdirs:
-            subdir_path = pathlib.Path().joinpath(a_dir, subdir)
+            subdir_path = pathlib.Path() / a_dir / subdir
             if subdir_path in non_empty_dirs:
                 new_subdirs.append(subdir)
 
@@ -59,29 +59,27 @@ def process_args(
         if not work_to_do:
             toc_filename = top_level_toc_filename
         else:
-            toc_filename = output_path.joinpath(make_flat_name(a_dir_list, is_dir=True))
+            toc_filename = output_path / make_flat_name(a_dir_list, is_dir=True)
         toc_file.write_to_file(toc_filename)
 
         for a_file in files:
             a_file_list = a_dir_list + [a_file]
             source_name = pathlib.Path().joinpath(*a_file_list)
-            source_path = root_path.joinpath(source_name)
+            source_path = root_path / source_name
             if is_feature_file(a_file):
-                dest_name = output_path.joinpath(
-                    make_flat_name(a_file_list, is_dir=False)
-                )
+                dest_name = output_path / make_flat_name(a_file_list, is_dir=False)
                 feature_rst_file = feature_to_rst(source_path, root_path)
                 verbose('converting "{}" to "{}"'.format(source_name, dest_name))
                 feature_rst_file.write_to_file(dest_name)
             elif not is_rst_file(a_file):
-                dest_name = output_path.joinpath(
-                    make_flat_name(a_file_list, is_dir=False, ext=None)
+                dest_name = output_path / make_flat_name(
+                    a_file_list, is_dir=False, ext=None
                 )
                 verbose('copying "{}" to "{}"'.format(source_name, dest_name))
                 shutil.copy(source_path, dest_name)
 
     if step_glossary_name:
-        glossary_filename = output_path.joinpath(f"{step_glossary_name}.rst")
+        glossary_filename = output_path / f"{step_glossary_name}.rst"
         glossary = make_steps_glossary(doc_project)
 
         if args.dry_run:

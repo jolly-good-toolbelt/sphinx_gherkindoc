@@ -67,7 +67,7 @@ def toctree(
 
         source_name_list = path_list + [a_file]
         source_name = pathlib.Path().joinpath(*source_name_list)
-        source_path = root_path.joinpath(source_name)
+        source_path = root_path / source_name
         verbose("Copying content from: {}".format(source_name))
         of.add_output(get_file_contents(source_path), line_breaks=2)
         need_header = False
