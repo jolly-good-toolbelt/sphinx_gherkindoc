@@ -144,15 +144,21 @@ It's a lot easier to do that `after` you have the basic process working.
 Experiment with the other optional parameters
 to get the effect(s) you want.
 
-Special Instructions for Ticket Links
--------------------------------------
+Special Instructions for Tag Links
+----------------------------------
 
-Any tags that come from ticket IDs can be converted into Links in the
-documentation via a parser plugin. The parser should accept a single string,
-the ticket ID, and return either a URL if the tag is a valid ticket ID or an
-empty string if it is not.
+Any tag can be converted into an anonymous link
+via a plugin or command-line argument.
+The converter needs to be a single function
+that accepts a single string parameter, the tag,
+and returns a URL if the tag should include a link
+or an empty string if not.
 
-In order to register the plugin for a `poetry`-based project::
+In order to register the plugin for a ``poetry``-based project::
 
     [tools.poetry.plugins."parsers"]
     url = "my_custom_library.parse:url_if_ticket"
+
+In order to use the parser via command line,
+the ``--url_from-tag`` flag should be used.
+The provided string should be be formatted ``<library>:<method_name>``

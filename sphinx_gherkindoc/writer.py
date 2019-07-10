@@ -142,6 +142,15 @@ def feature_to_rst(
                 rst_escape(line), line_breaks=2, indent_by=INDENT_DEPTH
             )
 
+    # Build the URL parser once since `ticket_url_or_tag` is called multiple times
+    url_parser = lambda x: ""  # noqa: E731
+    for entry_point in pkg_resources.iter_entry_points("parsers"):
+        if entry_point.name == "url":
+            url_parser = entry_point.load()
+    if url_from_tag:
+        parser_module = importlib.import_module(url_from_tag.split(":")[0])
+        url_parser = getattr(parser_module, url_from_tag.split(":")[1])
+
     # Reference link here because it's too long to put inside the function itself.
     # http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#embedded-uris-and-aliases
     def ticket_url_or_tag(tag: str) -> str:
@@ -150,14 +159,6 @@ def feature_to_rst(
         If tag is a ticket, return an anonymous embedded hyperlink for it,
         else tag itself.
         """
-        url_parser = lambda x: ""  # noqa: E731
-        for entry_point in pkg_resources.iter_entry_points("parsers"):
-            if entry_point.name == "url":
-                url_parser = entry_point.load()
-        # qecommon_tools.whatever:whatever
-        if url_from_tag:
-            parser_module = importlib.import_module(url_from_tag.split(":")[0])
-            url_parser = getattr(parser_module, url_from_tag.split(":")[1])
         url = url_parser(tag)
         if url:
             return "`{} <{}>`__".format(tag, url)
