@@ -157,7 +157,7 @@ or an empty string if not.
 In order to register the plugin for a ``poetry``-based project::
 
     [tools.poetry.plugins."parsers"]
-    url = "my_custom_library.parse:url_if_ticket"
+    url = "my_custom_library.parse:optional_url_from_tag"
 
 In order to use the parser via command line,
 the ``--url_from-tag`` flag should be used.
