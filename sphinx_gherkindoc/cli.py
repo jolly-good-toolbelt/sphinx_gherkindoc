@@ -37,33 +37,35 @@ def process_args(
     non_empty_dirs: Set[pathlib.Path] = set()
 
     while work_to_do:
-        a_dir, a_dir_list, subdirs, files = work_to_do.pop()
+        current = work_to_do.pop()
         new_subdirs = []
-        for subdir in subdirs:
-            subdir_path = pathlib.Path() / a_dir / subdir
+        for subdir in current.sub_dirs:
+            subdir_path = pathlib.Path() / current.dir_path / subdir
             if subdir_path in non_empty_dirs:
                 new_subdirs.append(subdir)
 
-        if not (files or new_subdirs):
+        if not (current.files or new_subdirs):
             continue
 
-        non_empty_dirs.add(a_dir)
+        non_empty_dirs.add(current.dir_path)
 
         if args.dry_run:
             continue
 
-        toc_file = toctree(a_dir_list, new_subdirs, files, maxtocdepth, root_path)
+        toc_file = toctree(
+            current.path_list, new_subdirs, current.files, maxtocdepth, root_path
+        )
         # Check to see if we are at the last item to be processed
         # (which has already been popped)
         # to write the asked for master TOC file name.
         if not work_to_do:
             toc_filename = top_level_toc_filename
         else:
-            toc_filename = output_path / make_flat_name(a_dir_list, is_dir=True)
+            toc_filename = output_path / make_flat_name(current.path_list, is_dir=True)
         toc_file.write_to_file(toc_filename)
 
-        for a_file in files:
-            a_file_list = a_dir_list + [a_file]
+        for a_file in current.files:
+            a_file_list = current.path_list + [a_file]
             source_name = pathlib.Path().joinpath(*a_file_list)
             source_path = root_path / source_name
             if is_feature_file(a_file):
