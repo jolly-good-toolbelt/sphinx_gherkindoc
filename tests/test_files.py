@@ -1,4 +1,6 @@
 """Tests for files module."""
+import pathlib
+
 import pytest
 
 from sphinx_gherkindoc import files
@@ -159,3 +161,13 @@ def test_scan_tree_exclude(tree):
         files.DirData(tree / "_private_dir", ["root0", "_private_dir"], [], []),
     ]
     assert files.scan_tree(tree, True, ["*subdir*"]) == expected_data
+
+
+def test_scan_tree_relative():
+    relative_path = pathlib.Path("tests")
+    expected_data = [
+        files.DirData(
+            relative_path.resolve(), ["tests"], [], ["tags.feature", "basic.feature"]
+        )
+    ]
+    assert files.scan_tree(relative_path, False, []) == expected_data
