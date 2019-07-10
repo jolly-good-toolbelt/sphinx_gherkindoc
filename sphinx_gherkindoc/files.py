@@ -70,7 +70,9 @@ def scan_tree(
     """
     result = []
 
-    for me, dirs, files in os.walk(starting_point.resolve()):
+    # Do not assume an absolute path is provided
+    starting_point = starting_point.resolve()
+    for me, dirs, files in os.walk(starting_point):
         if _is_excluded(me, exclude_patterns):
             dirs[:] = []
             continue
