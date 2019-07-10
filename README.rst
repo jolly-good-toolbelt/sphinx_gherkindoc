@@ -159,6 +159,15 @@ In order to register the plugin for a ``poetry``-based project::
     [tools.poetry.plugins."parsers"]
     url = "my_custom_library.parse:optional_url_from_tag"
 
+In order to register the plugin for a ``setup.py``-based project::
+
+    setup(
+        ...
+        entry_points={
+            'parsers': ['url = my_custom_library.parse:optional_url_from_tag']
+        }
+    )
+
 In order to use the parser via command line,
 the ``--url_from-tag`` flag should be used.
 The provided string should be be formatted ``<library>:<method_name>``
