@@ -30,7 +30,7 @@ def process_args(
     toc_name = args.toc_name
     step_glossary_name = args.step_glossary_name
     doc_project = args.doc_project
-    root_path = pathlib.Path(gherkin_path).resolve()
+    root_path = gherkin_path.resolve().parent
 
     top_level_toc_filename = output_path / f"{toc_name}.rst"
 
