@@ -1,4 +1,5 @@
 """Generic utils used throughout the module."""
+import pathlib
 from typing import List, Optional
 
 import sphinx.util
@@ -119,7 +120,7 @@ class SphinxWriter(object):
         self.add_output(section)
         self.add_output(self.sections[level] * len(section.rstrip()), line_breaks=2)
 
-    def write_to_file(self, filename: str) -> None:
+    def write_to_file(self, filename: pathlib.Path) -> None:
         """Write the provided output to the given filename.
 
         Args:

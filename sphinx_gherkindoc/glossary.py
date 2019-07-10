@@ -1,5 +1,6 @@
 """Module specific to building the steps glossary."""
 from collections import defaultdict
+import pathlib
 from typing import DefaultDict, Optional, Set, Tuple
 
 from .utils import INDENT_DEPTH, rst_escape, SphinxWriter
@@ -10,9 +11,11 @@ class GlossaryEntry(object):
 
     def __init__(self) -> None:
         self.step_set: Set[str] = set()
-        self.locations: DefaultDict[str, list] = defaultdict(list)
+        self.locations: DefaultDict[pathlib.Path, list] = defaultdict(list)
 
-    def add_reference(self, step_name: str, filename: str, line_number: int) -> None:
+    def add_reference(
+        self, step_name: str, filename: pathlib.Path, line_number: int
+    ) -> None:
         """
         Add a reference to the glossary.
 
