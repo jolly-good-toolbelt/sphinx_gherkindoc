@@ -148,8 +148,9 @@ def feature_to_rst(
         if entry_point.name == "url":
             url_parser = entry_point.load()
     if url_from_tag:
-        parser_module = importlib.import_module(url_from_tag.split(":")[0])
-        url_parser = getattr(parser_module, url_from_tag.split(":")[1])
+        url_module, url_function = url_from_tag.split(":", maxsplit=1)
+        parser_module = importlib.import_module(url_module)
+        url_parser = getattr(parser_module, url_function)
 
     # Reference link here because it's too long to put inside the function itself.
     # http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#embedded-uris-and-aliases
