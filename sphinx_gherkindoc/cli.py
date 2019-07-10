@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Module for running the tool from the CLI."""
 import argparse
-import os.path
+import pathlib
 import shutil
 from typing import Set
 
@@ -18,70 +18,70 @@ from .writer import feature_to_rst, toctree
 DEFAULT_TOC_DEPTH = 4
 
 
-def process_args(args: argparse.Namespace) -> None:
+def process_args(
+    args: argparse.Namespace,
+    gherkin_path: pathlib.Path,
+    output_path: pathlib.Path,
+    doc_project: str,
+) -> None:
     """Process the supplied CLI args."""
-    work_to_do = scan_tree(args.gherkin_path, args.private, args.exclude_patterns)
+    work_to_do = scan_tree(gherkin_path, args.private, args.exclude_patterns)
     maxtocdepth = args.maxtocdepth
-    output_path = args.output_path
     toc_name = args.toc_name
     step_glossary_name = args.step_glossary_name
     doc_project = args.doc_project
-    root_path = os.path.dirname(os.path.abspath(args.gherkin_path))
+    root_path = gherkin_path.resolve().parent
 
-    top_level_toc_filename = os.path.join(output_path, toc_name) + ".rst"
+    top_level_toc_filename = output_path / f"{toc_name}.rst"
 
-    non_empty_dirs: Set[str] = set()
+    non_empty_dirs: Set[pathlib.Path] = set()
 
     while work_to_do:
-        a_dir, a_dir_list, subdirs, files = work_to_do.pop()
+        current = work_to_do.pop()
         new_subdirs = []
-        for subdir in subdirs:
-            subdir_path = os.path.join(a_dir, subdir)
+        for subdir in current.sub_dirs:
+            subdir_path = pathlib.Path() / current.dir_path / subdir
             if subdir_path in non_empty_dirs:
                 new_subdirs.append(subdir)
 
-        if not (files or new_subdirs):
+        if not (current.files or new_subdirs):
             continue
 
-        non_empty_dirs.add(a_dir)
+        non_empty_dirs.add(current.dir_path)
 
         if args.dry_run:
             continue
 
-        toc_file = toctree(a_dir_list, new_subdirs, files, maxtocdepth, root_path)
+        toc_file = toctree(
+            current.path_list, new_subdirs, current.files, maxtocdepth, root_path
+        )
         # Check to see if we are at the last item to be processed
         # (which has already been popped)
         # to write the asked for master TOC file name.
         if not work_to_do:
             toc_filename = top_level_toc_filename
         else:
-            toc_filename = os.path.join(
-                output_path, make_flat_name(a_dir_list, is_dir=True)
-            )
+            toc_filename = output_path / make_flat_name(current.path_list, is_dir=True)
         toc_file.write_to_file(toc_filename)
 
-        for a_file in files:
-            a_file_list = a_dir_list + [a_file]
-            source_name = os.path.join(*a_file_list)
-            source_path = os.path.join(root_path, source_name)
+        for a_file in current.files:
+            a_file_list = current.path_list + [a_file]
+            source_name = pathlib.Path().joinpath(*a_file_list)
+            source_path = root_path / source_name
             if is_feature_file(a_file):
-                dest_name = os.path.join(
-                    output_path, make_flat_name(a_file_list, is_dir=False)
-                )
+                dest_name = output_path / make_flat_name(a_file_list, is_dir=False)
                 feature_rst_file = feature_to_rst(source_path, root_path)
                 verbose('converting "{}" to "{}"'.format(source_name, dest_name))
                 feature_rst_file.write_to_file(dest_name)
             elif not is_rst_file(a_file):
-                dest_name = os.path.join(
-                    output_path, make_flat_name(a_file_list, is_dir=False, ext=None)
+                dest_name = output_path / make_flat_name(
+                    a_file_list, is_dir=False, ext=None
                 )
                 verbose('copying "{}" to "{}"'.format(source_name, dest_name))
                 shutil.copy(source_path, dest_name)
 
     if step_glossary_name:
-        glossary_filename = os.path.join(
-            output_path, "{}.rst".format(step_glossary_name)
-        )
+        glossary_filename = output_path / f"{step_glossary_name}.rst"
         glossary = make_steps_glossary(doc_project)
 
         if args.dry_run:
@@ -163,19 +163,20 @@ def main() -> None:
     set_dry_run(args.dry_run)
     set_verbose(args.verbose)
 
+    gherkin_path = pathlib.Path(args.gherkin_path)
+    if not gherkin_path.is_dir():
+        parser.error("{} is not a directory.".format(gherkin_path))
+
     if args.doc_project is None:
-        args.doc_project = os.path.abspath(args.gherkin_path).split(os.path.sep)[-1]
+        args.doc_project = gherkin_path.parts[-1]
 
-    if not os.path.isdir(args.gherkin_path):
-        parser.error("{} is not a directory.".format(args.gherkin_path))
-
-    args.output_path = os.path.abspath(args.output_path)
-    if not os.path.isdir(args.output_path):
+    output_path = pathlib.Path(args.output_path).resolve()
+    if not output_path.is_dir():
         if not args.dry_run:
-            verbose("creating directory: {}".format(args.output_path))
-            os.makedirs(args.output_path)
+            verbose("creating directory: {}".format(output_path))
+            output_path.mkdir(parents=True)
 
-    process_args(args)
+    process_args(args, gherkin_path, output_path, args.doc_project)
 
 
 def config() -> None:
@@ -203,7 +204,7 @@ def config() -> None:
         "%%VERSION%%": args.version,
         "%%RELEASE%%": args.release,
     }
-    source_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+    source_dir = pathlib.Path(__file__).resolve().parent
     sample_contents = get_file_contents(source_dir, "sample-conf.py")
     for old_value, new_value in substitutions.items():
         sample_contents = sample_contents.replace(old_value, new_value)
