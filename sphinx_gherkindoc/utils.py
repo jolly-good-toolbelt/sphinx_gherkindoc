@@ -1,5 +1,6 @@
 """Generic utils used throughout the module."""
 import pathlib
+import string
 from typing import List, Optional
 
 import sphinx.util
@@ -136,3 +137,27 @@ class SphinxWriter(object):
                 # py2 unicode needs to be encoded first
                 data = data.encode("utf8")
             f.write(data)
+
+
+def display_name(path: pathlib.Path, package_name: Optional[str] = "") -> str:
+    """
+    Create a human-readable name for a given project.
+
+    Determine the display name for a project given a path and (optional) package name.
+    If a display_name.txt file is found, the first line is returned. Otherwise, return a
+    title-cased string from either the base directory or package_name (if provided).
+
+    Args:
+        path: Path for searching
+        package_name: Sphinx-style, dot-delimited package name (optional)
+
+    Returns:
+        A display name for the provided path
+
+    """
+    name_path = path / "display_name.txt"
+    if name_path.exists():
+        with open(name_path, "r") as name_fo:
+            return name_fo.readline().rstrip("\r\n")
+    raw_name = package_name.split(".")[-1] if package_name else path.name
+    return string.capwords(raw_name.replace("_", " "))

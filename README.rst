@@ -143,3 +143,16 @@ you may find you want to tweak the results some.
 It's a lot easier to do that `after` you have the basic process working.
 Experiment with the other optional parameters
 to get the effect(s) you want.
+
+Special Instructions for Ticket Links
+-------------------------------------
+
+Any tags that come from ticket IDs can be converted into Links in the
+documentation via a parser plugin. The parser should accept a single string,
+the ticket ID, and return either a URL if the tag is a valid ticket ID or an
+empty string if it is not.
+
+In order to register the plugin for a `poetry`-based project::
+
+    [tools.poetry.plugins."parsers"]
+    url = "my_custom_library.parse:url_if_ticket"

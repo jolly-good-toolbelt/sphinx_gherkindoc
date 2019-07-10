@@ -19,6 +19,14 @@ def constants():
     utils.set_verbose(verbose)
 
 
+@pytest.fixture(scope="module")
+def display_name_tree(tmp_path_factory):
+    root = tmp_path_factory.mktemp("root")
+    display_name_path = root / "display_name_test"
+    display_name_path.mkdir()
+    return display_name_path.resolve()
+
+
 @pytest.fixture()
 def writer():
     return utils.SphinxWriter()
@@ -238,3 +246,24 @@ def test_sphinxwriter_write_to_file_verbose(writer, tmpdir, capsys):
     writer.add_output(TEST_MESSAGE)
     writer.write_to_file(filename)
     assert capsys.readouterr().out == f"Writing {filename}\n"
+
+
+# utils.display_name
+def test_display_name_folder(display_name_tree):
+    assert utils.display_name(display_name_tree) == "Display Name Test"
+
+
+def test_display_name_package(display_name_tree):
+    assert utils.display_name(display_name_tree, "a.b.package_name") == "Package Name"
+
+
+def test_display_name_file(display_name_tree):
+    display_name_file = display_name_tree / "display_name.txt"
+    display_name_file.write_text("Fancy Display Name")
+    assert utils.display_name(display_name_tree) == "Fancy Display Name"
+
+
+def test_display_name_file_and_package(display_name_tree):
+    display_name_file = display_name_tree / "display_name.txt"
+    display_name_file.write_text("Fancy Display Name")
+    assert utils.display_name(display_name_tree, "a.b.c") == "Fancy Display Name"
