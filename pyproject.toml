@@ -1,27 +1,21 @@
 [tool.poetry]
 name = "sphinx_gherkindoc"
-version = "3.1.2"
+version = "3.2.0"
 description = "A tool to convert Gherkin into Sphinx documentation"
 authors = ["Lewis Franklin <lewis.franklin@gmail.com>", "Doug Philips <dgou@mac.com>"]
 license = "MIT"
-
-[[tool.poetry.source]]
-name = "artifactory"
-url = "https://artifacts.rackspace.net/artifactory/api/pypi/pypi/simple/"
 
 [tool.poetry.dependencies]
 python = "^3.6"
 Sphinx = ">=1.3"
 sphinx_rtd_theme = ">=0.3.1"
 behave = ">=1.2.6"
-qecommon_tools = ">=1.0.0"
 recommonmark = ">=0.4.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^1.15"
 ghp-import = "^0.5.5"
 tomlkit = "^0.5.3"
-github_tools = "^2.0"
 sphinx-autodoc-typehints = "^1.6"
 pytest = "^4.6"
 pytest-cov = "^2.7"

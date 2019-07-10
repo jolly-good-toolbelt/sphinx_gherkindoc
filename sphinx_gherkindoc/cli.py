@@ -6,7 +6,6 @@ import shutil
 from typing import Set
 
 import sphinx
-from qecommon_tools import get_file_contents
 
 from .files import is_feature_file, is_rst_file, scan_tree
 from .glossary import make_steps_glossary
@@ -70,7 +69,9 @@ def process_args(
             source_path = root_path / source_name
             if is_feature_file(a_file):
                 dest_name = output_path / make_flat_name(a_file_list, is_dir=False)
-                feature_rst_file = feature_to_rst(source_path, root_path)
+                feature_rst_file = feature_to_rst(
+                    source_path, root_path, args.url_from_tag
+                )
                 verbose('converting "{}" to "{}"'.format(source_name, dest_name))
                 feature_rst_file.write_to_file(dest_name)
             elif not is_rst_file(a_file):
@@ -152,6 +153,12 @@ def main() -> None:
     parser.add_argument(
         "--version", action="store_true", help="Show version information and exit"
     )
+    url_help = (
+        "A library and method name to call to build a URL from a tag. The string"
+        " should be <library>:<method_name> and it should accept a single string"
+        " parameter, the tag."
+    )
+    parser.add_argument("--url-from-tag", help=url_help)
 
     args = parser.parse_args()
 
@@ -205,7 +212,8 @@ def config() -> None:
         "%%RELEASE%%": args.release,
     }
     source_dir = pathlib.Path(__file__).resolve().parent
-    sample_contents = get_file_contents(source_dir, "sample-conf.py")
+    with open(source_dir / "sample-conf.py", "r") as conf_fo:
+        sample_contents = conf_fo.read()
     for old_value, new_value in substitutions.items():
         sample_contents = sample_contents.replace(old_value, new_value)
 

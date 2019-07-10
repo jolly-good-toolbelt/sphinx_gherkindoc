@@ -12,7 +12,7 @@ basic_rst = [
     "Scenario: Test a Scenario\n",
     "-------------------------\n\n",
     ".. pull-quote::\n\n",
-    "    Tagged: quarantined, `JIRA-1234 <https://jira.rax.io/browse/JIRA-1234>`__\n\n",
+    "    Tagged: quarantined, JIRA-1234\n\n",
     "    A scenario is quicker to write than a outline but less robust.\n",
     "\n",
     "- Given a test feature\n",

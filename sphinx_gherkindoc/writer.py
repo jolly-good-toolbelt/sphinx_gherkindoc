@@ -1,17 +1,25 @@
 """Helper functions for writing rST files."""
+import importlib
 import itertools
 import pathlib
 import re
-from typing import List, Union
+import pkg_resources
+from typing import List, Optional, Union
 
 import behave.parser
 import behave.model
 import behave.model_core
-from qecommon_tools import display_name, get_file_contents, list_from, url_if_ticket
 
 from .files import is_rst_file
 from .glossary import step_glossary
-from .utils import make_flat_name, INDENT_DEPTH, rst_escape, SphinxWriter, verbose
+from .utils import (
+    display_name,
+    make_flat_name,
+    INDENT_DEPTH,
+    rst_escape,
+    SphinxWriter,
+    verbose,
+)
 
 # The csv-table parser for restructuredtext does not allow for escaping so use
 # a unicode character that looks like a quote but will not be in any Gherkin
@@ -49,8 +57,7 @@ def toctree(
     This allows us to put content in the TOC file directly.
     The rST files that are included are expected to contain proper headers as well as
     content.
-    If no rST files are included, a header is created using display_name from
-    qecommon_tools.
+    If no rST files are included, a header is created using display_name.
 
     NOTE: If there is more than one rST file present,
           the order of their inclusion in the TOC is by filename sort order.
@@ -69,7 +76,8 @@ def toctree(
         source_name = pathlib.Path().joinpath(*source_name_list)
         source_path = root_path / source_name
         verbose("Copying content from: {}".format(source_name))
-        of.add_output(get_file_contents(source_path), line_breaks=2)
+        with open(source_path, "r") as source_fo:
+            of.add_output(source_fo.read(), line_breaks=2)
         need_header = False
 
     if need_header:
@@ -97,7 +105,9 @@ def toctree(
 
 # Simplified this from a class, for various reasons.
 # Additional simplification work is needed!!!!
-def feature_to_rst(source_path: pathlib.Path, root_path: pathlib.Path) -> SphinxWriter:
+def feature_to_rst(
+    source_path: pathlib.Path, root_path: pathlib.Path, url_from_tag: Optional[str] = ""
+) -> SphinxWriter:
     """Return a SphinxWriter containing the rST for the given feature file."""
     output_file = SphinxWriter()
 
@@ -108,7 +118,9 @@ def feature_to_rst(source_path: pathlib.Path, root_path: pathlib.Path) -> Sphinx
     def description(description: Union[str, List[str]]) -> None:
         if not description:
             return
-        for line in list_from(description):
+        if not isinstance(description, list):
+            description = [description]
+        for line in description:
             output_file.add_output(rst_escape(line), indent_by=INDENT_DEPTH)
             # Since behave strips newlines, a reasonable guess must be made as
             # to when a newline should be re-inserted
@@ -118,12 +130,14 @@ def feature_to_rst(source_path: pathlib.Path, root_path: pathlib.Path) -> Sphinx
     def text(text: Union[str, List[str]]) -> None:
         if not text:
             return
+        if not isinstance(text, list):
+            text = [text]
         output_file.blank_line()
         output_file.add_output("::", line_breaks=2)
         # Since text blocks are treated as raw text, any new lines in the
         # Gherkin are preserved. To convert the text block into a code block,
         # each new line must be indented.
-        for line in itertools.chain(*(x.splitlines() for x in list_from(text))):
+        for line in itertools.chain(*(x.splitlines() for x in text)):
             output_file.add_output(
                 rst_escape(line), line_breaks=2, indent_by=INDENT_DEPTH
             )
@@ -136,7 +150,15 @@ def feature_to_rst(source_path: pathlib.Path, root_path: pathlib.Path) -> Sphinx
         If tag is a ticket, return an anonymous embedded hyperlink for it,
         else tag itself.
         """
-        url = url_if_ticket(tag)
+        url_parser = lambda x: ""  # noqa: E731
+        for entry_point in pkg_resources.iter_entry_points("parsers"):
+            if entry_point.name == "url":
+                url_parser = entry_point.load()
+        # qecommon_tools.whatever:whatever
+        if url_from_tag:
+            parser_module = importlib.import_module(url_from_tag.split(":")[0])
+            url_parser = getattr(parser_module, url_from_tag.split(":")[1])
+        url = url_parser(tag)
         if url:
             return "`{} <{}>`__".format(tag, url)
         return tag
