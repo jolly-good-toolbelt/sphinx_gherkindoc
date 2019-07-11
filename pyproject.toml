@@ -1,8 +1,12 @@
 [tool.poetry]
 name = "sphinx_gherkindoc"
-version = "3.2.0"
+version = "3.2.1"
 description = "A tool to convert Gherkin into Sphinx documentation"
 authors = ["Lewis Franklin <lewis.franklin@gmail.com>", "Doug Philips <dgou@mac.com>"]
+readme = "README.rst"
+homepage = "https://jolly-good-toolbelt.github.io/sphinx_gherkindoc/"
+documentation = "https://jolly-good-toolbelt.github.io/sphinx_gherkindoc/"
+repository = "https://github.com/jolly-good-toolbelt/sphinx_gherkindoc"
 license = "MIT"
 
 [tool.poetry.dependencies]
