@@ -21,6 +21,9 @@ from .utils import (
     verbose,
 )
 
+
+ADD_ON_STEP_KEYWORDS = ["And", "But"]
+
 # The csv-table parser for restructuredtext does not allow for escaping so use
 # a unicode character that looks like a quote but will not be in any Gherkin
 QUOTE = "\u201C"
@@ -184,7 +187,10 @@ def feature_to_rst(
                 step.line,
             )
             bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
-            output_file.add_output(f"- {step.keyword} {bold_step}")
+            step_text = f"- {step.keyword} {bold_step}"
+            if step.keyword in ADD_ON_STEP_KEYWORDS:
+                step_text = "    " + step_text
+            output_file.add_output(step_text)
             if step.table:
                 output_file.blank_line()
                 table(step.table, inline=True)
