@@ -1,0 +1,32 @@
+language: python
+python:
+  - "3.6"
+
+branches:
+  only:
+    - master
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install graphviz
+  - pip install poetry
+
+install:
+  - ./env_setup.py
+
+script:
+  - ./self_check.py
+  - ./bin/build_docs.py
+
+before_deploy:
+  - poetry config http-basic.pypi $PYPI_USER $PYPI_PASS
+  - poetry build
+
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GH_TOKEN
+    local_dir: docs/
+  - provider: script
+    script: poetry publish
+    skip_cleanup: true
