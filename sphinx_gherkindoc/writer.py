@@ -179,6 +179,10 @@ def feature_to_rst(
             f"Tagged: {tag_str.strip()}", line_breaks=2, indent_by=INDENT_DEPTH
         )
 
+    def _format_keyword(keyword):
+        """Bold-ify keywords that show a new 'section' of a scenario."""
+        return keyword if keyword in ADD_ON_STEP_KEYWORDS else f"**{keyword}**"
+
     def steps(steps: List[behave.model.Step]) -> None:
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
@@ -187,7 +191,7 @@ def feature_to_rst(
                 step.line,
             )
             bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
-            step_text = f"- {step.keyword} {bold_step}"
+            step_text = f"- {_format_keyword(step.keyword)} {bold_step}"
             if step.keyword in ADD_ON_STEP_KEYWORDS:
                 step_text = "    " + step_text
             output_file.add_output(step_text)
