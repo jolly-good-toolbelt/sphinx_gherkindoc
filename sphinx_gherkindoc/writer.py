@@ -191,9 +191,9 @@ def feature_to_rst(
                 step.line,
             )
             bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
-            step_text = f"- {_format_keyword(step.keyword)} {bold_step}"
+            step_text = f"| - {_format_keyword(step.keyword)} {bold_step}"
             if step.keyword in ADD_ON_STEP_KEYWORDS:
-                step_text = "    " + step_text
+                step_text = step_text.replace("| -", "| ")
             output_file.add_output(step_text)
             if step.table:
                 output_file.blank_line()
