@@ -84,6 +84,10 @@ def scan_tree(
         if not private:
             dirs[:] = filter(_not_private, dirs)
 
+        # Make recursion predictable by sorting directory entries since
+        # os.walk doesn't make any guarantees about the order it uses.
+        dirs.sort()
+
         me_path = pathlib.Path(me)
         result.append(
             DirData(
