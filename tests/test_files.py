@@ -124,7 +124,7 @@ def test_wanted_source_files():
 
 
 def test_wanted_source_files_empty_exclude():
-    wanted_files = ["one.feature", "two.md", "subdir/three.feature"]
+    wanted_files = ["one.feature", "subdir/three.feature", "two.md"]
     unwanted_files = ["four.py"]
     assert files._wanted_source_files(wanted_files + unwanted_files, []) == wanted_files
 
@@ -167,7 +167,7 @@ def test_scan_tree_relative():
     relative_path = pathlib.Path("tests")
     expected_data = [
         files.DirData(
-            relative_path.resolve(), ["tests"], [], ["tags.feature", "basic.feature"]
+            relative_path.resolve(), ["tests"], [], ["basic.feature", "tags.feature"]
         )
     ]
     assert files.scan_tree(relative_path, False, []) == expected_data

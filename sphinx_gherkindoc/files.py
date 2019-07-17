@@ -52,11 +52,11 @@ def _not_hidden(name: str) -> bool:
 def _wanted_source_files(files: Iterable, exclude_pattern_list: Iterable) -> List[str]:
     """Get list of wanted sorce files, excluding unwanted files."""
     wanted_files = filter(_is_wanted_file, files)
-    return [
+    return sorted(
         a_file
         for a_file in wanted_files
         if not _is_excluded(a_file, exclude_pattern_list)
-    ]
+    )
 
 
 def scan_tree(
