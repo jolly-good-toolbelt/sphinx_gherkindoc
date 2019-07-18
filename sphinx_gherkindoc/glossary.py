@@ -52,13 +52,13 @@ def make_steps_glossary(project_name: str) -> Optional[SphinxWriter]:
         return None
 
     glossary = SphinxWriter()
-    glossary.create_section(1, "{} Glossary".format(project_name))
+    glossary.create_section(1, f"{project_name} Glossary")
 
     master_step_names = {
         name for gloss in step_glossary.values() for name in gloss.step_set
     }
     for term in sorted(master_step_names):
-        glossary.add_output("- :term:`{}`".format(rst_escape(term, slash_escape=True)))
+        glossary.add_output(f"- :term:`{rst_escape(term, slash_escape=True)}`")
 
     glossary.blank_line()
     glossary.add_output(".. glossary::")

@@ -72,13 +72,13 @@ def process_args(
                 feature_rst_file = feature_to_rst(
                     source_path, root_path, args.url_from_tag
                 )
-                verbose('converting "{}" to "{}"'.format(source_name, dest_name))
+                verbose(f'converting "{source_name}" to "{dest_name}"')
                 feature_rst_file.write_to_file(dest_name)
             elif not is_rst_file(a_file):
                 dest_name = output_path / make_flat_name(
                     a_file_list, is_dir=False, ext=None
                 )
-                verbose('copying "{}" to "{}"'.format(source_name, dest_name))
+                verbose(f'copying "{source_name}" to "{dest_name}"')
                 shutil.copy(source_path, dest_name)
 
     if step_glossary_name:
@@ -93,7 +93,7 @@ def process_args(
             print("No steps to include in the glossary: no glossary generated")
             return
 
-        verbose("Writing sphinx glossary: {}".format(glossary_filename))
+        verbose(f"Writing sphinx glossary: {glossary_filename}")
         glossary.write_to_file(glossary_filename)
 
 
@@ -163,16 +163,14 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.version:
-        parser.exit(
-            message="Sphinx (sphinx-gherkindoc) {}".format(sphinx.__display_version__)
-        )
+        parser.exit(message=f"Sphinx (sphinx-gherkindoc) {sphinx.__display_version__}")
 
     set_dry_run(args.dry_run)
     set_verbose(args.verbose)
 
     gherkin_path = pathlib.Path(args.gherkin_path)
     if not gherkin_path.is_dir():
-        parser.error("{} is not a directory.".format(gherkin_path))
+        parser.error(f"{args.gherkin_path} is not a directory.")
 
     if args.doc_project is None:
         args.doc_project = gherkin_path.parts[-1]
@@ -180,7 +178,7 @@ def main() -> None:
     output_path = pathlib.Path(args.output_path).resolve()
     if not output_path.is_dir():
         if not args.dry_run:
-            verbose("creating directory: {}".format(output_path))
+            verbose(f"creating directory: {args.output_path}")
             output_path.mkdir(parents=True)
 
     process_args(args, gherkin_path, output_path, args.doc_project)

@@ -39,9 +39,9 @@ def set_verbose(value: bool) -> None:
 
 
 # Build up dictionary of characters that need escaping
-_escape_mappings = {ord(x): u"\\{}".format(x) for x in ("*", '"', "#", ":", "<", ">")}
+_escape_mappings = {ord(x): f"\\{x}" for x in ("*", '"', "#", ":", "<", ">")}
 _advanced_escape_mappings = _escape_mappings.copy()
-_advanced_escape_mappings[ord("\\")] = u"\\\\\\"
+_advanced_escape_mappings[ord("\\")] = "\\\\\\"
 
 
 def rst_escape(unescaped: str, slash_escape: bool = False) -> str:
@@ -104,7 +104,8 @@ class SphinxWriter(object):
             line_breaks: The number of line breaks to include
             indenty_by: The number of spaces to indent the line.
         """
-        self._output.append(u"{}{}{}".format(" " * indent_by, line, "\n" * line_breaks))
+        line_breaks_str = "\n" * line_breaks
+        self._output.append(f"{' ' * indent_by}{line}{line_breaks_str}")
 
     def blank_line(self) -> None:
         """Write a single blank line."""
@@ -127,16 +128,11 @@ class SphinxWriter(object):
         Args:
             filename: The full path to write the output
         """
-        verbose("Writing {}".format(filename))
+        verbose(f"Writing {filename}")
         with sphinx.util.osutil.FileAvoidWrite(filename) as f:
             # All version of Sphinx will accept a string-type,
             # but >=2.0 accepts _only_ strings (not bytes)
-            data = "".join(self._output)
-            if not isinstance(data, str):
-                # py3 will recognize unicode as strings natively,
-                # py2 unicode needs to be encoded first
-                data = data.encode("utf8")
-            f.write(data)
+            f.write("".join(self._output))
 
 
 def display_name(path: pathlib.Path, package_name: Optional[str] = "") -> str:
