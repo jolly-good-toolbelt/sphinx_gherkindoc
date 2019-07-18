@@ -124,7 +124,7 @@ def test_wanted_source_files():
 
 
 def test_wanted_source_files_empty_exclude():
-    wanted_files = ["one.feature", "two.md", "subdir/three.feature"]
+    wanted_files = ["one.feature", "subdir/three.feature", "two.md"]
     unwanted_files = ["four.py"]
     assert files._wanted_source_files(wanted_files + unwanted_files, []) == wanted_files
 
@@ -146,18 +146,18 @@ def test_scan_tree(tree):
 
 def test_scan_tree_private(tree):
     expected_data = [
-        files.DirData(tree, ["root0"], ["subdir", "_private_dir"], ["test.feature"]),
+        files.DirData(tree, ["root0"], ["_private_dir", "subdir"], ["test.feature"]),
+        files.DirData(tree / "_private_dir", ["root0", "_private_dir"], [], []),
         files.DirData(
             tree / "subdir", ["root0", "subdir"], [], ["another_test.feature"]
         ),
-        files.DirData(tree / "_private_dir", ["root0", "_private_dir"], [], []),
     ]
     assert files.scan_tree(tree, True, []) == expected_data
 
 
 def test_scan_tree_exclude(tree):
     expected_data = [
-        files.DirData(tree, ["root0"], ["subdir", "_private_dir"], ["test.feature"]),
+        files.DirData(tree, ["root0"], ["_private_dir", "subdir"], ["test.feature"]),
         files.DirData(tree / "_private_dir", ["root0", "_private_dir"], [], []),
     ]
     assert files.scan_tree(tree, True, ["*subdir*"]) == expected_data
@@ -167,7 +167,7 @@ def test_scan_tree_relative():
     relative_path = pathlib.Path("tests")
     expected_data = [
         files.DirData(
-            relative_path.resolve(), ["tests"], [], ["tags.feature", "basic.feature"]
+            relative_path.resolve(), ["tests"], [], ["basic.feature", "tags.feature"]
         )
     ]
     assert files.scan_tree(relative_path, False, []) == expected_data
