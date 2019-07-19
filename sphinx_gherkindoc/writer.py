@@ -21,8 +21,8 @@ from .utils import (
     verbose,
 )
 
+MAIN_STEP_KEYWORDS = ["Given", "When", "Then"]
 
-ADD_ON_STEP_KEYWORDS = ["And", "But"]
 
 # The csv-table parser for restructuredtext does not allow for escaping so use
 # a unicode character that looks like a quote but will not be in any Gherkin
@@ -179,10 +179,6 @@ def feature_to_rst(
             f"Tagged: {tag_str.strip()}", line_breaks=2, indent_by=INDENT_DEPTH
         )
 
-    def _format_keyword(keyword):
-        """Bold-ify keywords that show a new 'section' of a scenario."""
-        return keyword if keyword in ADD_ON_STEP_KEYWORDS else f"**{keyword}**"
-
     def steps(steps: List[behave.model.Step]) -> None:
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
@@ -191,10 +187,8 @@ def feature_to_rst(
                 step.line,
             )
             bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
-            step_text = f"| - {_format_keyword(step.keyword)} {bold_step}"
-            if step.keyword in ADD_ON_STEP_KEYWORDS:
-                step_text = step_text.replace("| -", "| ")
-            output_file.add_output(step_text)
+            prefix = "| -" if step.keyword in MAIN_STEP_KEYWORDS else "| "
+            output_file.add_output(f"{prefix} {step.keyword} {bold_step}")
             if step.table:
                 output_file.blank_line()
                 table(step.table, inline=True)
