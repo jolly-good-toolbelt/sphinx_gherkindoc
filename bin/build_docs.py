@@ -62,6 +62,23 @@ def main():
         sphinx_apidoc_cmd + ["sphinx_gherkindoc", "*sample-conf*"], cwd=BASE_DIR
     )
 
+    print("Building Sample Gherkin docs")
+    subprocess.check_call(
+        [
+            "poetry",
+            "run",
+            "sphinx-gherkindoc",
+            "--doc-project",
+            "Sample Gherkin",
+            "--toc-name",
+            "sample-gherkindoc",
+            "--step-glossary-name",
+            "sample-gherkindoc-glossary",
+            "tests",
+            DOCS_WORKING_DIRECTORY,
+        ]
+    )
+
     # Copy over all the top level rST files so we don't
     # have to keep a duplicate list here.
     for filename in glob.iglob("*.rst"):
