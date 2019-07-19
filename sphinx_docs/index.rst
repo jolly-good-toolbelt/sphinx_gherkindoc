@@ -34,6 +34,22 @@ Command-Line/Utility Documentation
     See the ``--help`` flag for full command arguments.
 
 
+Sample Gherkin
+==============
+
+.. toctree::
+
+    sample-gherkindoc
+
+
+Sample Gherkin Glossary
+=======================
+
+.. toctree::
+
+    sample-gherkindoc-glossary
+
+
 Maintainer's Documentation
 ==========================
 
