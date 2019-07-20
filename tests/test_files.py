@@ -167,7 +167,10 @@ def test_scan_tree_relative():
     relative_path = pathlib.Path("tests")
     expected_data = [
         files.DirData(
-            relative_path.resolve(), ["tests"], [], ["basic.feature", "tags.feature"]
+            relative_path.resolve(),
+            ["tests"],
+            [],
+            ["README.rst", "basic.feature", "tags.feature"],
         )
     ]
     assert files.scan_tree(relative_path, False, []) == expected_data
