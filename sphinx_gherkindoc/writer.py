@@ -192,6 +192,7 @@ def feature_to_rst(
             if step.table:
                 output_file.blank_line()
                 table(step.table, inline=True)
+                output_file.blank_line()
             if step.text:
                 text(step.text)
         output_file.blank_line()
