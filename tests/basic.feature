@@ -39,3 +39,36 @@ Feature: Testing Sphinx Writer
             | Pudey     | Silly Walks |
             | Two-Lumps | Silly Walks |
         Then the file is converted into rST
+
+    Scenario: Indentation For Secondary Step Keywords
+
+        Given something not indented
+        And something else that IS indented
+        When something not indented happens
+        Then something not indented happened
+        And something indented also happened
+        And another indented thing happened
+
+    Scenario: Indentation For Secondary Step Keywords With Text and Tables
+
+        Given some text for a non-indented step
+        '''
+        Here be that said text!
+        '''
+        And some test for a step that IS indented
+        '''
+        Hello again!
+        '''
+        And how about a table in there too
+            | position | name         |
+            | first    | Who          |
+            | second   | What         |
+            | third    | I don't know |
+        When the fantasy has ended
+        And all the children are gone
+        Then something deep inside me
+        '''
+        Helps me to carry on
+        '''
+        And Encarnaciooooon
+        And doodle-doodle-doodle-doo
