@@ -180,6 +180,7 @@ def feature_to_rst(
         )
 
     def steps(steps: List[behave.model.Step]) -> None:
+        has_table_or_text = any(step.table or step.text for step in steps)
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
                 step.name,
@@ -187,7 +188,11 @@ def feature_to_rst(
                 step.line,
             )
             bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
-            prefix = "| -" if step.keyword in MAIN_STEP_KEYWORDS else "| "
+            prefix = (
+                "| -"
+                if (has_table_or_text or step.keyword in MAIN_STEP_KEYWORDS)
+                else "| "
+            )
             output_file.add_output(f"{prefix} {step.keyword} {bold_step}")
             if step.table:
                 output_file.blank_line()
