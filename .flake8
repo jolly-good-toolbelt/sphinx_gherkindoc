@@ -15,3 +15,5 @@ inline-quotes = "
 ignore = D107, D202, E203, W503
 per-file-ignores =
     tests/*:D103
+    # example rst output might have long lines
+    tests/rst_output.py:E501
