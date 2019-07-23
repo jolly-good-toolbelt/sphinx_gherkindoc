@@ -40,7 +40,7 @@ Feature: Testing Sphinx Writer
             | Two-Lumps | Silly Walks |
         Then the file is converted into rST
 
-    Scenario: Indentation For Secondary Step Keywords
+    Scenario: Normal scenarios with add on steps (And, But) have those add on steps indented
 
         Given something not indented
         And something else that IS indented
@@ -49,13 +49,13 @@ Feature: Testing Sphinx Writer
         And something indented also happened
         And another indented thing happened
 
-    Scenario: Indentation For Secondary Step Keywords With Text and Tables
+    Scenario: Indentation is ignored when any step in the scenario has text or a table
 
-        Given some text for a non-indented step
+        Given a step with some text
         '''
         Here be that said text!
         '''
-        And some test for a step that IS indented
+        And an And step with some text too
         '''
         Hello again!
         '''
