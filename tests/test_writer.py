@@ -84,6 +84,14 @@ def test_feature_to_rst(feature_file):
     assert results._output == rst_output.basic_rst
 
 
+def test_feature_to_rst_integrated_background(feature_file):
+    results = writer.feature_to_rst(
+        feature_file, feature_file.parent, integrate_background=True
+    )
+    print(results._output)
+    assert results._output == rst_output.basic_rst_with_integrated_background
+
+
 def test_feature_to_rst_inherited_tags(tags_feature_file):
     results = writer.feature_to_rst(tags_feature_file, tags_feature_file.parent)
     assert results._output == rst_output.tags_rst

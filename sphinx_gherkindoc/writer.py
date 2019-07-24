@@ -107,7 +107,10 @@ def toctree(
 # Simplified this from a class, for various reasons.
 # Additional simplification work is needed!!!!
 def feature_to_rst(
-    source_path: pathlib.Path, root_path: pathlib.Path, url_from_tag: Optional[str] = ""
+    source_path: pathlib.Path,
+    root_path: pathlib.Path,
+    url_from_tag: Optional[str] = "",
+    integrate_background: bool = False,
 ) -> SphinxWriter:
     """Return a SphinxWriter containing the rST for the given feature file."""
     output_file = SphinxWriter()
@@ -206,7 +209,6 @@ def feature_to_rst(
                 output_file.blank_line()
             if step.text:
                 text(step.text)
-        output_file.blank_line()
 
     def examples(
         scenario: behave.model.Scenario, feature: behave.model.Feature
@@ -232,14 +234,18 @@ def feature_to_rst(
     feature = behave.parser.parse_file(source_path)
     section(1, feature)
     description(feature.description)
-    if feature.background:
+    if feature.background and not integrate_background:
         section(2, feature.background)
         steps(feature.background.steps)
+        output_file.blank_line()
     for scenario in feature.scenarios:
         section(2, scenario)
         tags(scenario.tags, feature)
         description(scenario.description)
+        if integrate_background:
+            steps(feature.background.steps)
         steps(scenario.steps)
+        output_file.blank_line()
         examples(scenario, feature)
 
     return output_file
