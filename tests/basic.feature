@@ -39,3 +39,36 @@ Feature: Testing Sphinx Writer
             | Pudey     | Silly Walks |
             | Two-Lumps | Silly Walks |
         Then the file is converted into rST
+
+    Scenario: Normal scenarios with add on steps (And, But) have those add on steps indented
+
+        Given something not indented
+        And something else that IS indented
+        When something not indented happens
+        Then something not indented happened
+        And something indented also happened
+        And another indented thing happened
+
+    Scenario: Indentation is ignored when any step in the scenario has text or a table
+
+        Given a step with some text
+        '''
+        Here be that said text!
+        '''
+        And an And step with some text too
+        '''
+        Hello again!
+        '''
+        And how about a table in there too
+            | position | name         |
+            | first    | Who          |
+            | second   | What         |
+            | third    | I don't know |
+        When the fantasy has ended
+        And all the children are gone
+        Then something deep inside me
+        '''
+        Helps me to carry on
+        '''
+        And Encarnaciooooon
+        And doodle-doodle-doodle-doo
