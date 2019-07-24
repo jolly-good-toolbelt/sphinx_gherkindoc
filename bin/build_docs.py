@@ -78,6 +78,20 @@ def main():
             DOCS_WORKING_DIRECTORY,
         ]
     )
+    subprocess.check_call(
+        [
+            "poetry",
+            "run",
+            "sphinx-gherkindoc",
+            "--doc-project",
+            "Sample Gherkin With Integrated Background",
+            "--toc-name",
+            "sample-gherkindoc-integrated-background",
+            "tests_for_integrated_background",
+            DOCS_WORKING_DIRECTORY,
+            "--integrate-background",
+        ]
+    )
 
     # Copy over all the top level rST files so we don't
     # have to keep a duplicate list here.
