@@ -111,6 +111,7 @@ def feature_to_rst(
     root_path: pathlib.Path,
     url_from_tag: Optional[str] = "",
     integrate_background: bool = False,
+    background_step_format: str = "{}",
 ) -> SphinxWriter:
     """Return a SphinxWriter containing the rST for the given feature file."""
     output_file = SphinxWriter()
@@ -182,7 +183,7 @@ def feature_to_rst(
             f"Tagged: {tag_str.strip()}", line_breaks=2, indent_by=INDENT_DEPTH
         )
 
-    def steps(steps: List[behave.model.Step]) -> None:
+    def steps(steps: List[behave.model.Step], step_format="{}") -> None:
         any_step_has_table_or_text = any(step.table or step.text for step in steps)
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
@@ -190,7 +191,8 @@ def feature_to_rst(
                 pathlib.Path(step.filename).resolve().relative_to(root_path),
                 step.line,
             )
-            bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
+            formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
+            formatted_step = step_format.format(formatted_step)
             # Removing the dash, but still having the pipe character
             # makes the step slightly indented, and without a dash.
             # This creates a nice visual of "sections" of steps.
@@ -202,7 +204,7 @@ def feature_to_rst(
                 if (any_step_has_table_or_text or step.keyword in MAIN_STEP_KEYWORDS)
                 else "| "
             )
-            output_file.add_output(f"{prefix} {step.keyword} {bold_step}")
+            output_file.add_output(f"{prefix} {step.keyword} {formatted_step}")
             if step.table:
                 output_file.blank_line()
                 table(step.table, inline=True)
@@ -243,7 +245,7 @@ def feature_to_rst(
         tags(scenario.tags, feature)
         description(scenario.description)
         if integrate_background:
-            steps(feature.background.steps)
+            steps(feature.background.steps, step_format=background_step_format)
         steps(scenario.steps)
         output_file.blank_line()
         examples(scenario, feature)
