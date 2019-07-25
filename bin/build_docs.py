@@ -86,10 +86,28 @@ def main():
             "--doc-project",
             "Sample Gherkin With Integrated Background",
             "--toc-name",
-            "sample-gherkindoc-integrated-background",
-            "tests_for_integrated_background",
+            "sample-gherkindoc-integrated-background-default",
+            "tests_for_integrated_background/default_format",
             DOCS_WORKING_DIRECTORY,
             "--integrate-background",
+        ]
+    )
+    unique_background_step_format = "{} *(Background)*"
+    subprocess.check_call(
+        [
+            "poetry",
+            "run",
+            "sphinx-gherkindoc",
+            "--doc-project",
+            "Sample Gherkin With Integrated Background "
+            "And A Unique Background Step Format",
+            "--toc-name",
+            "sample-gherkindoc-integrated-background-unique-format",
+            "tests_for_integrated_background/unique_format",
+            DOCS_WORKING_DIRECTORY,
+            "--integrate-background",
+            "--background-step-format",
+            unique_background_step_format,
         ]
     )
 

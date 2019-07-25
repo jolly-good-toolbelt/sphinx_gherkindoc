@@ -74,6 +74,7 @@ def process_args(
                     root_path,
                     url_from_tag=args.url_from_tag,
                     integrate_background=args.integrate_background,
+                    background_step_format=args.background_step_format,
                 )
                 verbose(f'converting "{source_name}" to "{dest_name}"')
                 feature_rst_file.write_to_file(dest_name)
@@ -153,6 +154,17 @@ def main() -> None:
         help=(
             "Remove all references to Background, "
             "and integrate the steps into each scenario."
+        ),
+    )
+    parser.add_argument(
+        "--background-step-format",
+        default="{}",
+        help=(
+            "A format string to use to format integrated background steps. "
+            "It should contain a single pair of empty curly braces, "
+            "which is where the contents of the background step will go. "
+            "NOTE: This flag is only relevant when the --integrate-background flag "
+            "is also included."
         ),
     )
     parser.add_argument(
