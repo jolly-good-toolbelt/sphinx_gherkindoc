@@ -183,6 +183,13 @@ def feature_to_rst(
             f"Tagged: {tag_str.strip()}", line_breaks=2, indent_by=INDENT_DEPTH
         )
 
+    def format_step(step, step_format):
+        # Make bold any scenario outline variables
+        formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
+        # Apply the step format string
+        formatted_step = step_format.format(f"{step.keyword} {formatted_step}")
+        return formatted_step
+
     def steps(steps: List[behave.model.Step], step_format: str = "{}") -> None:
         any_step_has_table_or_text = any(step.table or step.text for step in steps)
         for step in steps:
@@ -191,10 +198,7 @@ def feature_to_rst(
                 pathlib.Path(step.filename).resolve().relative_to(root_path),
                 step.line,
             )
-            # Make bold any scenario outline variables
-            formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
-            # Apply the step format string
-            formatted_step = step_format.format(f"{step.keyword} {formatted_step}")
+            formatted_step = format_step(step, step_format)
             # Removing the dash, but still having the pipe character
             # makes the step slightly indented, and without a dash.
             # This creates a nice visual of "sections" of steps.
