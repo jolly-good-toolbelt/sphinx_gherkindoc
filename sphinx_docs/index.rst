@@ -40,6 +40,7 @@ Sample Gherkin
 .. toctree::
 
     sample-gherkindoc
+    sample-gherkindoc-integrated-background
 
 
 Sample Gherkin Glossary

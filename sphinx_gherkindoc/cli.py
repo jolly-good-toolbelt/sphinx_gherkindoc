@@ -70,7 +70,11 @@ def process_args(
             if is_feature_file(a_file):
                 dest_name = output_path / make_flat_name(a_file_list, is_dir=False)
                 feature_rst_file = feature_to_rst(
-                    source_path, root_path, args.url_from_tag
+                    source_path,
+                    root_path,
+                    url_from_tag=args.url_from_tag,
+                    integrate_background=args.integrate_background,
+                    background_step_format=args.background_step_format,
                 )
                 verbose(f'converting "{source_name}" to "{dest_name}"')
                 feature_rst_file.write_to_file(dest_name)
@@ -143,6 +147,25 @@ def main() -> None:
         default=None,
         help="Include steps glossary under the given name."
         " If not specified, no glossary will be created.",
+    )
+    parser.add_argument(
+        "--integrate-background",
+        action="store_true",
+        help=(
+            "Remove all references to Background, "
+            "and integrate the steps into each scenario."
+        ),
+    )
+    parser.add_argument(
+        "--background-step-format",
+        default="{}",
+        help=(
+            "A format string to use to format integrated background steps. "
+            "It should contain a single pair of empty curly braces, "
+            "which is where the contents of the background step will go. "
+            "NOTE: This flag is only relevant when the --integrate-background flag "
+            "is also included."
+        ),
     )
     parser.add_argument(
         "-v",
