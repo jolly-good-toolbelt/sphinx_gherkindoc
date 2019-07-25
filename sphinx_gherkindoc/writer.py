@@ -107,7 +107,11 @@ def toctree(
 # Simplified this from a class, for various reasons.
 # Additional simplification work is needed!!!!
 def feature_to_rst(
-    source_path: pathlib.Path, root_path: pathlib.Path, url_from_tag: Optional[str] = ""
+    source_path: pathlib.Path,
+    root_path: pathlib.Path,
+    url_from_tag: Optional[str] = "",
+    integrate_background: bool = False,
+    background_step_format: str = "{}",
 ) -> SphinxWriter:
     """Return a SphinxWriter containing the rST for the given feature file."""
     output_file = SphinxWriter()
@@ -179,7 +183,14 @@ def feature_to_rst(
             f"Tagged: {tag_str.strip()}", line_breaks=2, indent_by=INDENT_DEPTH
         )
 
-    def steps(steps: List[behave.model.Step]) -> None:
+    def format_step(step: behave.model.Step, step_format: str):
+        # Make bold any scenario outline variables
+        formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
+        # Apply the step format string
+        formatted_step = step_format.format(f"{step.keyword} {formatted_step}")
+        return formatted_step
+
+    def steps(steps: List[behave.model.Step], step_format: str = "{}") -> None:
         any_step_has_table_or_text = any(step.table or step.text for step in steps)
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
@@ -187,7 +198,7 @@ def feature_to_rst(
                 pathlib.Path(step.filename).resolve().relative_to(root_path),
                 step.line,
             )
-            bold_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
+            formatted_step = format_step(step, step_format)
             # Removing the dash, but still having the pipe character
             # makes the step slightly indented, and without a dash.
             # This creates a nice visual of "sections" of steps.
@@ -199,14 +210,13 @@ def feature_to_rst(
                 if (any_step_has_table_or_text or step.keyword in MAIN_STEP_KEYWORDS)
                 else "| "
             )
-            output_file.add_output(f"{prefix} {step.keyword} {bold_step}")
+            output_file.add_output(f"{prefix} {formatted_step}")
             if step.table:
                 output_file.blank_line()
                 table(step.table, inline=True)
                 output_file.blank_line()
             if step.text:
                 text(step.text)
-        output_file.blank_line()
 
     def examples(
         scenario: behave.model.Scenario, feature: behave.model.Feature
@@ -232,14 +242,18 @@ def feature_to_rst(
     feature = behave.parser.parse_file(source_path)
     section(1, feature)
     description(feature.description)
-    if feature.background:
+    if feature.background and not integrate_background:
         section(2, feature.background)
         steps(feature.background.steps)
+        output_file.blank_line()
     for scenario in feature.scenarios:
         section(2, scenario)
         tags(scenario.tags, feature)
         description(scenario.description)
+        if integrate_background:
+            steps(feature.background.steps, step_format=background_step_format)
         steps(scenario.steps)
+        output_file.blank_line()
         examples(scenario, feature)
 
     return output_file
