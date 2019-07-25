@@ -88,7 +88,6 @@ def test_feature_to_rst_integrated_background(feature_file):
     results = writer.feature_to_rst(
         feature_file, feature_file.parent, integrate_background=True
     )
-    print(results._output)
     assert results._output == rst_output.basic_rst_with_integrated_background
 
 

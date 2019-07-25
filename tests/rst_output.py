@@ -182,6 +182,7 @@ basic_rst_with_integrated_background = [
     "| - And doodle-doodle-doodle-doo\n",
     "\n",
 ]
+
 tags_rst = [
     "Feature: Testing Sphinx Writer\n",
     "==============================\n\n",
