@@ -183,7 +183,7 @@ def feature_to_rst(
             f"Tagged: {tag_str.strip()}", line_breaks=2, indent_by=INDENT_DEPTH
         )
 
-    def format_step(step, step_format):
+    def format_step(step: behave.model.Step, step_format: str):
         # Make bold any scenario outline variables
         formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
         # Apply the step format string
