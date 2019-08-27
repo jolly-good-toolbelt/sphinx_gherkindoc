@@ -250,7 +250,7 @@ def feature_to_rst(
         section(2, scenario)
         tags(scenario.tags, feature)
         description(scenario.description)
-        if integrate_background:
+        if integrate_background and feature.background:
             steps(feature.background.steps, step_format=background_step_format)
         steps(scenario.steps)
         output_file.blank_line()
