@@ -69,7 +69,7 @@ def make_steps_glossary(project_name: str) -> Optional[SphinxWriter]:
             )
 
         for location, line_numbers in sorted(entry.locations.items()):
-            definition = f"| {location} {', '.join(map(str, line_numbers))}"
+            definition = f"| {location} {', '.join(map(str, sorted(line_numbers)))}"
             glossary.add_output(definition, indent_by=INDENT_DEPTH * 2)
         glossary.blank_line()
 
