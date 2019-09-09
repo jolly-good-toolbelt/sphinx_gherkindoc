@@ -39,7 +39,7 @@ def test_glossary_entry_add_reference(entry):
     feature_file = pathlib.Path("filename.feature")
     entry.add_reference("A step", feature_file, 12)
     assert entry.step_set == {"A step"}
-    assert dict(entry.locations) == {feature_file: [12]}
+    assert dict(entry.locations) == {feature_file: {12}}
 
 
 def test_glossary_entry_tuple_len(entry):

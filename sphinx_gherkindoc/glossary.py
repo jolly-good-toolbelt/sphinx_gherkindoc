@@ -11,7 +11,7 @@ class GlossaryEntry(object):
 
     def __init__(self) -> None:
         self.step_set: Set[str] = set()
-        self.locations: DefaultDict[pathlib.Path, list] = defaultdict(list)
+        self.locations: DefaultDict[pathlib.Path, set] = defaultdict(set)
 
     def add_reference(
         self, step_name: str, filename: pathlib.Path, line_number: int
@@ -27,7 +27,7 @@ class GlossaryEntry(object):
         """
 
         self.step_set.add(step_name)
-        self.locations[filename].append(line_number)
+        self.locations[filename].add(line_number)
 
     def tuple_len(self) -> Tuple[int, int]:
         """Get the length for each location and the number of associated steps."""
@@ -69,7 +69,7 @@ def make_steps_glossary(project_name: str) -> Optional[SphinxWriter]:
             )
 
         for location, line_numbers in sorted(entry.locations.items()):
-            definition = f"| {location} {', '.join(map(str, line_numbers))}"
+            definition = f"| {location} {', '.join(map(str, sorted(line_numbers)))}"
             glossary.add_output(definition, indent_by=INDENT_DEPTH * 2)
         glossary.blank_line()
 
