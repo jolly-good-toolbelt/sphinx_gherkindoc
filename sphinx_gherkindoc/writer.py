@@ -190,7 +190,9 @@ def feature_to_rst(
         # Apply the step format string
         # Every step keyword has the `step-keyword` role applied to it
         # so that users can customize how the step keyword is formatted with CSS.
-        formatted_step = step_format.format(f":step-keyword:`{step.keyword}` {formatted_step}")
+        formatted_step = step_format.format(
+            f":step-keyword:`{step.keyword}` {formatted_step}"
+        )
         return formatted_step
 
     def steps(steps: List[behave.model.Step], step_format: str = "{}") -> None:
