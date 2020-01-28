@@ -171,3 +171,21 @@ In order to register the plugin for a ``setup.py``-based project::
 In order to use the parser via command line,
 the ``--url_from-tag`` flag should be used.
 The provided string should be be formatted ``<library>:<method_name>``
+
+Formatting Options
+------------------
+
+If you connect a ``.css`` file to your generated documentation,
+you can make use of certain classes to format parts of the Gherkin
+however you so choose!
+
+Here are the available CSS classes:
+
+- ``step-keyword``
+
+Example ``.css`` File::
+
+    .step-keyword {
+        font-weight: bold;
+        color: BlanchedAlmond;
+    }
