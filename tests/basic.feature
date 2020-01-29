@@ -40,14 +40,14 @@ Feature: Testing Sphinx Writer
             | Two-Lumps | Silly Walks |
         Then the file is converted into rST
 
-    Scenario: Normal scenarios with add on steps (And, But) have those add on steps indented
+    Scenario: Normal scenarios with add on steps (And, But)
 
-        Given something not indented
-        And something else that IS indented
-        When something not indented happens
-        Then something not indented happened
-        And something indented also happened
-        And another indented thing happened
+        Given something
+        And something else
+        When something happens
+        Then something happened
+        And something else also happened
+        And another thing happened
 
     Scenario: Indentation is ignored when any step in the scenario has text or a table
 
