@@ -176,6 +176,7 @@ Formatting Options
 ------------------
 
 If you connect a ``.css`` file to your generated documentation,
+via the ``_static`` folder that is supported by Sphinx,
 you can make use of certain classes to format parts of the Gherkin
 however you so choose!
 
@@ -189,3 +190,12 @@ Example ``.css`` File::
         font-weight: bold;
         color: BlanchedAlmond;
     }
+
+.. note::
+
+    Your ``.css`` can have any name. As long as it is in the ``_static`` folder,
+    Sphinx will integrate it into the generated HTML.
+    Sphinx officially documents `adding a CSS file via the Application API`_
+
+
+.. _`adding a CSS file via the Application API`: https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.add_css_file
