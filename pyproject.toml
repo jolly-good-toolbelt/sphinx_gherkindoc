@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sphinx_gherkindoc"
-version = "3.2.8"
+version = "3.3.0"
 description = "A tool to convert Gherkin into Sphinx documentation"
 authors = ["Lewis Franklin <lewis.franklin@gmail.com>", "Doug Philips <dgou@mac.com>"]
 readme = "README.rst"
