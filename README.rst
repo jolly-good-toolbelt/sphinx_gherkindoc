@@ -182,11 +182,11 @@ however you so choose!
 
 Here are the available CSS classes:
 
-- ``step-keyword``
+- ``gherkin-step-keyword``
 
 Example ``.css`` File::
 
-    .step-keyword {
+    .gherkin-step-keyword {
         font-weight: bold;
         color: BlanchedAlmond;
     }

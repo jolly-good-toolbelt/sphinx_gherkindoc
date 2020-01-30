@@ -22,7 +22,7 @@ from .utils import (
 )
 
 MAIN_STEP_KEYWORDS = ["Given", "When", "Then"]
-AVAILABLE_ROLES = ["step-keyword"]
+AVAILABLE_ROLES = ["gherkin-step-keyword"]
 
 
 # The csv-table parser for restructuredtext does not allow for escaping so use
@@ -188,10 +188,10 @@ def feature_to_rst(
         # Make bold any scenario outline variables
         formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
         # Apply the step format string
-        # Every step keyword has the `step-keyword` role applied to it
+        # Every step keyword has the `gherkin-step-keyword` role applied to it
         # so that users can customize how the step keyword is formatted with CSS.
         formatted_step = step_format.format(
-            f":step-keyword:`{step.keyword}` {formatted_step}"
+            f":gherkin-step-keyword:`{step.keyword}` {formatted_step}"
         )
         return formatted_step
 
