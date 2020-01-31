@@ -171,3 +171,31 @@ In order to register the plugin for a ``setup.py``-based project::
 In order to use the parser via command line,
 the ``--url_from-tag`` flag should be used.
 The provided string should be be formatted ``<library>:<method_name>``
+
+Formatting Options
+------------------
+
+If you connect a ``.css`` file to your generated documentation,
+via the ``_static`` folder that is supported by Sphinx,
+you can make use of certain classes to format parts of the Gherkin
+however you so choose!
+
+Here are the available CSS classes:
+
+- ``gherkin-step-keyword``
+
+Example ``.css`` File::
+
+    .gherkin-step-keyword {
+        font-weight: bold;
+        color: BlanchedAlmond;
+    }
+
+.. note::
+
+    Your ``.css`` can have any name. As long as it is in the ``_static`` folder,
+    Sphinx will integrate it into the generated HTML.
+    Sphinx officially documents `adding a CSS file via the Application API`_
+
+
+.. _`adding a CSS file via the Application API`: https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.add_css_file
