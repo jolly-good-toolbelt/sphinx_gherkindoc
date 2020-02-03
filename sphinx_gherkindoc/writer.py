@@ -51,6 +51,7 @@ def toctree(
     files: List[str],
     maxtocdepth: int,
     root_path: pathlib.Path,
+    display_name_from_dir: Optional[str] = None,
 ) -> SphinxWriter:
     """
     Return a SphinxWriter for one level of a directory tree.
@@ -85,7 +86,13 @@ def toctree(
 
     if need_header:
         # We're just adding a boiler plate heading.
-        of.create_section(1, display_name(root_path.joinpath(*path_list)))
+        of.create_section(
+            1,
+            display_name(
+                root_path.joinpath(*path_list),
+                display_name_from_dir=display_name_from_dir,
+            ),
+        )
 
     of.add_output(".. toctree::")
     of.add_output(f":maxdepth: {maxtocdepth}", line_breaks=2, indent_by=INDENT_DEPTH)
