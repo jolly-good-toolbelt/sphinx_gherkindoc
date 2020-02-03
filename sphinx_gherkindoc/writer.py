@@ -21,7 +21,6 @@ from .utils import (
     verbose,
 )
 
-MAIN_STEP_KEYWORDS = ["Given", "When", "Then"]
 AVAILABLE_ROLES = ["gherkin-step-keyword"]
 
 
@@ -196,7 +195,6 @@ def feature_to_rst(
         return formatted_step
 
     def steps(steps: List[behave.model.Step], step_format: str = "{}") -> None:
-        any_step_has_table_or_text = any(step.table or step.text for step in steps)
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
                 step.name,
@@ -204,18 +202,7 @@ def feature_to_rst(
                 step.line,
             )
             formatted_step = format_step(step, step_format)
-            # Removing the dash, but still having the pipe character
-            # makes the step slightly indented, and without a dash.
-            # This creates a nice visual of "sections" of steps.
-            # However, this creates odd results when there is a step text or step table
-            # anywhere in the scenario.
-            # In that case, we stick to a simple bullet list for all steps.
-            prefix = (
-                "| -"
-                if (any_step_has_table_or_text or step.keyword in MAIN_STEP_KEYWORDS)
-                else "| "
-            )
-            output_file.add_output(f"{prefix} {formatted_step}")
+            output_file.add_output(f"| {formatted_step}")
             if step.table:
                 output_file.blank_line()
                 table(step.table, inline=True)
