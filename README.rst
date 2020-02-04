@@ -144,32 +144,46 @@ It's a lot easier to do that `after` you have the basic process working.
 Experiment with the other optional parameters
 to get the effect(s) you want.
 
-Special Instructions for Tag Links
-----------------------------------
+Special Instructions for User Integrated Functionality
+------------------------------------------------------
 
-Any tag can be converted into an anonymous link
-via a plugin or command-line argument.
+There certain parts of ``sphinx-gherkindoc``
+that can be controlled by external, user defined code.
+This can be done via a plugin or command-line argument.
+
+Here are the places where this can be used:
+
+- Any tag can be converted into an anonymous link.
 The converter needs to be a single function
 that accepts a single string parameter, the tag,
 and returns a URL if the tag should include a link
 or an empty string if not.
+- Directory names can be converted into display names
+similarly to how ``display_name.txt`` works.
+This converter also needs to be a single function
+that accepts a single string parameter, the directory name,
+and returns a display name string for that directory.
 
 In order to register the plugin for a ``poetry``-based project::
 
     [tools.poetry.plugins."parsers"]
     url = "my_custom_library.parse:optional_url_from_tag"
+    dir_display_name = "my_custom_library.parse:optional_display_name_from_dir"
 
 In order to register the plugin for a ``setup.py``-based project::
 
     setup(
         ...
         entry_points={
-            'parsers': ['url = my_custom_library.parse:optional_url_from_tag']
+            'parsers': [
+                'url = my_custom_library.parse:optional_url_from_tag',
+                'dir_display_name = my_custom_library.parse:optional_display_name_from_dir'
+            ]
         }
     )
 
 In order to use the parser via command line,
-the ``--url_from-tag`` flag should be used.
+the ``--url_from-tag`` and ``--display-name-from-dir`` flags should be used.
 The provided string should be be formatted ``<library>:<method_name>``
 
 Formatting Options
