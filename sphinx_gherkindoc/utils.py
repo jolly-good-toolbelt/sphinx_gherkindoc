@@ -151,7 +151,8 @@ def display_name(
     Args:
         path: Path for searching
         package_name: Sphinx-style, dot-delimited package name (optional)
-        display_name_from_dir: The
+        display_name_from_dir: The module:function_name string that points to
+            a user defined function for converting a directory name to a display name.
 
     Returns:
         A display name for the provided path
