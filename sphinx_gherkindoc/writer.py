@@ -21,7 +21,29 @@ from .utils import (
     verbose,
 )
 
-AVAILABLE_ROLES = ["gherkin-step-keyword"]
+_keywords = (
+    "feature",
+    "background",
+    "scenario",
+    "scenario-outline",
+    "examples",
+    # While not a keyword in gherkin, it acts the same as a keyword in the docs
+    "tag",
+)
+
+AVAILABLE_ROLES = [
+    "gherkin-step-keyword",
+    "gherkin-step-content",
+    "gherkin-step-text",
+    "gherkin-feature-description",
+    "gherkin-scenario-description",
+]
+for keyword in _keywords:
+    AVAILABLE_ROLES.extend([f"gherkin-{keyword}-keyword", f"gherkin-{keyword}-content"])
+
+BehaveModelWithDescription = Union[
+    behave.model.Feature, behave.model.Scenario, behave.model.ScenarioOutline
+]
 
 
 # The csv-table parser for restructuredtext does not allow for escaping so use
@@ -104,6 +126,16 @@ def toctree(
     return of
 
 
+def role_name_from(s: str) -> str:
+    """Convert a string to a format that can be used as an rST role."""
+    return s.lower().replace(" ", "-")
+
+
+def apply_role(role: str, content: str) -> str:
+    """Wrap the given content string in the given role."""
+    return f":{role}:`{content}`"
+
+
 # Simplified this from a class, for various reasons.
 # Additional simplification work is needed!!!!
 def feature_to_rst(
@@ -117,16 +149,37 @@ def feature_to_rst(
     output_file = SphinxWriter()
 
     def section(level: int, obj: behave.model_core.BasicStatement) -> None:
-        section_name = f"{obj.keyword}: {rst_escape(obj.name)}"
+        keyword = obj.keyword
+        # "scenario outline" causes issues in the role name,
+        # so we format the role name before applying it.
+        keyword_role = role_name_from(f"gherkin-{keyword}-keyword")
+        content_role = role_name_from(f"gherkin-{keyword}-content")
+        content = rst_escape(obj.name)
+        section_name = " ".join(
+            [
+                apply_role(keyword_role, f"{keyword}:"),
+                apply_role(content_role, content) if content else "",
+            ]
+        )
         output_file.create_section(level, section_name.rstrip(": "))
 
-    def description(description: Union[str, List[str]]) -> None:
+    def description(obj: BehaveModelWithDescription) -> None:
+        description = obj.description
         if not description:
             return
         if not isinstance(description, list):
             description = [description]
+
         for line in description:
-            output_file.add_output(rst_escape(line), indent_by=INDENT_DEPTH)
+            output_file.add_output(
+                apply_role(
+                    # The keyword here will be capitalized and may contain a space,
+                    # so we sanitize it first.
+                    role_name_from(f"gherkin-{obj.keyword}-description"),
+                    rst_escape(line),
+                ),
+                indent_by=INDENT_DEPTH,
+            )
             # Since behave strips newlines, a reasonable guess must be made as
             # to when a newline should be re-inserted
             if line[-1] == "." or line == description[-1]:
@@ -144,7 +197,9 @@ def feature_to_rst(
         # each new line must be indented.
         for line in itertools.chain(*(x.splitlines() for x in text)):
             output_file.add_output(
-                rst_escape(line), line_breaks=2, indent_by=INDENT_DEPTH
+                apply_role("gherkin-step-text", rst_escape(line)),
+                line_breaks=2,
+                indent_by=INDENT_DEPTH,
             )
 
     # Build the URL parser once since `ticket_url_or_tag` is called multiple times
@@ -180,17 +235,41 @@ def feature_to_rst(
             tags_list = ", ".join(map(ticket_url_or_tag, obj.tags))
             tag_str += f" (Inherited from {obj.keyword}: {tags_list} )"
         output_file.add_output(
-            f"Tagged: {tag_str.strip()}", line_breaks=2, indent_by=INDENT_DEPTH
+            " ".join(
+                [
+                    apply_role("gherkin-tag-keyword", "Tagged:"),
+                    # Because nested inline markup is not possible,
+                    # we much choose between allowing tags to have links,
+                    # or allowing them to be formatted.
+                    # It is concluded that tag links are much more useful.
+                    # See https://docutils.sourceforge.io/FAQ.html#is-nested-inline-markup-possible.  # noqa
+                    # If rST supports this, we can add the following line:
+                    #     apply_role("gherkin-tag-content", <content-on-line-below>),
+                    tag_str.strip(),
+                ]
+            ),
+            line_breaks=2,
+            indent_by=INDENT_DEPTH,
         )
 
     def format_step(step: behave.model.Step, step_format: str) -> str:
         # Make bold any scenario outline variables
         formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
-        # Apply the step format string
-        # Every step keyword has the `gherkin-step-keyword` role applied to it
-        # so that users can customize how the step keyword is formatted with CSS.
         formatted_step = step_format.format(
-            f":gherkin-step-keyword:`{step.keyword}` {formatted_step}"
+            " ".join(
+                [
+                    apply_role("gherkin-step-keyword", step.keyword),
+                    # Because nested inline markup is not possible,
+                    # we much choose between making params bold,
+                    # or allowing step content to be formatted.
+                    # Making params bold is the current behavior
+                    # at the time of this implementation, so that is the current choice.
+                    # See https://docutils.sourceforge.io/FAQ.html#is-nested-inline-markup-possible.  # noqa
+                    # If rST supports this, we can add the following line:
+                    #     apply_role("gherkin-step-content", <content-on-line-below>),
+                    formatted_step,
+                ]
+            )
         )
         return formatted_step
 
@@ -240,7 +319,7 @@ def feature_to_rst(
 
     feature = behave.parser.parse_file(source_path)
     section(1, feature)
-    description(feature.description)
+    description(feature)
     if feature.background and not integrate_background:
         section(2, feature.background)
         steps(feature.background.steps)
@@ -248,7 +327,7 @@ def feature_to_rst(
     for scenario in feature.scenarios:
         section(2, scenario)
         tags(scenario.tags, feature)
-        description(scenario.description)
+        description(scenario)
         if integrate_background and feature.background:
             steps(feature.background.steps, step_format=background_step_format)
         steps(scenario.steps)

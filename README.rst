@@ -183,12 +183,62 @@ however you so choose!
 Here are the available CSS classes:
 
 - ``gherkin-step-keyword``
+- ``gherkin-step-text``
+- ``gherkin-feature-keyword``
+- ``gherkin-feature-content``
+- ``gherkin-feature-description``
+- ``gherkin-background-keyword``
+- ``gherkin-background-content``
+- ``gherkin-scenario-keyword``
+- ``gherkin-scenario-content``
+- ``gherkin-scenario-description``
+- ``gherkin-scenario-outline-keyword``
+- ``gherkin-scenario-outline-content``
+- ``gherkin-scenario-outline-description``
+- ``gherkin-examples-keyword``
+- ``gherkin-examples-content``
+- ``gherkin-tag-keyword``
+
 
 Example ``.css`` File::
 
     .gherkin-step-keyword {
         font-weight: bold;
-        color: BlanchedAlmond;
+        color: red;
+    }
+    .gherkin-step-text {
+        color: orange;
+    }
+
+    .gherkin-feature-keyword, .gherkin-background-keyword {
+        color: yellow;
+    }
+    .gherkin-feature-content {
+        color: green;
+    }
+    .gherkin-feature-description {
+        color: blue;
+    }
+
+    .gherkin-scenario-keyword, .gherkin-scenario-outline-keyword {
+        color: indigo;
+    }
+    .gherkin-scenario-content, .gherkin-scenario-outline-content {
+        color: violet;
+    }
+    .gherkin-scenario-description, .gherkin-scenario-outline-description {
+        color: purple;
+    }
+
+    .gherkin-examples-keyword {
+        color: gold;
+    }
+    .gherkin-examples-content {
+        color: goldenrod;
+    }
+
+    .gherkin-tag-keyword {
+        color: salmon;
     }
 
 .. note::
