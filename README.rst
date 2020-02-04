@@ -154,15 +154,15 @@ This can be done via a plugin or command-line argument.
 Here are the places where this can be used:
 
 - Any tag can be converted into an anonymous link.
-The converter needs to be a single function
-that accepts a single string parameter, the tag,
-and returns a URL if the tag should include a link
-or an empty string if not.
+  The converter needs to be a single function
+  that accepts a single string parameter, the tag,
+  and returns a URL if the tag should include a link
+  or an empty string if not.
 - Directory names can be converted into display names
-similarly to how ``display_name.txt`` works.
-This converter also needs to be a single function
-that accepts a single string parameter, the directory name,
-and returns a display name string for that directory.
+  similarly to how ``display_name.txt`` works.
+  This converter also needs to be a single function
+  that accepts a single string parameter, the directory name,
+  and returns a display name string for that directory.
 
 In order to register the plugin for a ``poetry``-based project::
 
