@@ -16,6 +16,8 @@ Feature: Testing Sphinx Writer
 
     Scenario Outline: Test a Scenario Outline
 
+        A scenario outline helps you avoid confusing duplication.
+
         Given I put <thing> in a blender
         When I turn the blender on
         Then it should transform into <other thing>
