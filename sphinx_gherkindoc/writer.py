@@ -179,15 +179,16 @@ def feature_to_rst(
         if not isinstance(description, list):
             description = [description]
 
+        # The keyword here will be capitalized and may contain a space,
+        # so we sanitize it first.
+        role = role_name_from(f"gherkin-{obj.keyword}-description")
+        if role == "gherkin-scenario-outline-description":
+            # Scenario and Scenario Outline description roles are considered the same
+            role = "gherkin-scenario-description"
+
         for line in description:
             output_file.add_output(
-                apply_role(
-                    # The keyword here will be capitalized and may contain a space,
-                    # so we sanitize it first.
-                    role_name_from(f"gherkin-{obj.keyword}-description"),
-                    rst_escape(line),
-                ),
-                indent_by=INDENT_DEPTH,
+                apply_role(role, rst_escape(line)), indent_by=INDENT_DEPTH
             )
             # Since behave strips newlines, a reasonable guess must be made as
             # to when a newline should be re-inserted
