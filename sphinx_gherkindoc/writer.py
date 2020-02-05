@@ -224,8 +224,9 @@ def feature_to_rst(
         If tag is a ticket, return an anonymous embedded hyperlink for it,
         else tag itself.
         """
-        if url_parser:
-            return f"`{tag} <{url_parser(tag)}>`__"
+        url = url_parser(tag) if url_parser else ""
+        if url:
+            return f"`{tag} <{url}>`__"
         return tag
 
     def tags(tags: List[str], *parent_objs: behave.model_core.BasicStatement) -> None:
