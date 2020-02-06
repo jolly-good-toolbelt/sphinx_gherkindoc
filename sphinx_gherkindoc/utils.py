@@ -152,6 +152,8 @@ def display_name(
     Args:
         path: Path for searching
         package_name: Sphinx-style, dot-delimited package name (optional)
+        dir_display_name_parser: The function for converting a dir to a display name
+            that comes from a defined parser.
         display_name_from_dir: The module:function_name string that points to
             a user defined function for converting a directory name to a display name.
 

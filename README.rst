@@ -147,7 +147,7 @@ to get the effect(s) you want.
 Special Instructions for User Integrated Functionality
 ------------------------------------------------------
 
-There certain parts of ``sphinx-gherkindoc``
+There are certain parts of ``sphinx-gherkindoc``
 that can be controlled by external, user defined code.
 This can be done via a plugin or command-line argument.
 
