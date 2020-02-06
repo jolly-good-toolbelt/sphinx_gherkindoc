@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Module for running the tool from the CLI."""
 import argparse
+import importlib
 import pkg_resources
 import pathlib
 import shutil
@@ -36,15 +37,26 @@ def process_args(
 
     non_empty_dirs: Set[pathlib.Path] = set()
 
+    get_url_from_tag = None  # noqa: E731
+    dir_display_name_converter = None
     # Set parsers once and pass along where they are needed.
-    url_parser = None  # noqa: E731
-    dir_display_name_parser = None
     for entry_point in pkg_resources.iter_entry_points("parsers"):
         if entry_point.name == "url":
-            url_parser = entry_point.load()
+            get_url_from_tag = entry_point.load()
 
         if entry_point.name == "dir_display_name":
-            dir_display_name_parser = entry_point.load()
+            dir_display_name_converter = entry_point.load()
+
+    # Override parsers if there is a command line arg
+    if args.url_from_tag:
+        url_module, url_function = args.url_from_tag.split(":", maxsplit=1)
+        parser_module = importlib.import_module(url_module)
+        get_url_from_tag = getattr(parser_module, url_function)
+
+    if args.display_name_from_dir:
+        module_name, function_name = args.display_name_from_dir.split(":", maxsplit=1)
+        conversion_func_module = importlib.import_module(module_name)
+        dir_display_name_converter = getattr(conversion_func_module, function_name)
 
     while work_to_do:
         current = work_to_do.pop()
@@ -68,8 +80,7 @@ def process_args(
             current.files,
             maxtocdepth,
             root_path,
-            dir_display_name_parser,
-            args.display_name_from_dir,
+            dir_display_name_converter=dir_display_name_converter,
         )
         # Check to see if we are at the last item to be processed
         # (which has already been popped)
@@ -89,8 +100,7 @@ def process_args(
                 feature_rst_file = feature_to_rst(
                     source_path,
                     root_path,
-                    url_parser,
-                    url_from_tag=args.url_from_tag,
+                    get_url_from_tag=get_url_from_tag,
                     integrate_background=args.integrate_background,
                     background_step_format=args.background_step_format,
                 )
