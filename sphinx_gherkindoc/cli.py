@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Module for running the tool from the CLI."""
 import argparse
+import pkg_resources
 import pathlib
 import shutil
 from typing import Set
@@ -35,6 +36,16 @@ def process_args(
 
     non_empty_dirs: Set[pathlib.Path] = set()
 
+    # Set parsers once and pass along where they are needed.
+    url_parser = None  # noqa: E731
+    dir_display_name_parser = None
+    for entry_point in pkg_resources.iter_entry_points("parsers"):
+        if entry_point.name == "url":
+            url_parser = entry_point.load()
+
+        if entry_point.name == "dir_display_name":
+            dir_display_name_parser = entry_point.load()
+
     while work_to_do:
         current = work_to_do.pop()
         new_subdirs = []
@@ -52,7 +63,13 @@ def process_args(
             continue
 
         toc_file = toctree(
-            current.path_list, new_subdirs, current.files, maxtocdepth, root_path
+            current.path_list,
+            new_subdirs,
+            current.files,
+            maxtocdepth,
+            root_path,
+            dir_display_name_parser,
+            args.display_name_from_dir,
         )
         # Check to see if we are at the last item to be processed
         # (which has already been popped)
@@ -72,6 +89,7 @@ def process_args(
                 feature_rst_file = feature_to_rst(
                     source_path,
                     root_path,
+                    url_parser,
                     url_from_tag=args.url_from_tag,
                     integrate_background=args.integrate_background,
                     background_step_format=args.background_step_format,
@@ -182,6 +200,15 @@ def main() -> None:
         " parameter, the tag."
     )
     parser.add_argument("--url-from-tag", help=url_help)
+    display_name_from_dir_help = (
+        "A library and method name to call to convert a directory name into a"
+        " display name. The string should be <library>:<method_name>"
+        " and it should accept a single string parameter, the directory name."
+        " The output of this function will be the same as creating"
+        " display_name.txt files for each directory, based on the directory name."
+        " Any display_name.txt files that exist will take precedence over this flag."
+    )
+    parser.add_argument("--display-name-from-dir", help=display_name_from_dir_help)
 
     args = parser.parse_args()
 

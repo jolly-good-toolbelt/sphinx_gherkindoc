@@ -3,8 +3,7 @@ import importlib
 import itertools
 import pathlib
 import re
-import pkg_resources
-from typing import List, Optional, Union
+from typing import Callable, List, Optional, Union
 
 import behave.parser
 import behave.model
@@ -73,6 +72,8 @@ def toctree(
     files: List[str],
     maxtocdepth: int,
     root_path: pathlib.Path,
+    dir_display_name_parser: Optional[Callable] = None,
+    display_name_from_dir: Optional[str] = None,
 ) -> SphinxWriter:
     """
     Return a SphinxWriter for one level of a directory tree.
@@ -107,7 +108,14 @@ def toctree(
 
     if need_header:
         # We're just adding a boiler plate heading.
-        of.create_section(1, display_name(root_path.joinpath(*path_list)))
+        of.create_section(
+            1,
+            display_name(
+                root_path.joinpath(*path_list),
+                dir_display_name_parser=dir_display_name_parser,
+                display_name_from_dir=display_name_from_dir,
+            ),
+        )
 
     of.add_output(".. toctree::")
     of.add_output(f":maxdepth: {maxtocdepth}", line_breaks=2, indent_by=INDENT_DEPTH)
@@ -141,6 +149,7 @@ def apply_role(role: str, content: str) -> str:
 def feature_to_rst(
     source_path: pathlib.Path,
     root_path: pathlib.Path,
+    url_parser: Optional[Callable] = None,
     url_from_tag: Optional[str] = "",
     integrate_background: bool = False,
     background_step_format: str = "{}",
@@ -203,11 +212,6 @@ def feature_to_rst(
                 indent_by=INDENT_DEPTH,
             )
 
-    # Build the URL parser once since `ticket_url_or_tag` is called multiple times
-    url_parser = lambda x: ""  # noqa: E731
-    for entry_point in pkg_resources.iter_entry_points("parsers"):
-        if entry_point.name == "url":
-            url_parser = entry_point.load()
     if url_from_tag:
         url_module, url_function = url_from_tag.split(":", maxsplit=1)
         parser_module = importlib.import_module(url_module)
@@ -221,7 +225,7 @@ def feature_to_rst(
         If tag is a ticket, return an anonymous embedded hyperlink for it,
         else tag itself.
         """
-        url = url_parser(tag)
+        url = url_parser(tag) if url_parser else ""
         if url:
             return f"`{tag} <{url}>`__"
         return tag
