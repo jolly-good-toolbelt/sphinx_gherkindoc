@@ -5,7 +5,7 @@ import importlib
 import pkg_resources
 import pathlib
 import shutil
-from typing import Set
+from typing import Callable, Set
 
 import sphinx
 
@@ -17,6 +17,19 @@ from .writer import feature_to_rst, toctree
 # This is a pretty arbitrary number controlling how much detail
 # will show up in the various TOCs.
 DEFAULT_TOC_DEPTH = 4
+
+
+def _get_function_from_command_line_arg(module_func_str: str) -> Callable:
+    """Get a function from a module:func string that comes from a command arg.
+
+    The ``module_func_str`` must be in the form ``{module_name}:{function_name}``.
+
+    :param module_func_str: The string containing the module and function names.
+    :return: The imported python function based on the given string.
+    """
+    module_name, function_name = module_func_str.split(":", maxsplit=1)
+    module = importlib.import_module(module_name)
+    return getattr(module, function_name)
 
 
 def process_args(
@@ -49,14 +62,12 @@ def process_args(
 
     # Override parsers if there is a command line arg
     if args.url_from_tag:
-        url_module, url_function = args.url_from_tag.split(":", maxsplit=1)
-        parser_module = importlib.import_module(url_module)
-        get_url_from_tag = getattr(parser_module, url_function)
+        get_url_from_tag = _get_function_from_command_line_arg(args.url_from_tag)
 
     if args.display_name_from_dir:
-        module_name, function_name = args.display_name_from_dir.split(":", maxsplit=1)
-        conversion_func_module = importlib.import_module(module_name)
-        dir_display_name_converter = getattr(conversion_func_module, function_name)
+        dir_display_name_converter = _get_function_from_command_line_arg(
+            args.display_name_from_dir
+        )
 
     while work_to_do:
         current = work_to_do.pop()
