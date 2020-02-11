@@ -197,7 +197,6 @@ however you so choose!
 Here are the available CSS classes:
 
 - ``gherkin-step-keyword``
-- ``gherkin-step-text``
 - ``gherkin-feature-keyword``
 - ``gherkin-feature-content``
 - ``gherkin-feature-description``
@@ -219,9 +218,6 @@ Example ``.css`` File::
     .gherkin-step-keyword {
         font-weight: bold;
         color: red;
-    }
-    .gherkin-step-text {
-        color: orange;
     }
 
     .gherkin-feature-keyword, .gherkin-background-keyword {

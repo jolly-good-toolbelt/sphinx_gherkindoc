@@ -33,7 +33,6 @@ _keywords = (
 AVAILABLE_ROLES = [
     "gherkin-step-keyword",
     "gherkin-step-content",
-    "gherkin-step-text",
     "gherkin-feature-description",
     "gherkin-scenario-description",
 ]
@@ -207,9 +206,7 @@ def feature_to_rst(
         # each new line must be indented.
         for line in itertools.chain(*(x.splitlines() for x in text)):
             output_file.add_output(
-                apply_role("gherkin-step-text", rst_escape(line)),
-                line_breaks=2,
-                indent_by=INDENT_DEPTH,
+                rst_escape(line), line_breaks=2, indent_by=INDENT_DEPTH
             )
 
     if url_from_tag:

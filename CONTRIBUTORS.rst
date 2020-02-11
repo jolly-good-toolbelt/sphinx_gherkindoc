@@ -6,6 +6,7 @@ This package was the result of collaborative dissussion and effort between:
 * Lewis Franklin `@brolewis`_
 * Doug Philips `@dgou`_
 * Brad Brown `@bradsbrown`_
+* Ryan Casperson `@rbcasperson`_
 
 Some notable contributions:
 
@@ -19,7 +20,11 @@ Some notable contributions:
 * Conversion to Python 3.6+ and splitting into individual modules
   for publication was done by Lewis Franklin `@brolewis`_
 * Self tests were added by Lewis Franklin `@brolewis`_
+* CSS based custom formatting was added by Ryan Casperson `@rbcasperson`_
+* Converting directory names into display names
+  was added by Ryan Casperson `@rbcasperson`_
 
 .. _`@brolewis`: https://github.com/brolewis/
 .. _`@dgou`: https://github.com/dgou/
 .. _`@bradsbrown`: https://github.com/bradsbrown/
+.. _`@rbcasperson`: https://github.com/rbcasperson
