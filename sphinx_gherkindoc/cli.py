@@ -50,7 +50,7 @@ def process_args(
 
     non_empty_dirs: Set[pathlib.Path] = set()
 
-    get_url_from_tag = None  # noqa: E731
+    get_url_from_tag = None
     dir_display_name_converter = None
     # Set parsers once and pass along where they are needed.
     for entry_point in pkg_resources.iter_entry_points("parsers"):
