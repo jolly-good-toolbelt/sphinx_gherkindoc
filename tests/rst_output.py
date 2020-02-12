@@ -373,7 +373,6 @@ tags_rst = [
 tags_rst_with_urls = [
     ".. role:: gherkin-step-keyword\n",
     ".. role:: gherkin-step-content\n",
-    ".. role:: gherkin-step-text\n",
     ".. role:: gherkin-feature-description\n",
     ".. role:: gherkin-scenario-description\n",
     ".. role:: gherkin-feature-keyword\n",
