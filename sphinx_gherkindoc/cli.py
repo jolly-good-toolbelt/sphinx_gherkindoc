@@ -11,7 +11,7 @@ import sphinx
 from .files import is_feature_file, is_rst_file, scan_tree
 from .glossary import make_steps_glossary
 from .utils import make_flat_name, set_dry_run, set_verbose, verbose
-from .writer import feature_to_rst, toctree
+from .writer import toctree
 
 # This is a pretty arbitrary number controlling how much detail
 # will show up in the various TOCs.
@@ -79,6 +79,11 @@ def process_args(
         else:
             toc_filename = output_path / make_flat_name(current.path_list, is_dir=True)
         toc_file.write_to_file(toc_filename)
+
+        if args.pytest_parser:
+            from .pytest_bdd_writer import feature_to_rst
+        else:
+            from .behave_writer import feature_to_rst  # type: ignore
 
         for a_file in current.files:
             a_file_list = current.path_list + [a_file]
@@ -184,6 +189,11 @@ def main() -> None:
             "NOTE: This flag is only relevant when the --integrate-background flag "
             "is also included."
         ),
+    )
+    parser.add_argument(
+        "--pytest-parser",
+        action="store_true",
+        help="Use the pytest-bdd parser rather than the behave parser.",
     )
     parser.add_argument(
         "-v",
