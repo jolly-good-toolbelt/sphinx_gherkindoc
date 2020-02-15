@@ -10,12 +10,48 @@ import sphinx.util
 INDENT_DEPTH = 4
 
 
+MAIN_STEP_KEYWORDS = ["Given", "When", "Then"]
+
+# The csv-table parser for restructuredtext does not allow for escaping so use
+# a unicode character that looks like a quote but will not be in any Gherkin
+QUOTE = "\u201C"
+
+
 # DRY_RUN and VERBOSE are global states for all the code.
 # By making these into global variables, the code "admits that" they are global;
 # rather than cluttering up method parameters passing these values around,
 # and having to track if any particular method/function needs or no-longer needs them.
 DRY_RUN = False
 VERBOSE = False
+
+_keywords = (
+    "feature",
+    "background",
+    "scenario",
+    "scenario-outline",
+    "examples",
+    # While not a keyword in gherkin, it acts the same as a keyword in the docs
+    "tag",
+)
+
+AVAILABLE_ROLES = [
+    "gherkin-step-keyword",
+    "gherkin-step-content",
+    "gherkin-feature-description",
+    "gherkin-scenario-description",
+]
+for keyword in _keywords:
+    AVAILABLE_ROLES.extend([f"gherkin-{keyword}-keyword", f"gherkin-{keyword}-content"])
+
+
+def role_name_from(s: str) -> str:
+    """Convert a string to a format that can be used as an rST role."""
+    return s.lower().replace(" ", "-")
+
+
+def apply_role(role: str, content: str) -> str:
+    """Wrap the given content string in the given role."""
+    return f":{role}:`{content}`"
 
 
 def verbose(message: str) -> None:
