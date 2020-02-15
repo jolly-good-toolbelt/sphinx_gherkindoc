@@ -160,14 +160,21 @@ def feature_to_rst(
                 text(_step_text(step))
 
     def examples(
-        scenario: pytest_bdd.feature.Scenario, feature: pytest_bdd.feature.Feature
+        scenario: Optional[pytest_bdd.feature.Scenario],
+        feature: pytest_bdd.feature.Feature,
     ) -> None:
-        scenario_examples = getattr(scenario, "examples", [])
-        if not scenario_examples.examples:
+        if scenario:
+            obj = scenario
+            tag_objects = [scenario, feature]
+        else:
+            obj = feature
+            tag_objects = []
+        example_obj = getattr(obj, "examples", [])
+        if not example_obj.examples:
             return
-        section(3, scenario_examples)
-        tags(scenario.tags, scenario, feature)
-        table(scenario_examples)
+        section(3, example_obj)
+        tags(obj.tags, *tag_objects)
+        table(example_obj)
         output_file.blank_line()
 
     def table(table: pytest_bdd.feature.Examples, inline: bool = False) -> None:
@@ -187,6 +194,8 @@ def feature_to_rst(
     )
     section(1, feature)
     description(feature.description)
+    if feature.examples.examples:
+        examples(None, feature)
     if feature.background and not integrate_background:
         section(2, feature.background)
         steps(feature.background.steps)
