@@ -10,7 +10,15 @@ from typing import List, Optional, Union
 import pytest_bdd.feature
 
 from .glossary import step_glossary
-from .utils import INDENT_DEPTH, MAIN_STEP_KEYWORDS, QUOTE, rst_escape, SphinxWriter
+from .utils import (
+    AVAILABLE_ROLES,
+    INDENT_DEPTH,
+    QUOTE,
+    rst_escape,
+    SphinxWriter,
+    role_name_from,
+    apply_role,
+)
 
 
 PytestBddModel = Union[
@@ -54,16 +62,37 @@ def feature_to_rst(
     def section(level: int, obj: PytestBddModel) -> None:
         keyword = _get_keyword(obj)
         name = getattr(obj, "name", "") or ""
-        section_name = f"{keyword}: {rst_escape(name)}"
+
+        keyword_role = role_name_from(f"gherkin-{keyword}-keyword")
+        content_role = role_name_from(f"gherkin-{keyword}-content")
+        content = rst_escape(name)
+        section_name = " ".join(
+            [
+                apply_role(keyword_role, f"{keyword}:"),
+                apply_role(content_role, content) if content else "",
+            ]
+        )
+
         output_file.create_section(level, section_name.rstrip(": "))
 
-    def description(description: Union[str, List[str]]) -> None:
+    def description(obj: PytestBddModel) -> None:
+        description = obj.description
         if not description:
             return
         if not isinstance(description, list):
             description = [description]
+
+        # The keyword here will be capitalized and may contain a space,
+        # so we sanitize it first.
+        role = role_name_from(f"gherkin-{_get_keyword(obj)}-description")
+        if role == "gherkin-scenario-outline-description":
+            # Scenario and Scenario Outline description roles are considered the same
+            role = "gherkin-scenario-description"
+
         for line in description:
-            output_file.add_output(rst_escape(line), indent_by=INDENT_DEPTH)
+            output_file.add_output(
+                apply_role(role, rst_escape(line)), indent_by=INDENT_DEPTH
+            )
             # Since behave strips newlines, a reasonable guess must be made as
             # to when a newline should be re-inserted
             if line[-1] == "." or line == description[-1]:
@@ -117,7 +146,16 @@ def feature_to_rst(
             tags_list = ", ".join(map(ticket_url_or_tag, obj.tags))
             tag_str += f" (Inherited from {_get_keyword(obj)}: {tags_list} )"
         output_file.add_output(
-            f"Tagged: {tag_str.strip()}", line_breaks=2, indent_by=INDENT_DEPTH
+            # Because nested inline markup is not possible,
+            # we much choose between allowing tags to have links,
+            # or allowing them to be formatted.
+            # It is concluded that tag links are much more useful.
+            # See https://docutils.sourceforge.io/FAQ.html#is-nested-inline-markup-possible.  # noqa
+            # If rST supports this, we can add the following line:
+            #     apply_role("gherkin-tag-content", <content-on-line-below>),
+            f"{apply_role('gherkin-tag-keyword', 'Tagged:')} {tag_str.strip()}",
+            line_breaks=2,
+            indent_by=INDENT_DEPTH,
         )
 
     def format_step(step: pytest_bdd.feature.Step, step_format: str) -> str:
@@ -126,7 +164,16 @@ def feature_to_rst(
             r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name.splitlines()[0])
         )
         # Apply the step format string
-        formatted_step = step_format.format(f"{step.keyword} {formatted_step}")
+        keyword_with_role = apply_role("gherkin-step-keyword", step.keyword)
+        # Because nested inline markup is not possible,
+        # we much choose between making params bold,
+        # or allowing step content to be formatted.
+        # Making params bold is the current behavior
+        # at the time of this implementation, so that is the current choice.
+        # See https://docutils.sourceforge.io/FAQ.html#is-nested-inline-markup-possible.  # noqa
+        # If rST supports this, we can add the following line:
+        #     apply_role("gherkin-step-content", <content-on-line-below>),
+        formatted_step = step_format.format(f"{keyword_with_role} {formatted_step}")
         return formatted_step
 
     def _step_table(step):
@@ -155,9 +202,6 @@ def feature_to_rst(
         is_feature_background: bool = False,
         integrate_background: bool = False,
     ) -> None:
-        any_step_has_table_or_text = any(
-            _step_table(step) or _step_text(step) for step in steps
-        )
         for step in steps:
             this_step_format = step_format
             # pytest-bdd includes background steps in the scenario list,
@@ -174,18 +218,7 @@ def feature_to_rst(
                 _step_line(step),
             )
             formatted_step = format_step(step, this_step_format)
-            # Removing the dash, but still having the pipe character
-            # makes the step slightly indented, and without a dash.
-            # This creates a nice visual of "sections" of steps.
-            # However, this creates odd results when there is a step text or step table
-            # anywhere in the scenario.
-            # In that case, we stick to a simple bullet list for all steps.
-            prefix = (
-                "| -"
-                if (any_step_has_table_or_text or step.keyword in MAIN_STEP_KEYWORDS)
-                else "| "
-            )
-            output_file.add_output(f"{prefix} {formatted_step}")
+            output_file.add_output(f"| {formatted_step}")
             step_table = _step_table(step)
             if step_table:
                 output_file.blank_line()
@@ -226,11 +259,18 @@ def feature_to_rst(
             row = f"{QUOTE}, {QUOTE}".join(map(rst_escape, row))
             output_file.add_output(f"{QUOTE}{row}{QUOTE}", indent_by=indent_by)
 
+    # Declare roles in each rST file
+    # so that they are available for customization by users.
+    for role in AVAILABLE_ROLES:
+        output_file.add_output(f".. role:: {role}")
+    if AVAILABLE_ROLES:
+        output_file.blank_line()
+
     feature = pytest_bdd.feature.Feature(
         root_path, pathlib.Path(source_path).resolve().relative_to(root_path)
     )
     section(1, feature)
-    description(feature.description)
+    description(feature)
     if feature.examples.examples:
         examples(None, feature)
     if feature.background and not integrate_background:
@@ -240,7 +280,7 @@ def feature_to_rst(
     for scenario in feature.scenarios.values():
         section(2, scenario)
         tags(scenario.tags, feature)
-        description(scenario.description)
+        description(scenario)
         steps(scenario.steps, integrate_background=integrate_background)
         output_file.blank_line()
         examples(scenario, feature)

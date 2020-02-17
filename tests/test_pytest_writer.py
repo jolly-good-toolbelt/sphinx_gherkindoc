@@ -27,11 +27,15 @@ def tags_feature_file(tmp_path):
 
 def _reformat_keywords(rst_lines):
     for (no_description_keyword, marker) in (("Background", "-"), ("Examples", "~")):
+        line_to_match = (
+            f":gherkin-{no_description_keyword.lower()}-keyword:"
+            f"`{no_description_keyword}:`"
+        )
         for i, line in enumerate(rst_lines):
-            if line.startswith(f"{no_description_keyword}:"):
-                rst_lines[i] = f"{no_description_keyword}\n"
-            if rst_lines[i - 1] == f"{no_description_keyword}\n":
-                marker_line = marker * len(no_description_keyword)
+            if line.startswith(line_to_match):
+                rst_lines[i] = f"{line_to_match}\n"
+            if rst_lines[i - 1] == f"{line_to_match}\n":
+                marker_line = marker * len(line_to_match)
                 rst_lines[i] = f"{marker_line}\n\n"
     return rst_lines
 
