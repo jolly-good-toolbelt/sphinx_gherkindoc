@@ -1,4 +1,5 @@
 """Helper functions for writing rST files."""
+from dataclasses import dataclass
 import importlib
 import itertools
 import pathlib
@@ -19,6 +20,17 @@ PytestBddModel = Union[
     pytest_bdd.feature.Step,
     pytest_bdd.feature.Examples,
 ]
+
+
+@dataclass
+class InlineTable:
+    """Mockup of Examples item for use in inline tables."""
+
+    example_params: List[str]
+    examples: List[str]
+
+
+PytestTable = Union[pytest_bdd.feature.Examples, InlineTable]
 
 
 # Simplified this from a class, for various reasons.
@@ -110,16 +122,24 @@ def feature_to_rst(
 
     def format_step(step: pytest_bdd.feature.Step, step_format: str) -> str:
         # Make bold any scenario outline variables
-        formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
+        formatted_step = re.sub(
+            r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name.splitlines()[0])
+        )
         # Apply the step format string
         formatted_step = step_format.format(f"{step.keyword} {formatted_step}")
         return formatted_step
 
     def _step_table(step):
-        return getattr(step, "table", "")
+        if step.lines and all("|" in x for x in step.lines):
+            rows = [l.strip().split("|") for l in step.lines]
+            rows = [
+                list(filter(None, (entry.strip() for entry in row))) for row in rows
+            ]
+            return InlineTable(example_params=rows[0], examples=rows[1:])
+        return ""
 
     def _step_text(step):
-        return getattr(step, "text", getattr(step, "lines", ""))
+        return [l.strip() for l in step.lines if not set(l).issubset({"'", '"', " "})]
 
     def _step_filename(step):
         return getattr(
@@ -127,19 +147,33 @@ def feature_to_rst(
         )
 
     def _step_line(step):
-        return getattr(step, "line", step.line_number)
+        return step.line_number
 
-    def steps(steps: List[pytest_bdd.feature.Step], step_format: str = "{}") -> None:
+    def steps(
+        steps: List[pytest_bdd.feature.Step],
+        step_format: str = "{}",
+        is_feature_background: bool = False,
+        integrate_background: bool = False,
+    ) -> None:
         any_step_has_table_or_text = any(
             _step_table(step) or _step_text(step) for step in steps
         )
         for step in steps:
+            this_step_format = step_format
+            # pytest-bdd includes background steps in the scenario list,
+            # so we should either skip them if integrate_background is false,
+            # or format them appropriately if true.
+            if not is_feature_background and step.background:
+                if integrate_background:
+                    this_step_format = background_step_format
+                else:
+                    continue
             step_glossary[step.name.lower()].add_reference(
                 step.name,
                 pathlib.Path(_step_filename(step)).resolve().relative_to(root_path),
                 _step_line(step),
             )
-            formatted_step = format_step(step, step_format)
+            formatted_step = format_step(step, this_step_format)
             # Removing the dash, but still having the pipe character
             # makes the step slightly indented, and without a dash.
             # This creates a nice visual of "sections" of steps.
@@ -152,12 +186,15 @@ def feature_to_rst(
                 else "| "
             )
             output_file.add_output(f"{prefix} {formatted_step}")
-            if _step_table(step):
+            step_table = _step_table(step)
+            if step_table:
                 output_file.blank_line()
-                table(_step_table(step), inline=True)
+                table(step_table, inline=True)
                 output_file.blank_line()
-            if _step_text(step):
-                text(_step_text(step))
+            else:
+                step_text = _step_text(step)
+                if step_text:
+                    text(step_text)
 
     def examples(
         scenario: Optional[pytest_bdd.feature.Scenario],
@@ -177,7 +214,7 @@ def feature_to_rst(
         table(example_obj)
         output_file.blank_line()
 
-    def table(table: pytest_bdd.feature.Examples, inline: bool = False) -> None:
+    def table(table: PytestTable, inline: bool = False) -> None:
         indent_by = INDENT_DEPTH if inline else 0
         directive = ".. csv-table::"
         output_file.add_output(directive, indent_by=indent_by)
@@ -198,15 +235,13 @@ def feature_to_rst(
         examples(None, feature)
     if feature.background and not integrate_background:
         section(2, feature.background)
-        steps(feature.background.steps)
+        steps(feature.background.steps, is_feature_background=True)
         output_file.blank_line()
     for scenario in feature.scenarios.values():
         section(2, scenario)
         tags(scenario.tags, feature)
         description(scenario.description)
-        if integrate_background and feature.background:
-            steps(feature.background.steps, step_format=background_step_format)
-        steps(scenario.steps)
+        steps(scenario.steps, integrate_background=integrate_background)
         output_file.blank_line()
         examples(scenario, feature)
 

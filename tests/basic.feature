@@ -32,9 +32,9 @@ Feature: Testing Sphinx Writer
         Test the additional options for a scenario
 
         Given step text
-        '''
-        Lorum ipsum solor sit amet.
-        '''
+          '''
+          Lorum ipsum solor sit amet.
+          '''
         When the suite reaches a scenario table
             | name      | department  |
             | Barry     | Beer Cans   |
@@ -54,13 +54,13 @@ Feature: Testing Sphinx Writer
     Scenario: Indentation is ignored when any step in the scenario has text or a table
 
         Given a step with some text
-        '''
-        Here be that said text!
-        '''
+          '''
+          Here be that said text!
+          '''
         And an And step with some text too
-        '''
-        Hello again!
-        '''
+          '''
+          Hello again!
+          '''
         And how about a table in there too
             | position | name         |
             | first    | Who          |
@@ -69,8 +69,8 @@ Feature: Testing Sphinx Writer
         When the fantasy has ended
         And all the children are gone
         Then something deep inside me
-        '''
-        Helps me to carry on
-        '''
+          '''
+          Helps me to carry on
+          '''
         And Encarnaciooooon
         And doodle-doodle-doodle-doo

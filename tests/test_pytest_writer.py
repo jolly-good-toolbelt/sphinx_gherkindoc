@@ -25,12 +25,14 @@ def tags_feature_file(tmp_path):
     return tags_feature
 
 
-def _reformat_background(rst_lines):
-    for i, line in enumerate(rst_lines):
-        if line.startswith("Background:"):
-            rst_lines[i] = "Background\n"
-        if rst_lines[i - 1] == "Background\n":
-            rst_lines[i] = "----------\n\n"
+def _reformat_keywords(rst_lines):
+    for (no_description_keyword, marker) in (("Background", "-"), ("Examples", "~")):
+        for i, line in enumerate(rst_lines):
+            if line.startswith(f"{no_description_keyword}:"):
+                rst_lines[i] = f"{no_description_keyword}\n"
+            if rst_lines[i - 1] == f"{no_description_keyword}\n":
+                marker_line = marker * len(no_description_keyword)
+                rst_lines[i] = f"{marker_line}\n\n"
     return rst_lines
 
 
@@ -41,22 +43,44 @@ def rst_output():
             setattr(
                 _rst_output,
                 attribute,
-                _reformat_background(getattr(_rst_output, attribute)),
+                _reformat_keywords(getattr(_rst_output, attribute)),
             )
     return _rst_output
+
+
+def _tagline_into_word_set(tag_line):
+    return {word.strip(" ,") for word in tag_line.split() if word}
+
+
+def check_with_tags(actual, expected):
+    tag_text = "Tagged:"
+
+    # pytest-bdd maintains tag data in sets, so the tag order is never guaranteed,
+    # thus we have to evaluate non-tag lines for direct matching,
+    #  and tag lines for all the same "words"
+
+    # First, compare non-tag lines
+    actual_without_tags = [x for x in actual if tag_text not in x]
+    expected_without_tags = [x for x in expected if tag_text not in x]
+    assert actual_without_tags == expected_without_tags
+
+    # Then verify tag lines match in an orderless manner
+    actual_tags = [_tagline_into_word_set(x) for x in actual if tag_text in x]
+    expected_tags = [_tagline_into_word_set(x) for x in expected if tag_text in x]
+    assert actual_tags == expected_tags
 
 
 # writer.feature_to_rst
 def test_feature_to_rst(feature_file, rst_output):
     results = writer.feature_to_rst(feature_file, feature_file.parent)
-    assert results._output == rst_output.basic_rst
+    check_with_tags(results._output, rst_output.basic_rst)
 
 
 def test_feature_to_rst_integrated_background(feature_file, rst_output):
     results = writer.feature_to_rst(
         feature_file, feature_file.parent, integrate_background=True
     )
-    assert results._output == rst_output.basic_rst_with_integrated_background
+    check_with_tags(results._output, rst_output.basic_rst_with_integrated_background)
 
 
 def test_feature_to_rst_unique_integrated_background_step_format(
@@ -70,9 +94,9 @@ def test_feature_to_rst_unique_integrated_background_step_format(
         background_step_format=unique_background_step_format,
     )
     expected_output = rst_output.basic_rst_unique_integrated_background_step_format
-    assert results._output == expected_output
+    check_with_tags(results._output, expected_output)
 
 
 def test_feature_to_rst_inherited_tags(tags_feature_file, rst_output):
     results = writer.feature_to_rst(tags_feature_file, tags_feature_file.parent)
-    assert results._output == rst_output.tags_rst
+    check_with_tags(results._output, rst_output.tags_rst)
