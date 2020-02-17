@@ -12,7 +12,7 @@ import subprocess
 
 __commands_to_run = [
     "poetry run pip install --upgrade pip<19",
-    "poetry install",
+    "poetry install -E pytest-bdd",
     "poetry run pre-commit install",
 ]
 
