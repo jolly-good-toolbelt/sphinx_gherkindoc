@@ -16,6 +16,7 @@ def entry():
 @pytest.fixture()
 def step_glossary():
     old_value = copy.deepcopy(glossary.step_glossary)
+    glossary.step_glossary = defaultdict(glossary.GlossaryEntry)
     glossary.step_glossary["Step one"].add_reference(
         "Step one", pathlib.Path("filename.feature"), 12
     )
@@ -25,6 +26,14 @@ def step_glossary():
     glossary.step_glossary["Step two"].add_reference(
         "Step two", pathlib.Path("filename.feature"), 13
     )
+    yield
+    glossary.step_glossary = old_value
+
+
+@pytest.fixture()
+def empty_step_glossary():
+    old_value = copy.deepcopy(glossary.step_glossary)
+    glossary.step_glossary = defaultdict(glossary.GlossaryEntry)
     yield
     glossary.step_glossary = old_value
 
@@ -58,6 +67,7 @@ def test_glossary_eq():
 
 
 # glossary.make_steps_glossary
+@pytest.mark.usefixtures("empty_step_glossary")
 def test_make_steps_glossry_empty():
     assert glossary.make_steps_glossary("Test") is None
 
