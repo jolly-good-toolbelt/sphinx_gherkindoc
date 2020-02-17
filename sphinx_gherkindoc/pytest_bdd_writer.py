@@ -1,5 +1,5 @@
 """Helper functions for writing rST files."""
-from dataclasses import dataclass
+from collections import namedtuple
 import importlib
 import itertools
 import pathlib
@@ -30,12 +30,7 @@ PytestBddModel = Union[
 ]
 
 
-@dataclass
-class InlineTable:
-    """Mockup of Examples item for use in inline tables."""
-
-    example_params: List[str]
-    examples: List[str]
+InlineTable = namedtuple("InlineTable", ["example_params", "examples"])
 
 
 PytestTable = Union[pytest_bdd.feature.Examples, InlineTable]
