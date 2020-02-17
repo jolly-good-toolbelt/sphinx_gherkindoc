@@ -203,7 +203,7 @@ def feature_to_rst(
     for scenario in feature.scenarios.values():
         section(2, scenario)
         tags(scenario.tags, feature)
-        description(getattr(scenario, "description", ""))
+        description(scenario.description)
         if integrate_background and feature.background:
             steps(feature.background.steps, step_format=background_step_format)
         steps(scenario.steps)
