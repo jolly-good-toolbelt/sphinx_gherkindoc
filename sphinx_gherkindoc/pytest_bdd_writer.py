@@ -5,7 +5,7 @@ import itertools
 import pathlib
 import re
 import pkg_resources
-from typing import List, Optional, Union
+from typing import Callable, List, Optional, Union
 
 import pytest_bdd.feature
 
@@ -46,6 +46,7 @@ PytestTable = Union[pytest_bdd.feature.Examples, InlineTable]
 def feature_to_rst(
     source_path: pathlib.Path,
     root_path: pathlib.Path,
+    url_parser: Optional[Callable] = None,
     url_from_tag: Optional[str] = "",
     integrate_background: bool = False,
     background_step_format: str = "{}",
@@ -131,7 +132,7 @@ def feature_to_rst(
         If tag is a ticket, return an anonymous embedded hyperlink for it,
         else tag itself.
         """
-        url = url_parser(tag)
+        url = url_parser(tag) if url_parser else ""
         if url:
             return f"`{tag} <{url}>`__"
         return tag

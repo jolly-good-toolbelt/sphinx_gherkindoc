@@ -3,13 +3,7 @@ import pathlib
 from typing import Callable, List, Optional
 
 from .files import is_rst_file
-from .utils import (
-    display_name,
-    make_flat_name,
-    INDENT_DEPTH,
-    SphinxWriter,
-    verbose,
-)
+from .utils import display_name, make_flat_name, INDENT_DEPTH, SphinxWriter, verbose
 
 # IMPLEMENTATION NOTES:
 # When generating rST output files from directory trees containing feature files,
