@@ -19,7 +19,9 @@ def constants():
     utils.set_verbose(verbose)
 
 
-@pytest.fixture(scope="module")
+# Ensure that a new test dir is created for every test,
+# since some tests may add/rename files.
+@pytest.fixture(scope="function")
 def display_name_tree(tmp_path_factory):
     root = tmp_path_factory.mktemp("root")
     display_name_path = root / "display_name_test"
@@ -267,3 +269,15 @@ def test_display_name_file_and_package(display_name_tree):
     display_name_file = display_name_tree / "display_name.txt"
     display_name_file.write_text("Fancy Display Name")
     assert utils.display_name(display_name_tree, "a.b.c") == "Fancy Display Name"
+
+
+def test_display_name_dir_converter(display_name_tree):
+    def dir_name_to_display_name(dir_name: str):
+        return dir_name.upper().replace("_", " ")
+
+    assert (
+        utils.display_name(
+            display_name_tree, dir_display_name_converter=dir_name_to_display_name
+        )
+        == "DISPLAY NAME TEST"
+    )
