@@ -10,8 +10,9 @@ import sphinx
 
 from .files import is_feature_file, is_rst_file, scan_tree
 from .glossary import make_steps_glossary
+from .parsers import parsers
 from .utils import make_flat_name, set_dry_run, set_verbose, verbose
-from .writer import toctree
+from .writer import feature_to_rst, toctree
 
 # This is a pretty arbitrary number controlling how much detail
 # will show up in the various TOCs.
@@ -80,11 +81,6 @@ def process_args(
             toc_filename = output_path / make_flat_name(current.path_list, is_dir=True)
         toc_file.write_to_file(toc_filename)
 
-        if args.pytest_parser:
-            from .pytest_bdd_writer import feature_to_rst
-        else:
-            from .behave_writer import feature_to_rst  # type: ignore
-
         for a_file in current.files:
             a_file_list = current.path_list + [a_file]
             source_name = pathlib.Path().joinpath(*a_file_list)
@@ -94,7 +90,8 @@ def process_args(
                 feature_rst_file = feature_to_rst(
                     source_path,
                     root_path,
-                    url_parser,
+                    feature_parser=args.parser,
+                    url_parser=url_parser,
                     url_from_tag=args.url_from_tag,
                     integrate_background=args.integrate_background,
                     background_step_format=args.background_step_format,
@@ -191,9 +188,9 @@ def main() -> None:
         ),
     )
     parser.add_argument(
-        "--pytest-parser",
-        action="store_true",
-        help="Use the pytest-bdd parser rather than the behave parser.",
+        "--parser",
+        default="behave",
+        help=f"Specify an alternate parser to use. Available: {list(parsers.keys())}",
     )
     parser.add_argument(
         "-v",
