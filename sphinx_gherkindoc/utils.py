@@ -1,5 +1,4 @@
 """Generic utils used throughout the module."""
-import importlib
 import pathlib
 import string
 from typing import Callable, List, Optional
@@ -146,8 +145,7 @@ class SphinxWriter(object):
 def display_name(
     path: pathlib.Path,
     package_name: Optional[str] = "",
-    dir_display_name_parser: Optional[Callable] = None,
-    display_name_from_dir: Optional[str] = None,
+    dir_display_name_converter: Optional[Callable] = None,
 ) -> str:
     """
     Create a human-readable name for a given project.
@@ -159,10 +157,7 @@ def display_name(
     Args:
         path: Path for searching
         package_name: Sphinx-style, dot-delimited package name (optional)
-        dir_display_name_parser: The function for converting a dir to a display name
-            that comes from a defined parser.
-        display_name_from_dir: The module:function_name string that points to
-            a user defined function for converting a directory name to a display name.
+        dir_display_name_converter: A function for converting a dir to a display name.
 
     Returns:
         A display name for the provided path
@@ -174,13 +169,8 @@ def display_name(
             return name_fo.readline().rstrip("\r\n")
 
     raw_name = package_name.split(".")[-1] if package_name else path.name
-    if display_name_from_dir:
-        module_name, function_name = display_name_from_dir.split(":", maxsplit=1)
-        conversion_func_module = importlib.import_module(module_name)
-        conversion_func = getattr(conversion_func_module, function_name)
-        return conversion_func(raw_name)
 
-    if dir_display_name_parser:
-        return dir_display_name_parser(raw_name)
+    if dir_display_name_converter:
+        return dir_display_name_converter(raw_name)
 
     return string.capwords(raw_name.replace("_", " "))

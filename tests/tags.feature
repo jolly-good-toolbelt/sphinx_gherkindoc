@@ -6,7 +6,7 @@ Feature: Testing Sphinx Writer
   Background: Some requirements for this test
     Given that this file exists
 
-  @api
+  @api @tag_with_url
   Scenario: Test a Scenario
 
     A scenario is quicker to write than a outline but less robust.
