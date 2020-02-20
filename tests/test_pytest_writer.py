@@ -1,35 +1,43 @@
 """Tests for behave_writer module."""
+from types import SimpleNamespace
+
 import pytest
 
-from sphinx_gherkindoc import pytest_bdd_writer as writer
-import rst_output as _rst_output
+from sphinx_gherkindoc import writer
+import rst_output
 
 
 def _reformat_keywords(rst_lines):
+    new_rst_lines = rst_lines[:]
     for (no_description_keyword, marker) in (("Background", "-"), ("Examples", "~")):
         line_to_match = (
             f":gherkin-{no_description_keyword.lower()}-keyword:"
             f"`{no_description_keyword}:`"
         )
-        for i, line in enumerate(rst_lines):
+        for i, line in enumerate(new_rst_lines):
             if line.startswith(line_to_match):
-                rst_lines[i] = f"{line_to_match}\n"
-            if rst_lines[i - 1] == f"{line_to_match}\n":
+                new_rst_lines[i] = f"{line_to_match}\n"
+            if new_rst_lines[i - 1] == f"{line_to_match}\n":
                 marker_line = marker * len(line_to_match)
-                rst_lines[i] = f"{marker_line}\n\n"
-    return rst_lines
+                new_rst_lines[i] = f"{marker_line}\n\n"
+    return new_rst_lines
 
 
 @pytest.fixture()
-def rst_output():
-    for attribute in dir(_rst_output):
+def pytest_rst_output():
+    base_rst_output = SimpleNamespace()
+    for attribute in dir(rst_output):
         if not attribute.startswith("_"):
             setattr(
-                _rst_output,
+                base_rst_output,
                 attribute,
-                _reformat_keywords(getattr(_rst_output, attribute)),
+                _reformat_keywords(getattr(rst_output, attribute)),
             )
-    return _rst_output
+    return base_rst_output
+
+
+def pytest_writer(*args, **kwargs):
+    return writer.feature_to_rst(*args, **kwargs, feature_parser="pytest_bdd")
 
 
 def _tagline_into_word_set(tag_line):
@@ -55,32 +63,36 @@ def check_with_tags(actual, expected):
 
 
 # writer.feature_to_rst
-def test_feature_to_rst(feature_file, rst_output):
-    results = writer.feature_to_rst(feature_file, feature_file.parent)
-    check_with_tags(results._output, rst_output.basic_rst)
+def test_pytest_feature_to_rst(feature_file, pytest_rst_output):
+    results = pytest_writer(feature_file, feature_file.parent)
+    check_with_tags(results._output, pytest_rst_output.basic_rst)
 
 
-def test_feature_to_rst_integrated_background(feature_file, rst_output):
-    results = writer.feature_to_rst(
+def test_pytest_feature_to_rst_integrated_background(feature_file, pytest_rst_output):
+    results = pytest_writer(
         feature_file, feature_file.parent, integrate_background=True
     )
-    check_with_tags(results._output, rst_output.basic_rst_with_integrated_background)
+    check_with_tags(
+        results._output, pytest_rst_output.basic_rst_with_integrated_background
+    )
 
 
-def test_feature_to_rst_unique_integrated_background_step_format(
-    feature_file, rst_output
+def test_pytest_feature_to_rst_unique_integrated_background_step_format(
+    feature_file, pytest_rst_output
 ):
     unique_background_step_format = "{} *(Background)*"
-    results = writer.feature_to_rst(
+    results = pytest_writer(
         feature_file,
         feature_file.parent,
         integrate_background=True,
         background_step_format=unique_background_step_format,
     )
-    expected_output = rst_output.basic_rst_unique_integrated_background_step_format
+    expected_output = (
+        pytest_rst_output.basic_rst_unique_integrated_background_step_format
+    )
     check_with_tags(results._output, expected_output)
 
 
-def test_feature_to_rst_inherited_tags(tags_feature_file, rst_output):
-    results = writer.feature_to_rst(tags_feature_file, tags_feature_file.parent)
-    check_with_tags(results._output, rst_output.tags_rst)
+def test_pytest_feature_to_rst_inherited_tags(tags_feature_file, pytest_rst_output):
+    results = pytest_writer(tags_feature_file, tags_feature_file.parent)
+    check_with_tags(results._output, pytest_rst_output.tags_rst)
