@@ -190,7 +190,8 @@ def main() -> None:
     parser.add_argument(
         "--parser",
         default="behave",
-        help=f"Specify an alternate parser to use. Available: {list(parsers.keys())}",
+        choices=list(parsers.keys()),
+        help=f"Specify an alternate parser to use.",
     )
     parser.add_argument(
         "-v",
