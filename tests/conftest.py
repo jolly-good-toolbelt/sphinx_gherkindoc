@@ -1,4 +1,5 @@
 """Pytest Config and shared fixtures."""
+import shutil
 import pathlib
 
 import pytest
@@ -8,8 +9,7 @@ import pytest
 def feature_file(tmp_path):
     basic_feature = tmp_path / "basic.feature"
     test_dir = pathlib.Path(__file__).parent
-    with open(test_dir / "basic.feature") as feature_fo:
-        basic_feature.write_text(feature_fo.read())
+    shutil.copyfile(test_dir / "basic.feature", basic_feature)
     return basic_feature
 
 
@@ -17,6 +17,5 @@ def feature_file(tmp_path):
 def tags_feature_file(tmp_path):
     tags_feature = tmp_path / "tags.feature"
     test_dir = pathlib.Path(__file__).parent
-    with open(test_dir / "tags.feature") as feature_fo:
-        tags_feature.write_text(feature_fo.read())
+    shutil.copyfile(test_dir / "tags.feature", tags_feature)
     return tags_feature
