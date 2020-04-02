@@ -208,10 +208,7 @@ def feature_to_rst(
 
     # Reference link here because it's too long to put inside the function itself.
     # http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#embedded-uris-and-aliases
-    def _url_if_url(
-        url_checker: Optional[Callable],
-        value: str,
-    ) -> str:
+    def _url_if_url(url_checker: Optional[Callable], value: str,) -> str:
         return url_checker(value) if url_checker else ""
 
     def _value_with_url(value: str, url: str) -> str:
