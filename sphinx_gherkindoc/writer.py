@@ -208,16 +208,14 @@ def feature_to_rst(
 
     # Reference link here because it's too long to put inside the function itself.
     # http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#embedded-uris-and-aliases
-    def _url_or_value(
+    def _url_if_url(
         url_checker: Optional[Callable],
         value: str,
-        value_formatter: Optional[Callable] = None,
     ) -> str:
-        url = url_checker(value) if url_checker else ""
-        value = value_formatter(value) if value_formatter else value
-        if url:
-            return f"`{value} <{url}>`__"
-        return value
+        return url_checker(value) if url_checker else ""
+
+    def _value_with_url(value: str, url: str) -> str:
+        return f"`{value} <{url}>`__"
 
     def ticket_url_or_tag(tag: str) -> str:
         """Get a URL or tag.
@@ -225,7 +223,8 @@ def feature_to_rst(
         If tag is a ticket, return an anonymous embedded hyperlink for it,
         else tag itself.
         """
-        return _url_or_value(get_url_from_tag, tag)
+        url = _url_if_url(get_url_from_tag, tag)
+        return _value_with_url(tag, url) if url else tag
 
     def tags(tags: List[str], *parent_objs: behave.model_core.BasicStatement) -> None:
         parent_with_tags = tuple(x for x in parent_objs if x.tags)
@@ -260,11 +259,9 @@ def feature_to_rst(
         If step has a code definition, return an anonymous embedded hyperlink for it,
         else step itself.
         """
-        return _url_or_value(
-            get_url_from_step,
-            f"{step_keyword} {step}",
-            value_formatter=lambda x: re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(x)),
-        )
+        url = _url_if_url(get_url_from_step, f"{step_keyword} {step}")
+        formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step))
+        return _value_with_url(formatted_step, url) if url else formatted_step
 
     def format_step(step: behave.model.Step, step_format: str) -> str:
         # Make bold any scenario outline variables
