@@ -103,6 +103,19 @@ def test_feature_to_rst_unique_integrated_background_step_format(feature_file):
     assert results._output == expected_output
 
 
+def test_feature_to_rst_steps_converted_to_url(feature_file):
+    def get_url_from_step(step):
+        if step == "Given a test feature":
+            return "https://github.com/jolly-good-toolbelt/sphinx_gherkindoc"
+
+        return ""
+
+    results = writer.feature_to_rst(
+        feature_file, feature_file.parent, get_url_from_step=get_url_from_step
+    )
+    assert results._output == rst_output.basic_rst_with_step_url
+
+
 def test_feature_to_rst_inherited_tags(tags_feature_file):
     results = writer.feature_to_rst(tags_feature_file, tags_feature_file.parent)
     assert results._output == rst_output.tags_rst
