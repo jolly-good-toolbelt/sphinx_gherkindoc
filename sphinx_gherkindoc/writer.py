@@ -208,8 +208,13 @@ def feature_to_rst(
 
     # Reference link here because it's too long to put inside the function itself.
     # http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#embedded-uris-and-aliases
-    def _url_or_value(url_checker: Optional[Callable], value: str) -> str:
+    def _url_or_value(
+        url_checker: Optional[Callable],
+        value: str,
+        value_formatter: Optional[Callable] = None,
+    ) -> str:
         url = url_checker(value) if url_checker else ""
+        value = value_formatter(value) if value_formatter else value
         if url:
             return f"`{value} <{url}>`__"
         return value
@@ -255,11 +260,14 @@ def feature_to_rst(
         If step has a code definition, return an anonymous embedded hyperlink for it,
         else step itself.
         """
-        return _url_or_value(get_url_from_step, f"{step_keyword} {step}")
+        return _url_or_value(
+            get_url_from_step,
+            f"{step_keyword} {step}",
+            value_formatter=lambda x: re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(x))
+        )
 
     def format_step(step: behave.model.Step, step_format: str) -> str:
         # Make bold any scenario outline variables
-        formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
         formatted_step = step_format.format(
             " ".join(
                 [
@@ -272,7 +280,7 @@ def feature_to_rst(
                     # See https://docutils.sourceforge.io/FAQ.html#is-nested-inline-markup-possible.  # noqa
                     # If rST supports this, we can add the following line:
                     #     apply_role("gherkin-step-content", <content-on-line-below>),
-                    step_link_or_string(step.keyword, formatted_step),
+                    step_link_or_string(step.step_type.capitalize(), step.name),
                 ]
             )
         )

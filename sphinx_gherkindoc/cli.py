@@ -119,6 +119,7 @@ def process_args(
                     source_path,
                     root_path,
                     get_url_from_tag=get_url_from_tag,
+                    get_url_from_step=get_url_from_step,
                     integrate_background=args.integrate_background,
                     background_step_format=args.background_step_format,
                 )
