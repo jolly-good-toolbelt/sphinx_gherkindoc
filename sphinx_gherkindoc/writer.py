@@ -263,7 +263,7 @@ def feature_to_rst(
         return _url_or_value(
             get_url_from_step,
             f"{step_keyword} {step}",
-            value_formatter=lambda x: re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(x))
+            value_formatter=lambda x: re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(x)),
         )
 
     def format_step(step: behave.model.Step, step_format: str) -> str:
