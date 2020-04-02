@@ -146,6 +146,7 @@ def feature_to_rst(
     source_path: pathlib.Path,
     root_path: pathlib.Path,
     get_url_from_tag: Optional[Callable] = None,
+    get_url_from_step: Optional[Callable] = None,
     integrate_background: bool = False,
     background_step_format: str = "{}",
 ) -> SphinxWriter:
@@ -207,16 +208,19 @@ def feature_to_rst(
 
     # Reference link here because it's too long to put inside the function itself.
     # http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#embedded-uris-and-aliases
+    def _url_or_value(url_checker: Optional[Callable], value: str) -> str:
+        url = url_checker(value) if url_checker else ""
+        if url:
+            return f"`{value} <{url}>`__"
+        return value
+
     def ticket_url_or_tag(tag: str) -> str:
         """Get a URL or tag.
 
         If tag is a ticket, return an anonymous embedded hyperlink for it,
         else tag itself.
         """
-        url = get_url_from_tag(tag) if get_url_from_tag else ""
-        if url:
-            return f"`{tag} <{url}>`__"
-        return tag
+        return _url_or_value(get_url_from_tag, tag)
 
     def tags(tags: List[str], *parent_objs: behave.model_core.BasicStatement) -> None:
         parent_with_tags = tuple(x for x in parent_objs if x.tags)
@@ -245,6 +249,14 @@ def feature_to_rst(
             indent_by=INDENT_DEPTH,
         )
 
+    def step_link_or_string(step_keyword: str, step: str) -> str:
+        """Get a URL or step.
+
+        If step has a code definition, return an anonymous embedded hyperlink for it,
+        else step itself.
+        """
+        return _url_or_value(get_url_from_step, f"{step_keyword} {step}")
+
     def format_step(step: behave.model.Step, step_format: str) -> str:
         # Make bold any scenario outline variables
         formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step.name))
@@ -260,7 +272,7 @@ def feature_to_rst(
                     # See https://docutils.sourceforge.io/FAQ.html#is-nested-inline-markup-possible.  # noqa
                     # If rST supports this, we can add the following line:
                     #     apply_role("gherkin-step-content", <content-on-line-below>),
-                    formatted_step,
+                    step_link_or_string(step.keyword, formatted_step),
                 ]
             )
         )
