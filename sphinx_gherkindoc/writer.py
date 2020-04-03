@@ -257,8 +257,9 @@ def feature_to_rst(
         else step itself.
         """
         url = _url_if_url(get_url_from_step, f"{step_keyword} {step}")
-        formatted_step = re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step))
-        return _value_with_url(formatted_step, url) if url else formatted_step
+        if url:
+            return _value_with_url(step, url)
+        return re.sub(r"(\\\<.*?\>)", r"**\1**", rst_escape(step))
 
     def format_step(step: behave.model.Step, step_format: str) -> str:
         # Make bold any scenario outline variables
