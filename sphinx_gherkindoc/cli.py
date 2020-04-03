@@ -55,6 +55,7 @@ def process_args(
     dir_display_name_converter = None
     # Set parsers once and pass along where they are needed.
     for entry_point in pkg_resources.iter_entry_points("parsers"):
+        # `url` is a supported legacy key value for the `tag_url`.
         if entry_point.name in ("url", "tag_url"):
             get_url_from_tag = entry_point.load()
 
