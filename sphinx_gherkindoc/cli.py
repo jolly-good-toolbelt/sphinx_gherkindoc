@@ -51,11 +51,16 @@ def process_args(
     non_empty_dirs: Set[pathlib.Path] = set()
 
     get_url_from_tag = None
+    get_url_from_step = None
     dir_display_name_converter = None
     # Set parsers once and pass along where they are needed.
     for entry_point in pkg_resources.iter_entry_points("parsers"):
-        if entry_point.name == "url":
+        # `url` is a supported legacy key value for the `tag_url`.
+        if entry_point.name in ("url", "tag_url"):
             get_url_from_tag = entry_point.load()
+
+        if entry_point.name == "step_url":
+            get_url_from_step = entry_point.load()
 
         if entry_point.name == "dir_display_name":
             dir_display_name_converter = entry_point.load()
@@ -63,6 +68,9 @@ def process_args(
     # Override parsers if there is a command line arg
     if args.url_from_tag:
         get_url_from_tag = _get_function_from_command_line_arg(args.url_from_tag)
+
+    if args.url_from_step:
+        get_url_from_step = _get_function_from_command_line_arg(args.url_from_step)
 
     if args.display_name_from_dir:
         dir_display_name_converter = _get_function_from_command_line_arg(
@@ -112,6 +120,7 @@ def process_args(
                     source_path,
                     root_path,
                     get_url_from_tag=get_url_from_tag,
+                    get_url_from_step=get_url_from_step,
                     integrate_background=args.integrate_background,
                     background_step_format=args.background_step_format,
                 )
@@ -221,6 +230,12 @@ def main() -> None:
         " parameter, the tag."
     )
     parser.add_argument("--url-from-tag", help=url_help)
+    step_url_help = (
+        "A library and method name to call to build a URL from a step. The string"
+        " should be <library>:<method_name> and it should accept a single string"
+        " parameter, the step name."
+    )
+    parser.add_argument("--url-from-step", help=step_url_help)
     display_name_from_dir_help = (
         "A library and method name to call to convert a directory name into a"
         " display name. The string should be <library>:<method_name>"
