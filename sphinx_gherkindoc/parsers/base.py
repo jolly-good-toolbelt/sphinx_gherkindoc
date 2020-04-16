@@ -9,6 +9,8 @@ class BaseModel:
 
     def __getattr__(self, key):
         """Grab attribute from wrapped class, if present."""
+        if key == "description":
+            return getattr(self._data, key, None)
         return getattr(self._data, key)
 
 

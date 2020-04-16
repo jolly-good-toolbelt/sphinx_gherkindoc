@@ -15,7 +15,7 @@ Sphinx = ">=1.3"
 sphinx_rtd_theme = ">=0.3.1"
 behave = ">=1.2.6"
 recommonmark = ">=0.4.0"
-pytest-bdd = {git = "https://github.com/rbcasperson/pytest-bdd.git", rev = "scenario-descriptions", optional = true}
+# pytest-bdd = {version = "^3.2.1", optional = true}
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^1.15"
@@ -23,10 +23,8 @@ ghp-import = "^0.5.5"
 tomlkit = "^0.5.3"
 sphinx-autodoc-typehints = "^1.6"
 pytest = "^4.6"
+pytest-bdd = {git = "https://github.com/rbcasperson/pytest-bdd.git", rev = "scenario-descriptions"}
 pytest-cov = "^2.7"
-
-[tool.poetry.extras]
-pytest-bdd = ["pytest-bdd"]
 
 [tool.poetry.scripts]
 sphinx-gherkindoc = 'sphinx_gherkindoc.cli:main'
