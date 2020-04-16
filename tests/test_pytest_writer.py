@@ -1,10 +1,11 @@
 """Tests for behave_writer module."""
+import pathlib
 from types import SimpleNamespace
 
 import pytest
 
 from sphinx_gherkindoc import writer
-import rst_output
+import rst_output_pytest as rst_output
 
 
 def _reformat_keywords(rst_lines):
@@ -35,6 +36,23 @@ def pytest_rst_output():
             )
     return base_rst_output
 
+@pytest.fixture()
+def feature_file_pytest(tmp_path):
+    test_dir = pathlib.Path(__file__).parent
+    basic_feature = test_dir / "basic_pytest.feature"
+    return basic_feature
+    # with open(test_dir / "basic_pytest.feature") as feature_fo:
+    #     basic_feature.write_text(feature_fo.read())
+
+
+@pytest.fixture()
+def tags_feature_file_pytest(tmp_path):
+    test_dir = pathlib.Path(__file__).parent
+    tags_feature = test_dir / "tags_pytest.feature"
+    return tags_feature
+    # with open(test_dir / "tags_pytest.feature") as feature_fo:
+    #     tags_feature.write_text(feature_fo.read())
+
 
 def pytest_writer(*args, **kwargs):
     return writer.feature_to_rst(*args, **kwargs, feature_parser="pytest_bdd")
@@ -63,14 +81,14 @@ def check_with_tags(actual, expected):
 
 
 # writer.feature_to_rst
-def test_pytest_feature_to_rst(feature_file, pytest_rst_output):
-    results = pytest_writer(feature_file, feature_file.parent)
+def test_pytest_feature_to_rst(feature_file_pytest, pytest_rst_output):
+    results = pytest_writer(feature_file_pytest, feature_file_pytest.parent)
     check_with_tags(results._output, pytest_rst_output.basic_rst)
 
 
-def test_pytest_feature_to_rst_integrated_background(feature_file, pytest_rst_output):
+def test_pytest_feature_to_rst_integrated_background(feature_file_pytest, pytest_rst_output):
     results = pytest_writer(
-        feature_file, feature_file.parent, integrate_background=True
+        feature_file_pytest, feature_file_pytest.parent, integrate_background=True
     )
     check_with_tags(
         results._output, pytest_rst_output.basic_rst_with_integrated_background
@@ -78,12 +96,12 @@ def test_pytest_feature_to_rst_integrated_background(feature_file, pytest_rst_ou
 
 
 def test_pytest_feature_to_rst_unique_integrated_background_step_format(
-    feature_file, pytest_rst_output
+    feature_file_pytest, pytest_rst_output
 ):
     unique_background_step_format = "{} *(Background)*"
     results = pytest_writer(
-        feature_file,
-        feature_file.parent,
+        feature_file_pytest,
+        feature_file_pytest.parent,
         integrate_background=True,
         background_step_format=unique_background_step_format,
     )
@@ -93,6 +111,6 @@ def test_pytest_feature_to_rst_unique_integrated_background_step_format(
     check_with_tags(results._output, expected_output)
 
 
-def test_pytest_feature_to_rst_inherited_tags(tags_feature_file, pytest_rst_output):
-    results = pytest_writer(tags_feature_file, tags_feature_file.parent)
+def test_pytest_feature_to_rst_inherited_tags(tags_feature_file_pytest, pytest_rst_output):
+    results = pytest_writer(tags_feature_file_pytest, tags_feature_file_pytest.parent)
     check_with_tags(results._output, pytest_rst_output.tags_rst)
