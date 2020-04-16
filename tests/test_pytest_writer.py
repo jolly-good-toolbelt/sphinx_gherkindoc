@@ -26,6 +26,17 @@ def _reformat_keywords(rst_lines):
 
 @pytest.fixture()
 def pytest_rst_output():
+    """Adjust expected rst output to align with pytest-bdd parser formats.
+
+    One change is necessary between ``behave`` and ``pytest-bdd`` formats.
+    Backgrounds and Examples in pytest-bdd do not have descriptions/titles,
+    so "Background: Stuff I Need" will become simply "Background:", for example.
+    As part of this change, the section header underline will also be adjusted
+    to match length.
+
+    This fixture creates a copy of the ``behave`` expected rst output module,
+    with that change made.
+    """
     base_rst_output = SimpleNamespace()
     for attribute in dir(rst_output):
         if not attribute.startswith("_"):
@@ -42,8 +53,6 @@ def feature_file_pytest(tmp_path):
     test_dir = pathlib.Path(__file__).parent
     basic_feature = test_dir / "basic_pytest.feature"
     return basic_feature
-    # with open(test_dir / "basic_pytest.feature") as feature_fo:
-    #     basic_feature.write_text(feature_fo.read())
 
 
 @pytest.fixture()
@@ -51,8 +60,6 @@ def tags_feature_file_pytest(tmp_path):
     test_dir = pathlib.Path(__file__).parent
     tags_feature = test_dir / "tags_pytest.feature"
     return tags_feature
-    # with open(test_dir / "tags_pytest.feature") as feature_fo:
-    #     tags_feature.write_text(feature_fo.read())
 
 
 def pytest_writer(*args, **kwargs):
