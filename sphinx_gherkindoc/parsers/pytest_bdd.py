@@ -44,7 +44,7 @@ class Step(PytestModel):
 
     @property
     def step_type(self):
-        """Returns the step type/keyword."""
+        """Return the step type/keyword."""
         return self.keyword
 
     @property

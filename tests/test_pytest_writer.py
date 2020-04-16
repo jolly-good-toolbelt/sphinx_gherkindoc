@@ -36,6 +36,7 @@ def pytest_rst_output():
             )
     return base_rst_output
 
+
 @pytest.fixture()
 def feature_file_pytest(tmp_path):
     test_dir = pathlib.Path(__file__).parent
@@ -86,7 +87,9 @@ def test_pytest_feature_to_rst(feature_file_pytest, pytest_rst_output):
     check_with_tags(results._output, pytest_rst_output.basic_rst)
 
 
-def test_pytest_feature_to_rst_integrated_background(feature_file_pytest, pytest_rst_output):
+def test_pytest_feature_to_rst_integrated_background(
+    feature_file_pytest, pytest_rst_output
+):
     results = pytest_writer(
         feature_file_pytest, feature_file_pytest.parent, integrate_background=True
     )
@@ -111,6 +114,8 @@ def test_pytest_feature_to_rst_unique_integrated_background_step_format(
     check_with_tags(results._output, expected_output)
 
 
-def test_pytest_feature_to_rst_inherited_tags(tags_feature_file_pytest, pytest_rst_output):
+def test_pytest_feature_to_rst_inherited_tags(
+    tags_feature_file_pytest, pytest_rst_output
+):
     results = pytest_writer(tags_feature_file_pytest, tags_feature_file_pytest.parent)
     check_with_tags(results._output, pytest_rst_output.tags_rst)
