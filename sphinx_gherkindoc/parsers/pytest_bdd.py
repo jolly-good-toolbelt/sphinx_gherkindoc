@@ -43,6 +43,11 @@ class Step(PytestModel):
         return self._data.line_number
 
     @property
+    def step_type(self):
+        """Returns the step type/keyword."""
+        return self.keyword
+
+    @property
     def table(self):
         """Return the step table, if present."""
         lines = self._data.lines
