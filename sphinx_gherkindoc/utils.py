@@ -9,6 +9,13 @@ import sphinx.util
 INDENT_DEPTH = 4
 
 
+MAIN_STEP_KEYWORDS = ["Given", "When", "Then"]
+
+# The csv-table parser for restructuredtext does not allow for escaping so use
+# a unicode character that looks like a quote but will not be in any Gherkin
+QUOTE = "\u201C"
+
+
 # DRY_RUN and VERBOSE are global states for all the code.
 # By making these into global variables, the code "admits that" they are global;
 # rather than cluttering up method parameters passing these values around,

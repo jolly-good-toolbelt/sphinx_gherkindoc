@@ -8,15 +8,11 @@ Feature: Testing Sphinx Writer
     @quarantined @JIRA-1234
     Scenario: Test a Scenario
 
-        A scenario is quicker to write than a outline but less robust.
-
         Given a test feature
         When the suite reaches a scenario
         Then the file is converted into rST
 
     Scenario Outline: Test a Scenario Outline
-
-        A scenario outline helps you avoid confusing duplication.
 
         Given I put <thing> in a blender
         When I turn the blender on
@@ -28,8 +24,6 @@ Feature: Testing Sphinx Writer
             | banana | smoothie    |
 
     Scenario: Text and Table Scenario
-
-        Test the additional options for a scenario
 
         Given step text
           '''

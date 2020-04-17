@@ -11,6 +11,7 @@ import sphinx
 
 from .files import is_feature_file, is_rst_file, scan_tree
 from .glossary import make_steps_glossary
+from .parsers import parsers
 from .utils import make_flat_name, set_dry_run, set_verbose, verbose
 from .writer import feature_to_rst, toctree
 
@@ -119,6 +120,7 @@ def process_args(
                 feature_rst_file = feature_to_rst(
                     source_path,
                     root_path,
+                    feature_parser=args.parser,
                     get_url_from_tag=get_url_from_tag,
                     get_url_from_step=get_url_from_step,
                     integrate_background=args.integrate_background,
@@ -214,6 +216,12 @@ def main() -> None:
             "NOTE: This flag is only relevant when the --integrate-background flag "
             "is also included."
         ),
+    )
+    parser.add_argument(
+        "--parser",
+        default="behave",
+        choices=list(parsers.keys()),
+        help=f"Specify an alternate parser to use.",
     )
     parser.add_argument(
         "-v",

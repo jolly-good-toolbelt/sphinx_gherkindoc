@@ -10,6 +10,7 @@ import behave.model_core
 
 from .files import is_rst_file
 from .glossary import step_glossary
+from .parsers import parsers
 from .utils import (
     display_name,
     make_flat_name,
@@ -145,6 +146,7 @@ def apply_role(role: str, content: str) -> str:
 def feature_to_rst(
     source_path: pathlib.Path,
     root_path: pathlib.Path,
+    feature_parser: str = "behave",
     get_url_from_tag: Optional[Callable] = None,
     get_url_from_step: Optional[Callable] = None,
     integrate_background: bool = False,
@@ -325,9 +327,17 @@ def feature_to_rst(
     if AVAILABLE_ROLES:
         output_file.blank_line()
 
-    feature = behave.parser.parse_file(source_path)
+    feature_class = parsers.get(feature_parser, None)
+    if not feature_class:
+        raise KeyError(
+            f'No parser found for "{feature_parser}",'
+            f" options are: {list(parsers.keys())}"
+        )
+    feature = feature_class(root_path, source_path)
     section(1, feature)
     description(feature)
+    if feature.examples:
+        examples(None, feature)
     if feature.background and not integrate_background:
         section(2, feature.background)
         steps(feature.background.steps)

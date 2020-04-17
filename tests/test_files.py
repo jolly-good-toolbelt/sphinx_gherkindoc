@@ -170,7 +170,13 @@ def test_scan_tree_relative():
             relative_path.resolve(),
             ["tests"],
             [],
-            ["README.rst", "basic.feature", "tags.feature"],
+            [
+                "README.rst",
+                "basic.feature",
+                "basic_pytest.feature",
+                "tags.feature",
+                "tags_pytest.feature",
+            ],
         )
     ]
     assert files.scan_tree(relative_path, False, []) == expected_data

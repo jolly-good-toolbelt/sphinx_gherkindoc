@@ -17,3 +17,4 @@ per-file-ignores =
     tests/*:D103
     # example rst output might have long lines
     tests/rst_output.py:E501
+    tests/rst_output_pytest.py:E501
