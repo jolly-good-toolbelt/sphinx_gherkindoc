@@ -101,8 +101,12 @@ def test_pytest_feature_to_rst(feature_file_pytest, pytest_rst_output):
     check_with_tags(results._output, pytest_rst_output.basic_rst)
 
 
-def test_pytest_nobackground_to_rst(nobackground_feature_file_pytest, pytest_rst_output):
-    results = pytest_writer(nobackground_feature_file_pytest, nobackground_feature_file_pytest.parent)
+def test_pytest_nobackground_to_rst(
+    nobackground_feature_file_pytest, pytest_rst_output
+):
+    results = pytest_writer(
+        nobackground_feature_file_pytest, nobackground_feature_file_pytest.parent
+    )
     check_with_tags(results._output, pytest_rst_output.no_background_rst)
 
 
