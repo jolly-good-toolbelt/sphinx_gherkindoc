@@ -1,6 +1,11 @@
 Feature: Testing Sphinx Writer
 
-    Test the ability to write Gherkin data to a SphinxWriter object
+    Test the ability to write Gherkin data to a SphinxWriter object,
+    with a multiline feature description for pytest.
+
+    This includes several paragraphs of description,
+    to demonstrate how blank lines are handled
+    in the pytest-bdd parser.
 
     @quarantined @JIRA-1234
     Scenario: Test a Scenario
