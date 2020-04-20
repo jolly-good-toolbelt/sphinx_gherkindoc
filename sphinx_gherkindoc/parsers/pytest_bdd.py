@@ -133,7 +133,8 @@ class Feature(PytestModel):
     @property
     def background(self):
         """Return the background for the feature."""
-        return Background(self._data.background)
+        background_entry = self._data.background
+        return Background(background_entry) if background_entry else None
 
     @property
     def examples(self):
@@ -141,3 +142,11 @@ class Feature(PytestModel):
         if self._data.examples.examples:
             return [Example(self._data.examples)]
         return []
+
+    @property
+    def description(self):
+        """Return description as a list of lines."""
+        description = self._data.description
+        if description:
+            return description.split("\n")
+        return description
