@@ -185,6 +185,9 @@ def feature_to_rst(
             role = "gherkin-scenario-description"
 
         for line in description:
+            if line == "":
+                output_file.blank_line()
+                continue
             output_file.add_output(
                 apply_role(role, rst_escape(line)), indent_by=INDENT_DEPTH
             )

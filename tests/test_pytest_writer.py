@@ -56,6 +56,13 @@ def feature_file_pytest(tmp_path):
 
 
 @pytest.fixture()
+def nobackground_feature_file_pytest(tmp_path):
+    test_dir = pathlib.Path(__file__).parent
+    basic_feature = test_dir / "nobackground_pytest.feature"
+    return basic_feature
+
+
+@pytest.fixture()
 def tags_feature_file_pytest(tmp_path):
     test_dir = pathlib.Path(__file__).parent
     tags_feature = test_dir / "tags_pytest.feature"
@@ -92,6 +99,15 @@ def check_with_tags(actual, expected):
 def test_pytest_feature_to_rst(feature_file_pytest, pytest_rst_output):
     results = pytest_writer(feature_file_pytest, feature_file_pytest.parent)
     check_with_tags(results._output, pytest_rst_output.basic_rst)
+
+
+def test_pytest_nobackground_to_rst(
+    nobackground_feature_file_pytest, pytest_rst_output
+):
+    results = pytest_writer(
+        nobackground_feature_file_pytest, nobackground_feature_file_pytest.parent
+    )
+    check_with_tags(results._output, pytest_rst_output.no_background_rst)
 
 
 def test_pytest_feature_to_rst_integrated_background(
