@@ -6,6 +6,7 @@ from .base import BaseModel
 
 class BehaveModel(BaseModel):
     """Custom model for Behave-parsed objects."""
+
     @property
     def description(self):
         """Add some reasonable assumptions about line breaks into descriptions.
