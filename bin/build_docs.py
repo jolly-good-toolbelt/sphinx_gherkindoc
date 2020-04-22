@@ -74,6 +74,8 @@ def main():
             "sample-gherkindoc",
             "--step-glossary-name",
             "sample-gherkindoc-glossary",
+            "--parser",
+            "pytest_bdd",
             "tests",
             DOCS_WORKING_DIRECTORY,
         ]
