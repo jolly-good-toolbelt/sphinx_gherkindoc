@@ -299,11 +299,12 @@ def feature_to_rst(
                 text(step.text)
 
     def examples(
-        scenario: behave.model.Scenario, feature: behave.model.Feature
+        scenario: Optional[behave.model.Scenario], feature: behave.model.Feature
     ) -> None:
-        for example in getattr(scenario, "examples", []):
+        example_source = scenario if scenario else feature
+        for example in getattr(example_source, "examples", []):
             section(3, example)
-            tags(example.tags, scenario, feature)
+            tags(example.tags, *filter(None, (scenario, feature)))
             table(example.table)
             output_file.blank_line()
 
