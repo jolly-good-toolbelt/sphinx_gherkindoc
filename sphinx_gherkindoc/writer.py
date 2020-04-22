@@ -191,10 +191,6 @@ def feature_to_rst(
             output_file.add_output(
                 apply_role(role, rst_escape(line)), indent_by=INDENT_DEPTH
             )
-            # Since behave strips newlines, a reasonable guess must be made as
-            # to when a newline should be re-inserted
-            if line[-1] == "." or line == description[-1]:
-                output_file.blank_line()
 
     def text(text: Union[str, List[str]]) -> None:
         if not text:
