@@ -299,12 +299,15 @@ def feature_to_rst(
                 text(step.text)
 
     def examples(
-        scenario: Optional[behave.model.Scenario], feature: behave.model.Feature
+        example_source: Union[behave.model.Scenario, behave.model.Feature],
+        example_source_parent: Optional[behave.model.Feature] = None
     ) -> None:
-        example_source = scenario if scenario else feature
+        tag_sources = [example_source]
+        if example_source_parent:
+            tag_sources.append(example_source_parent)
         for example in getattr(example_source, "examples", []):
             section(3, example)
-            tags(example.tags, *filter(None, (scenario, feature)))
+            tags(example.tags, *tag_sources)
             table(example.table)
             output_file.blank_line()
 
@@ -337,7 +340,7 @@ def feature_to_rst(
     section(1, feature)
     description(feature)
     if feature.examples:
-        examples(None, feature)
+        examples(feature)
     if feature.background and not integrate_background:
         section(2, feature.background)
         steps(feature.background.steps)
