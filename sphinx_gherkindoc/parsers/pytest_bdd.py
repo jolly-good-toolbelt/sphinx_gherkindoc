@@ -148,7 +148,7 @@ class Feature(PytestModel):
         """Return description as a list of lines."""
         description = self._data.description
         if description:
-            lines = [x for x in description.split("\n")]
+            lines = list(description.split("\n"))
             lines.append("")
             return lines
         return description

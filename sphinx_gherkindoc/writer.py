@@ -300,7 +300,7 @@ def feature_to_rst(
 
     def examples(
         example_source: Union[behave.model.Scenario, behave.model.Feature],
-        example_source_parent: Optional[behave.model.Feature] = None
+        example_source_parent: Optional[behave.model.Feature] = None,
     ) -> None:
         tag_sources = [example_source]
         if example_source_parent:
