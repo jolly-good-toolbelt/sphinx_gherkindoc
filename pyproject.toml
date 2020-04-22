@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "sphinx_gherkindoc"
-version = "3.4.1"
+version = "3.4.2"
 description = "A tool to convert Gherkin into Sphinx documentation"
-authors = ["Lewis Franklin <lewis.franklin@gmail.com>", "Doug Philips <dgou@mac.com>"]
+authors = ["Lewis Franklin <lewis.franklin@gmail.com>", "Doug Philips <dgou@mac.com>", "Brad Brown <brad@bradsbrown.com"]
 readme = "README.rst"
 homepage = "https://jolly-good-toolbelt.github.io/sphinx_gherkindoc/"
 documentation = "https://jolly-good-toolbelt.github.io/sphinx_gherkindoc/"
