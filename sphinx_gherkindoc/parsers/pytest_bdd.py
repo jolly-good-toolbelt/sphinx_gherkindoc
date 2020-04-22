@@ -13,6 +13,16 @@ class PytestModel(BaseModel):
     """Base Model for Pytest-Bdd objects."""
 
     @property
+    def description(self):
+        """Return description as a list of lines."""
+        description = getattr(self._data, "description", None)
+        if description:
+            lines = list(description.split("\n"))
+            lines.append("")
+            return lines
+        return description
+
+    @property
     def keyword(self):
         """Return the keyword for a given item."""
         keyword = getattr(
@@ -142,13 +152,3 @@ class Feature(PytestModel):
         if self._data.examples.examples:
             return [Example(self._data.examples)]
         return []
-
-    @property
-    def description(self):
-        """Return description as a list of lines."""
-        description = self._data.description
-        if description:
-            lines = list(description.split("\n"))
-            lines.append("")
-            return lines
-        return description
