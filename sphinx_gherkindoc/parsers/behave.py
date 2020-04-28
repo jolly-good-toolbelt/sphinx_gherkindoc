@@ -44,6 +44,6 @@ class Feature(BehaveModel):
         return [Scenario(s) for s in self._data.scenarios]
 
     @property
-    def examples(self) -> Union[behave.model.Example, List]:
+    def examples(self) -> Union[behave.model.Examples, List]:
         """Supports dummy feature-level examples."""
         return []
