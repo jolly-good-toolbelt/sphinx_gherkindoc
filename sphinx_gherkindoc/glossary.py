@@ -33,12 +33,14 @@ class GlossaryEntry(object):
         """Get the length for each location and the number of associated steps."""
         return (len(self.locations), sum(map(len, self.locations.values())))
 
-    def __gt__(self, other) -> bool:
+    def __gt__(self, other: "GlossaryEntry") -> bool:
         """Compare the location and step lenghts for the larger one."""
         return self.tuple_len() > other.tuple_len()
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: object) -> bool:
         """Compare the location and step lengths for equality."""
+        if not isinstance(other, GlossaryEntry):
+            return NotImplemented
         return self.tuple_len() == other.tuple_len()
 
 
