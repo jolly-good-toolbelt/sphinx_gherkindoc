@@ -1,13 +1,13 @@
 """Helper functions for writing rST files."""
 from collections import namedtuple
-from typing import List, Literal, Optional, Union
+from typing import List, Optional, Union
 import pathlib
 
 import pytest_bdd.feature
 
 from .base import BaseModel
 
-BlankString = Literal[""]
+BlankString = str
 InlineTable = namedtuple("InlineTable", ["headings", "rows"])
 
 
