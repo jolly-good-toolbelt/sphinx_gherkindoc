@@ -2,6 +2,12 @@ Feature: Testing Sphinx Writer
 
     Test the ability to write Gherkin data to a SphinxWriter object
 
+    Examples:
+      | item  |
+      | apple |
+      | tree  |
+      | dog   |
+
     Background: Some requirements for this test
         Given that this file exists
 

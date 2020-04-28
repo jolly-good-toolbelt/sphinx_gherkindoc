@@ -191,10 +191,6 @@ def feature_to_rst(
             output_file.add_output(
                 apply_role(role, rst_escape(line)), indent_by=INDENT_DEPTH
             )
-            # Since behave strips newlines, a reasonable guess must be made as
-            # to when a newline should be re-inserted
-            if line[-1] == "." or line == description[-1]:
-                output_file.blank_line()
 
     def text(text: Union[str, List[str]]) -> None:
         if not text:
@@ -303,11 +299,15 @@ def feature_to_rst(
                 text(step.text)
 
     def examples(
-        scenario: behave.model.Scenario, feature: behave.model.Feature
+        example_source: Union[behave.model.Scenario, behave.model.Feature],
+        example_source_parent: Optional[behave.model.Feature] = None,
     ) -> None:
-        for example in getattr(scenario, "examples", []):
+        tag_sources = [example_source]
+        if example_source_parent:
+            tag_sources.append(example_source_parent)
+        for example in getattr(example_source, "examples", []):
             section(3, example)
-            tags(example.tags, scenario, feature)
+            tags(example.tags, *tag_sources)
             table(example.table)
             output_file.blank_line()
 
@@ -340,7 +340,7 @@ def feature_to_rst(
     section(1, feature)
     description(feature)
     if feature.examples:
-        examples(None, feature)
+        examples(feature)
     if feature.background and not integrate_background:
         section(2, feature.background)
         steps(feature.background.steps)
