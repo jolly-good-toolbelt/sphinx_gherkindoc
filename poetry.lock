@@ -440,7 +440,7 @@ pytest = ">=4.3"
 six = ">=1.9.0"
 
 [package.source]
-reference = "b3d464bef1af2accbef493c6be85fc6232c318ed"
+reference = "684c5dde75d0e8c7dacddd81fbb7cd93bd4f46d2"
 type = "git"
 url = "https://github.com/rbcasperson/pytest-bdd.git"
 [[package]]
@@ -727,7 +727,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "25d44d0590365b45e52bfa9026eb35130e0fb566de8858ffddd9d1a2d72b0c08"
+content-hash = "0384772f559dc0935db951643468d87b4ec752fac9d4517c1856438f3cd4d914"
 python-versions = "^3.6"
 
 [metadata.files]
