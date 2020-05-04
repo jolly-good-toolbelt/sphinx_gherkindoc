@@ -15,6 +15,13 @@ def feature_file_pytest(tmp_path):
 
 
 @pytest.fixture()
+def raw_rst_descriptions_feature_file_pytest(tmp_path):
+    test_dir = pathlib.Path(__file__).parent
+    feature = test_dir / "descriptions_with_raw_rst.feature"
+    return feature
+
+
+@pytest.fixture()
 def nobackground_feature_file_pytest(tmp_path):
     test_dir = pathlib.Path(__file__).parent
     basic_feature = test_dir / "nobackground_pytest.feature"
@@ -95,3 +102,16 @@ def test_pytest_feature_to_rst_unique_integrated_background_step_format(
 def test_pytest_feature_to_rst_inherited_tags(tags_feature_file_pytest):
     results = pytest_writer(tags_feature_file_pytest, tags_feature_file_pytest.parent)
     check_with_tags(results._output, rst_output_pytest.tags_rst)
+
+
+def test_pytest_feature_to_rst_raw_descriptions(
+    raw_rst_descriptions_feature_file_pytest,
+):
+    results = pytest_writer(
+        raw_rst_descriptions_feature_file_pytest,
+        raw_rst_descriptions_feature_file_pytest.parent,
+        integrate_background=True,
+        raw_descriptions=True,
+    )
+    expected_output = rst_output_pytest.raw_rst_descriptions_rst
+    check_with_tags(results._output, expected_output)
