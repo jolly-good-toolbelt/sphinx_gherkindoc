@@ -22,7 +22,10 @@ ghp-import = "^0.5.5"
 tomlkit = "^0.5.3"
 sphinx-autodoc-typehints = "^1.6"
 pytest = "^4.6"
-pytest-bdd = {git = "https://github.com/rbcasperson/pytest-bdd.git", rev = "scenario-descriptions"}
+# branch: scenario-descriptions
+# This branch is still active, so we lock to a specific commit in the branch
+# to prevent unexpected issues if that branch is pushed to.
+pytest-bdd = {git = "https://github.com/rbcasperson/pytest-bdd.git", rev = "684c5dde75d0e8c7dacddd81fbb7cd93bd4f46d2"}
 pytest-cov = "^2.7"
 
 [tool.poetry.scripts]
