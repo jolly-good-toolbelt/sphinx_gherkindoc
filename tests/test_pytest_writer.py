@@ -1,51 +1,10 @@
 """Tests for behave_writer module."""
 import pathlib
-from types import SimpleNamespace
 
 import pytest
 
 from sphinx_gherkindoc import writer
-import rst_output_pytest as rst_output
-
-
-def _reformat_keywords(rst_lines):
-    new_rst_lines = rst_lines[:]
-    for (no_description_keyword, marker) in (("Background", "-"), ("Examples", "~")):
-        line_to_match = (
-            f":gherkin-{no_description_keyword.lower()}-keyword:"
-            f"`{no_description_keyword}:`"
-        )
-        for i, line in enumerate(new_rst_lines):
-            if line.startswith(line_to_match):
-                new_rst_lines[i] = f"{line_to_match}\n"
-            if new_rst_lines[i - 1] == f"{line_to_match}\n":
-                marker_line = marker * len(line_to_match)
-                new_rst_lines[i] = f"{marker_line}\n\n"
-    return new_rst_lines
-
-
-@pytest.fixture()
-def pytest_rst_output():
-    """Adjust expected rst output to align with pytest-bdd parser formats.
-
-    One change is necessary between ``behave`` and ``pytest-bdd`` formats.
-    Backgrounds and Examples in pytest-bdd do not have descriptions/titles,
-    so "Background: Stuff I Need" will become simply "Background:", for example.
-    As part of this change, the section header underline will also be adjusted
-    to match length.
-
-    This fixture creates a copy of the ``behave`` expected rst output module,
-    with that change made.
-    """
-    base_rst_output = SimpleNamespace()
-    for attribute in dir(rst_output):
-        if not attribute.startswith("_"):
-            setattr(
-                base_rst_output,
-                attribute,
-                _reformat_keywords(getattr(rst_output, attribute)),
-            )
-    return base_rst_output
+import rst_output_pytest
 
 
 @pytest.fixture()
@@ -96,33 +55,29 @@ def check_with_tags(actual, expected):
 
 
 # writer.feature_to_rst
-def test_pytest_feature_to_rst(feature_file_pytest, pytest_rst_output):
+def test_pytest_feature_to_rst(feature_file_pytest):
     results = pytest_writer(feature_file_pytest, feature_file_pytest.parent)
-    check_with_tags(results._output, pytest_rst_output.basic_rst)
+    check_with_tags(results._output, rst_output_pytest.basic_rst)
 
 
-def test_pytest_nobackground_to_rst(
-    nobackground_feature_file_pytest, pytest_rst_output
-):
+def test_pytest_nobackground_to_rst(nobackground_feature_file_pytest):
     results = pytest_writer(
         nobackground_feature_file_pytest, nobackground_feature_file_pytest.parent
     )
-    check_with_tags(results._output, pytest_rst_output.no_background_rst)
+    check_with_tags(results._output, rst_output_pytest.no_background_rst)
 
 
-def test_pytest_feature_to_rst_integrated_background(
-    feature_file_pytest, pytest_rst_output
-):
+def test_pytest_feature_to_rst_integrated_background(feature_file_pytest):
     results = pytest_writer(
         feature_file_pytest, feature_file_pytest.parent, integrate_background=True
     )
     check_with_tags(
-        results._output, pytest_rst_output.basic_rst_with_integrated_background
+        results._output, rst_output_pytest.basic_rst_with_integrated_background
     )
 
 
 def test_pytest_feature_to_rst_unique_integrated_background_step_format(
-    feature_file_pytest, pytest_rst_output
+    feature_file_pytest,
 ):
     unique_background_step_format = "{} *(Background)*"
     results = pytest_writer(
@@ -132,13 +87,11 @@ def test_pytest_feature_to_rst_unique_integrated_background_step_format(
         background_step_format=unique_background_step_format,
     )
     expected_output = (
-        pytest_rst_output.basic_rst_unique_integrated_background_step_format
+        rst_output_pytest.basic_rst_unique_integrated_background_step_format
     )
     check_with_tags(results._output, expected_output)
 
 
-def test_pytest_feature_to_rst_inherited_tags(
-    tags_feature_file_pytest, pytest_rst_output
-):
+def test_pytest_feature_to_rst_inherited_tags(tags_feature_file_pytest):
     results = pytest_writer(tags_feature_file_pytest, tags_feature_file_pytest.parent)
-    check_with_tags(results._output, pytest_rst_output.tags_rst)
+    check_with_tags(results._output, rst_output_pytest.tags_rst)
