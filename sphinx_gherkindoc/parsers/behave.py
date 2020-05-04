@@ -1,4 +1,6 @@
 """Helper functions for writing rST files with behave parser."""
+from typing import List, Optional, Union
+
 import behave.parser
 
 from .base import BaseModel
@@ -8,7 +10,7 @@ class BehaveModel(BaseModel):
     """Custom model for Behave-parsed objects."""
 
     @property
-    def description(self):
+    def description(self) -> Optional[List[str]]:
         """Add some reasonable assumptions about line breaks into descriptions.
 
         Any line that ends in a period will have a newline added for separation.
@@ -33,15 +35,15 @@ class Scenario(BehaveModel):
 class Feature(BehaveModel):
     """Feature model for Behave."""
 
-    def __init__(self, root_path, source_path):
+    def __init__(self, root_path: str, source_path: str):
         self._data = behave.parser.parse_file(source_path)
 
     @property
-    def scenarios(self):
+    def scenarios(self) -> List[Scenario]:
         """Wrap Behave Scenarios to include description processing."""
         return [Scenario(s) for s in self._data.scenarios]
 
     @property
-    def examples(self):
+    def examples(self) -> Union[behave.model.Examples, List]:
         """Supports dummy feature-level examples."""
         return []

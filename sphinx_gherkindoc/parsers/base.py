@@ -1,13 +1,14 @@
 """Base classes for parsing."""
+from typing import Any
 
 
 class BaseModel:
     """Base model for parsers."""
 
-    def __init__(self, data):
+    def __init__(self, data: Any):
         self._data = data
 
-    def __getattr__(self, key):
+    def __getattr__(self, key: str) -> Any:
         """Grab attribute from wrapped class, if present.
 
         When inheriting this model,
