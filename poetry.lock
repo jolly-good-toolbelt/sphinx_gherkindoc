@@ -440,7 +440,7 @@ pytest = ">=4.3"
 six = ">=1.9.0"
 
 [package.source]
-reference = "684c5dde75d0e8c7dacddd81fbb7cd93bd4f46d2"
+reference = "b3d464bef1af2accbef493c6be85fc6232c318ed"
 type = "git"
 url = "https://github.com/rbcasperson/pytest-bdd.git"
 [[package]]
