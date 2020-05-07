@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sphinx_gherkindoc"
-version = "3.4.3"
+version = "3.4.4"
 description = "A tool to convert Gherkin into Sphinx documentation"
 authors = ["Lewis Franklin <lewis.franklin@gmail.com>", "Doug Philips <dgou@mac.com>"]
 readme = "README.rst"
@@ -25,7 +25,7 @@ pytest = "^4.6"
 # branch: scenario-descriptions
 # This branch is still active, so we lock to a specific commit in the branch
 # to prevent unexpected issues if that branch is pushed to.
-pytest-bdd = {git = "https://github.com/rbcasperson/pytest-bdd.git", rev = "684c5dde75d0e8c7dacddd81fbb7cd93bd4f46d2"}
+pytest-bdd = {git = "https://github.com/rbcasperson/pytest-bdd.git", rev = "b3d464bef1af2accbef493c6be85fc6232c318ed"}
 pytest-cov = "^2.7"
 
 [tool.poetry.scripts]

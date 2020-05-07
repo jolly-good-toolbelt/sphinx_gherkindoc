@@ -151,6 +151,7 @@ def feature_to_rst(
     get_url_from_step: Optional[Callable] = None,
     integrate_background: bool = False,
     background_step_format: str = "{}",
+    raw_descriptions: bool = False,
 ) -> SphinxWriter:
     """Return a SphinxWriter containing the rST for the given feature file."""
     output_file = SphinxWriter()
@@ -170,7 +171,9 @@ def feature_to_rst(
         )
         output_file.create_section(level, section_name.rstrip(": "))
 
-    def description(obj: BehaveModelWithDescription) -> None:
+    def description(
+        obj: BehaveModelWithDescription, raw_descriptions: bool = False
+    ) -> None:
         description = obj.description
         if not description:
             return
@@ -188,9 +191,22 @@ def feature_to_rst(
             if line == "":
                 output_file.blank_line()
                 continue
-            output_file.add_output(
-                apply_role(role, rst_escape(line)), indent_by=INDENT_DEPTH
-            )
+
+            if raw_descriptions:
+                # Extra indentations can cause rST formatting issues.
+                # By choosing raw descriptions, the user wants to have full control
+                # over what is put in the rST file.
+                indent_by = 0
+                # Note that we also intentionally do not escape characters in the line,
+                # since we are assuming the user knows that the raw descriptions option
+                # means the descriptions will be treated as raw rST lines.
+                # We also do not apply the gherkin-feature-description
+                # or gherkin-scenario-description roles.
+            else:
+                indent_by = INDENT_DEPTH
+                line = apply_role(role, rst_escape(line))
+
+            output_file.add_output(line, indent_by=indent_by)
 
     def text(text: Union[str, List[str]]) -> None:
         if not text:
@@ -338,7 +354,7 @@ def feature_to_rst(
         )
     feature = feature_class(root_path, source_path)
     section(1, feature)
-    description(feature)
+    description(feature, raw_descriptions=raw_descriptions)
     if feature.examples:
         examples(feature)
     if feature.background and not integrate_background:
@@ -348,7 +364,7 @@ def feature_to_rst(
     for scenario in feature.scenarios:
         section(2, scenario)
         tags(scenario.tags, feature)
-        description(scenario)
+        description(scenario, raw_descriptions=raw_descriptions)
         if integrate_background and feature.background:
             steps(feature.background.steps, step_format=background_step_format)
         steps(scenario.steps)

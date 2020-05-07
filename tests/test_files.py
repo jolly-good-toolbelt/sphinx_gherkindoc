@@ -174,6 +174,7 @@ def test_scan_tree_relative():
                 "README.rst",
                 "basic.feature",
                 "basic_pytest.feature",
+                "descriptions_with_raw_rst.feature",
                 "nobackground_pytest.feature",
                 "tags.feature",
                 "tags_pytest.feature",

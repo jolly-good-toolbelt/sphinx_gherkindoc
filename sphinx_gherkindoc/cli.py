@@ -125,6 +125,7 @@ def process_args(
                     get_url_from_step=get_url_from_step,
                     integrate_background=args.integrate_background,
                     background_step_format=args.background_step_format,
+                    raw_descriptions=args.raw_descriptions,
                 )
                 verbose(f'converting "{source_name}" to "{dest_name}"')
                 feature_rst_file.write_to_file(dest_name)
@@ -253,6 +254,14 @@ def main() -> None:
         " Any display_name.txt files that exist will take precedence over this flag."
     )
     parser.add_argument("--display-name-from-dir", help=display_name_from_dir_help)
+    parser.add_argument(
+        "--raw-descriptions",
+        action="store_true",
+        help=(
+            "Treat text from feature and scenario descriptions as raw rST. "
+            "This allows descriptions to contain rST links, code blocks, etc."
+        ),
+    )
 
     args = parser.parse_args()
 
