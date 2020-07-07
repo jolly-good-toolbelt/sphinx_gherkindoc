@@ -1,6 +1,9 @@
 """Sphinx-Gherkindoc Parsers."""
 import importlib
 from pathlib import Path
+from typing import Protocol
+
+from .base import BaseModel
 
 
 parsers = {}
@@ -17,3 +20,9 @@ for file in Path(__file__).parent.glob("*.py"):
     if not feature:
         continue
     parsers[name] = feature
+
+
+class ExampleClass(Protocol):
+    """Protocol for models that contain examples."""
+
+    examples: BaseModel
