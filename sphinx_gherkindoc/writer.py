@@ -10,9 +10,7 @@ import behave.model_core
 
 from .files import is_rst_file
 from .glossary import step_glossary
-from .parsers import behave as behave_models
-from .parsers import parsers
-from .parsers import pytest_bdd as pytest_bdd_models
+from .parsers import parsers, ExampleClass
 from .utils import (
     display_name,
     make_flat_name,
@@ -317,18 +315,14 @@ def feature_to_rst(
                 text(step.text)
 
     def examples(
-        example_source: Union[
-            behave_models.Scenario,
-            pytest_bdd_models.Scenario,
-            pytest_bdd_models.Feature,
-        ],
+        example_source: ExampleClass,
         example_source_parent: Optional[behave.model.Feature] = None,
     ) -> None:
         tag_sources = [example_source]
         if example_source_parent:
             tag_sources.append(example_source_parent)
         for example in getattr(example_source, "examples", []):
-            if isinstance(example_source, pytest_bdd_models.Feature):
+            if example_source.__class__.__name__ == "Feature":
                 # Set feature examples tables at the same section level as scenarios.
                 section_level = 2
             else:
