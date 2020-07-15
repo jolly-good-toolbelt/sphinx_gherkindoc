@@ -178,6 +178,95 @@ def display_name(
     return string.capwords(raw_name.replace("_", " "))
 
 
+def _examples_table_if_included(
+    examples_table: ExamplesTableClass,
+    scenario_has_include_tag: bool,
+    include_tags_set: set,
+    exclude_tags_set: set,
+) -> Optional[ExamplesTableClass]:
+    """Return an examples table if it should be included."""
+    examples_table_tags_set = set(examples_table.tags)
+    examples_table_has_include_tag = bool(examples_table_tags_set & include_tags_set)
+
+    if any(
+        # Exclude the examples table if:
+        [
+            # Examples table has an exclude tag
+            (examples_table_tags_set & exclude_tags_set),
+            # Neither the scenario,
+            # nor any scenario outline examples tables
+            # have an include tag
+            (not scenario_has_include_tag and not examples_table_has_include_tag),
+        ]
+    ):
+        return None
+
+    return examples_table
+
+
+def _scenario_if_included(
+    scenario: ScenarioClass,
+    feature_has_include_tag: bool,
+    include_tags_set: set,
+    exclude_tags_set: set,
+) -> Optional[ScenarioClass]:
+    """Return a (possibly modified) scenario if it should be included."""
+    scenario_tags_set = set(scenario.tags)
+    scenario_examples = getattr(scenario, "examples", [])
+
+    # If there are no include tags,
+    # then treat it the same as if the scenario has an include tag.
+    # If include tags exist, that will affect whether or not
+    # any examples tables need to have an include tag.
+    # If the feature has an include tag, then the scenario inherits it.
+    scenario_has_include_tag = feature_has_include_tag or (
+        bool(scenario_tags_set & include_tags_set) if include_tags_set else True
+    )
+
+    included_examples = list(
+        filter(
+            None,
+            (
+                _examples_table_if_included(
+                    examples_table,
+                    scenario_has_include_tag,
+                    include_tags_set,
+                    exclude_tags_set,
+                )
+                for examples_table in scenario_examples
+            ),
+        )
+    )
+
+    # This is the default, even if the scenario has no examples tables.
+    all_examples_tables_have_exclude_tag = False
+    if scenario_examples:
+        all_examples_tables_have_exclude_tag = all(
+            (set(examples_table.tags) & exclude_tags_set)
+            for examples_table in scenario_examples
+        )
+
+    at_least_one_examples_table_included = scenario_examples and included_examples
+    if any(
+        # Exclude if:
+        [
+            # Scenario has an exclude tag
+            (scenario_tags_set & exclude_tags_set),
+            # Neither the scenario, nor any scenario examples tables are included
+            (not scenario_has_include_tag and not at_least_one_examples_table_included),
+            # All examples tables in the scenario have at least one exclude tag
+            all_examples_tables_have_exclude_tag,
+        ]
+    ):
+        return None
+
+    # Only include examples tables that are included
+    if scenario_examples:
+        scenario.examples = included_examples
+
+    return scenario
+
+
 def get_all_included_scenarios(
     feature: FeatureClass,
     include_tags: List[str] = None,
@@ -219,72 +308,17 @@ def get_all_included_scenarios(
         bool(feature_tags_set & include_tags_set) if include_tags else True
     )
 
-    included_scenarios = []
-    for scenario in feature.scenarios:
-        scenario_tags_set = set(scenario.tags)
-        scenario_examples = getattr(scenario, "examples", [])
-
-        # If there are no include tags,
-        # then treat it the same as if the scenario has an include tag.
-        # If include tags exist, that will affect whether or not
-        # any examples tables need to have an include tag.
-        # If the feature has an include tag, then the scenario inherits it.
-        scenario_has_include_tag = feature_has_include_tag or (
-            bool(scenario_tags_set & include_tags_set) if include_tags else True
+    return list(
+        filter(
+            None,
+            (
+                _scenario_if_included(
+                    scenario,
+                    feature_has_include_tag,
+                    include_tags_set,
+                    exclude_tags_set,
+                )
+                for scenario in feature.scenarios
+            ),
         )
-
-        included_examples: List[ExamplesTableClass] = []
-        for examples_table in scenario_examples:
-            examples_table_tags_set = set(examples_table.tags)
-            examples_table_has_include_tag = bool(
-                examples_table_tags_set & include_tags_set
-            )
-
-            if any(
-                # Exclude the examples table if:
-                [
-                    # Examples table has an exclude tag
-                    (examples_table_tags_set & exclude_tags_set),
-                    # Neither the scenario,
-                    # nor any scenario outline examples tables
-                    # have an include tag
-                    (
-                        not scenario_has_include_tag
-                        and not examples_table_has_include_tag
-                    ),
-                ]
-            ):
-                continue
-
-            included_examples.append(examples_table)
-
-        all_examples_tables_have_exclude_tag = False
-        if scenario_examples:
-            all_examples_tables_have_exclude_tag = all(
-                (set(examples_table.tags) & exclude_tags_set)
-                for examples_table in scenario_examples
-            )
-
-        at_least_one_examples_table_included = scenario_examples and included_examples
-        if any(
-            # Exclude if:
-            [
-                # Scenario has an exclude tag
-                (scenario_tags_set & exclude_tags_set),
-                # Neither the scenario, nor any scenario examples tables are included
-                (
-                    not scenario_has_include_tag
-                    and not at_least_one_examples_table_included
-                ),
-                # All examples tables in the scenario have at least one exclude tag
-                all_examples_tables_have_exclude_tag,
-            ]
-        ):
-            continue
-
-        # Only include examples tables that are included
-        if scenario_examples:
-            scenario.examples = included_examples
-        included_scenarios.append(scenario)
-
-    return included_scenarios
+    )
