@@ -262,6 +262,20 @@ def main() -> None:
             "This allows descriptions to contain rST links, code blocks, etc."
         ),
     )
+    include_exclude_tags_caveat = (
+        "If a feature/scenario has both an exclude and and include tag,"
+        "it will be excluded."
+    )
+    exclude_tags_help = (
+        "Features and scenarios tagged with these exclude tags "
+        "will not be included in the build docs. " + include_exclude_tags_caveat
+    )
+    parser.add_argument("--exclude-tags", help=exclude_tags_help, nargs="*")
+    include_tags_help = (
+        "Only features and scenarios tagged with at least one of these include tags "
+        "will be included in the build docs." + include_exclude_tags_caveat
+    )
+    parser.add_argument("--include-tags", help=include_tags_help, nargs="*")
 
     args = parser.parse_args()
 
