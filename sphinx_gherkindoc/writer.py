@@ -10,7 +10,7 @@ import behave.model_core
 
 from .files import is_rst_file
 from .glossary import step_glossary
-from .parsers import parsers, ExampleClass
+from .parsers import parsers, ClassWithExamples
 from .utils import (
     display_name,
     make_flat_name,
@@ -315,7 +315,7 @@ def feature_to_rst(
                 text(step.text)
 
     def examples(
-        example_source: ExampleClass,
+        example_source: ClassWithExamples,
         example_source_parent: Optional[behave.model.Feature] = None,
     ) -> None:
         tag_sources = [example_source]
