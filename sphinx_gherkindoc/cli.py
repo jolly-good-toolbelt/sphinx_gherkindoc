@@ -126,7 +126,12 @@ def process_args(
                     integrate_background=args.integrate_background,
                     background_step_format=args.background_step_format,
                     raw_descriptions=args.raw_descriptions,
+                    include_tags=args.include_tags,
+                    exclude_tags=args.exclude_tags,
                 )
+                if not feature_rst_file:
+                    continue
+
                 verbose(f'converting "{source_name}" to "{dest_name}"')
                 feature_rst_file.write_to_file(dest_name)
             elif not is_rst_file(a_file):
