@@ -10,7 +10,7 @@ import behave.model_core
 
 from .files import is_rst_file
 from .glossary import step_glossary
-from .parsers import parsers, ExampleClass
+from .parsers import parsers, ClassWithExamples
 from .utils import (
     display_name,
     make_flat_name,
@@ -18,6 +18,7 @@ from .utils import (
     rst_escape,
     SphinxWriter,
     verbose,
+    get_all_included_scenarios,
 )
 
 _keywords = (
@@ -152,7 +153,9 @@ def feature_to_rst(
     integrate_background: bool = False,
     background_step_format: str = "{}",
     raw_descriptions: bool = False,
-) -> SphinxWriter:
+    include_tags: List[str] = None,
+    exclude_tags: List[str] = None,
+) -> Optional[SphinxWriter]:
     """Return a SphinxWriter containing the rST for the given feature file."""
     output_file = SphinxWriter()
 
@@ -315,7 +318,7 @@ def feature_to_rst(
                 text(step.text)
 
     def examples(
-        example_source: ExampleClass,
+        example_source: ClassWithExamples,
         example_source_parent: Optional[behave.model.Feature] = None,
     ) -> None:
         tag_sources = [example_source]
@@ -359,6 +362,11 @@ def feature_to_rst(
             f" options are: {list(parsers.keys())}"
         )
     feature = feature_class(root_path, source_path)
+
+    included_scenarios = get_all_included_scenarios(feature, include_tags, exclude_tags)
+    if not included_scenarios:
+        return None
+
     section(1, feature)
     description(feature, raw_descriptions=raw_descriptions)
     if feature.examples:
@@ -367,7 +375,7 @@ def feature_to_rst(
         section(2, feature.background)
         steps(feature.background.steps)
         output_file.blank_line()
-    for scenario in feature.scenarios:
+    for scenario in included_scenarios:
         section(2, scenario)
         tags(scenario.tags, feature)
         description(scenario, raw_descriptions=raw_descriptions)

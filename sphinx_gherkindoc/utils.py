@@ -5,6 +5,8 @@ from typing import Callable, List, Optional
 
 import sphinx.util
 
+from sphinx_gherkindoc.parsers import ScenarioClass, FeatureClass, ExamplesTableClass
+
 # Increments of how much we indent Sphinx rST content when indenting.
 INDENT_DEPTH = 4
 
@@ -174,3 +176,149 @@ def display_name(
         return dir_display_name_converter(raw_name)
 
     return string.capwords(raw_name.replace("_", " "))
+
+
+def _examples_table_if_included(
+    examples_table: ExamplesTableClass,
+    scenario_has_include_tag: bool,
+    include_tags_set: set,
+    exclude_tags_set: set,
+) -> Optional[ExamplesTableClass]:
+    """Return an examples table if it should be included."""
+    examples_table_tags_set = set(examples_table.tags)
+    examples_table_has_include_tag = bool(examples_table_tags_set & include_tags_set)
+
+    if any(
+        # Exclude the examples table if:
+        [
+            # Examples table has an exclude tag
+            (examples_table_tags_set & exclude_tags_set),
+            # Neither the scenario,
+            # nor any scenario outline examples tables
+            # have an include tag
+            (not scenario_has_include_tag and not examples_table_has_include_tag),
+        ]
+    ):
+        return None
+
+    return examples_table
+
+
+def _scenario_if_included(
+    scenario: ScenarioClass,
+    feature_has_include_tag: bool,
+    include_tags_set: set,
+    exclude_tags_set: set,
+) -> Optional[ScenarioClass]:
+    """Return a (possibly modified) scenario if it should be included."""
+    scenario_tags_set = set(scenario.tags)
+    scenario_examples = getattr(scenario, "examples", [])
+
+    # If there are no include tags,
+    # then treat it the same as if the scenario has an include tag.
+    # If include tags exist, that will affect whether or not
+    # any examples tables need to have an include tag.
+    # If the feature has an include tag, then the scenario inherits it.
+    scenario_has_include_tag = feature_has_include_tag or (
+        bool(scenario_tags_set & include_tags_set) if include_tags_set else True
+    )
+
+    included_examples = list(
+        filter(
+            None,
+            (
+                _examples_table_if_included(
+                    examples_table,
+                    scenario_has_include_tag,
+                    include_tags_set,
+                    exclude_tags_set,
+                )
+                for examples_table in scenario_examples
+            ),
+        )
+    )
+
+    # This is the default, even if the scenario has no examples tables.
+    all_examples_tables_have_exclude_tag = False
+    if scenario_examples:
+        all_examples_tables_have_exclude_tag = all(
+            (set(examples_table.tags) & exclude_tags_set)
+            for examples_table in scenario_examples
+        )
+
+    at_least_one_examples_table_included = scenario_examples and included_examples
+    if any(
+        # Exclude if:
+        [
+            # Scenario has an exclude tag
+            (scenario_tags_set & exclude_tags_set),
+            # Neither the scenario, nor any scenario examples tables are included
+            (not scenario_has_include_tag and not at_least_one_examples_table_included),
+            # All examples tables in the scenario have at least one exclude tag
+            all_examples_tables_have_exclude_tag,
+        ]
+    ):
+        return None
+
+    # Only include examples tables that are included
+    if scenario_examples:
+        scenario.examples = included_examples
+
+    return scenario
+
+
+def get_all_included_scenarios(
+    feature: FeatureClass,
+    include_tags: List[str] = None,
+    exclude_tags: List[str] = None,
+) -> List[ScenarioClass]:
+    """
+    Get all scenarios to include in the docs based on the include/exclude tags.
+
+    This is designed to match what tests would be run if you ran a test suite
+    with something like this (pytest-bdd format)::
+
+        -m include_this_tag -m "not exclude_this_tag"
+
+    Args:
+        feature: The feature whose scenarios are to be filtered.
+        include_tags: Tags for which scenarios should be included.
+        exclude_tags: Tags for which scenarios should be excluded.
+
+    Returns:
+         All scenarios to include.
+
+    """
+    # If there's no exclude/include logic return all scenarios
+    if not include_tags and not exclude_tags:
+        return feature.scenarios
+
+    include_tags_set = set(include_tags) if include_tags else set()
+    exclude_tags_set = set(exclude_tags) if exclude_tags else set()
+    feature_tags_set = set(feature.tags)
+
+    if feature_tags_set & exclude_tags_set:
+        return []
+
+    # If there are no include tags,
+    # then treat it the same as if the feature has an include tag.
+    # If include tags exist, that will affect whether or not
+    # the scenario needs to have an include tag.
+    feature_has_include_tag = (
+        bool(feature_tags_set & include_tags_set) if include_tags else True
+    )
+
+    return list(
+        filter(
+            None,
+            (
+                _scenario_if_included(
+                    scenario,
+                    feature_has_include_tag,
+                    include_tags_set,
+                    exclude_tags_set,
+                )
+                for scenario in feature.scenarios
+            ),
+        )
+    )

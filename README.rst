@@ -195,6 +195,15 @@ In order to use the parser via command line,
 the ``--url_from-tag`` and ``--display-name-from-dir`` flags should be used.
 The provided string should be be formatted ``<library>:<method_name>``
 
+Filtering Included Features/Scenarios By Tag
+--------------------------------------------
+
+If you'd like to build documentation for only a subset of features/scenarios,
+you can include and exclude them by tags.
+
+Just use the ``--include-tags`` and/or ``--exclude-tags`` flags.
+Run ``sphinx-gherkindoc --help`` for usage info.
+
 Formatting Options
 ------------------
 

@@ -132,3 +132,16 @@ def test_feature_to_rst_tags_converted_to_url(tags_feature_file):
         tags_feature_file, tags_feature_file.parent, get_url_from_tag=get_url_from_tag
     )
     assert results._output == rst_output.tags_rst_with_urls
+
+
+def test_filter_by_tags_logic_is_triggered(tags_feature_file):
+    # All the variations are tested in test_utils.test_get_all_included_scenarios,
+    # so this just makes sure that logic get triggered within the writer.py module.
+    results = writer.feature_to_rst(
+        tags_feature_file,
+        tags_feature_file.parent,
+        # An include tag that should cause the feature to be excluded,
+        # meaning the include/exclude helper has indeed been triggered.
+        include_tags=["some-tag-no-scenario-or-feature-has"],
+    )
+    assert results is None
