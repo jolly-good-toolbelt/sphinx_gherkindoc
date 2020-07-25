@@ -64,7 +64,7 @@ class Step(PytestModel):
         """Return the step table, if present."""
         lines = self._data.lines
         if lines and all("|" in x for x in lines):
-            rows = [l.strip().split("|") for l in lines]
+            rows = [x.strip().split("|") for x in lines]
             rows = [
                 list(filter(None, (entry.strip() for entry in row))) for row in rows
             ]
@@ -81,7 +81,7 @@ class Step(PytestModel):
             # and return only non-table lines.
             return ""
         return [
-            l.strip() for l in self._data.lines if not set(l).issubset({"'", '"', " "})
+            x.strip() for x in self._data.lines if not set(x).issubset({"'", '"', " "})
         ]
 
     @property

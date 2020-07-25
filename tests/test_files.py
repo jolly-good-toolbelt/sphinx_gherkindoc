@@ -80,7 +80,7 @@ def test_is_wanted_file_caps(extension):
 
 
 def test_is_wanted_file_not():
-    assert files._is_wanted_file(f"test.py") is False
+    assert files._is_wanted_file("test.py") is False
 
 
 # files._is_excluded

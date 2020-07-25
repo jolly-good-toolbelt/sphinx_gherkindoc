@@ -227,7 +227,7 @@ def main() -> None:
         "--parser",
         default="behave",
         choices=list(parsers.keys()),
-        help=f"Specify an alternate parser to use.",
+        help="Specify an alternate parser to use.",
     )
     parser.add_argument(
         "-v",
