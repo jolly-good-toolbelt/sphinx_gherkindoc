@@ -28,7 +28,7 @@ pytest = "^4.6"
 # to prevent unexpected issues if that branch is pushed to.
 pytest-bdd = {git = "https://github.com/rbcasperson/pytest-bdd.git", rev = "b3d464bef1af2accbef493c6be85fc6232c318ed"}
 pytest-cov = "^2.7"
-jgt_tools = "^0.2.3"
+jgt_tools = "^0.3"
 
 [tool.poetry.scripts]
 sphinx-gherkindoc = 'sphinx_gherkindoc.cli:main'
