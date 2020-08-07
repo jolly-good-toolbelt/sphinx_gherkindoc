@@ -236,7 +236,7 @@ description = "A collection of tools for commmon package scripts"
 name = "jgt-tools"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "0.2.3"
+version = "0.3.0"
 
 [package.dependencies]
 tomlkit = ">=0.5.3,<0.6.0"
@@ -316,7 +316,7 @@ description = "parse() is the opposite of format()"
 name = "parse"
 optional = false
 python-versions = "*"
-version = "1.15.0"
+version = "1.16.0"
 
 [[package]]
 category = "main"
@@ -453,7 +453,6 @@ six = ">=1.9.0"
 reference = "b3d464bef1af2accbef493c6be85fc6232c318ed"
 type = "git"
 url = "https://github.com/rbcasperson/pytest-bdd.git"
-
 [[package]]
 category = "dev"
 description = "Pytest plugin for measuring coverage."
@@ -708,7 +707,7 @@ description = "Virtual Python Environment builder"
 name = "virtualenv"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
-version = "20.0.28"
+version = "20.0.30"
 
 [package.dependencies]
 appdirs = ">=1.4.3,<2"
@@ -750,7 +749,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "649bac00c5d0d45ebd9e6a28c9ea044de432627af3522ad70af098646cd20db8"
+content-hash = "cf39a24765e252af8df603bd4312558e4ab738d01d19e345ba8da20a1993ece3"
 lock-version = "1.0"
 python-versions = "^3.6"
 
@@ -878,8 +877,8 @@ importlib-resources = [
     {file = "importlib_resources-3.0.0.tar.gz", hash = "sha256:19f745a6eca188b490b1428c8d1d4a0d2368759f32370ea8fb89cad2ab1106c3"},
 ]
 jgt-tools = [
-    {file = "jgt_tools-0.2.3-py3-none-any.whl", hash = "sha256:5d32cf8abb57686ac4b44c4659a3b3650813cb5b9b1f3401bd3a6499f3baa42f"},
-    {file = "jgt_tools-0.2.3.tar.gz", hash = "sha256:ee02678a9dc360906fa19876cfa0107607afc50c09d89dbed5dc635ae018bba2"},
+    {file = "jgt_tools-0.3.0-py3-none-any.whl", hash = "sha256:9bc65adc582d98fb6872ba6c4fa1ab4b992f74c4234d32da8297a9173c8e358e"},
+    {file = "jgt_tools-0.3.0.tar.gz", hash = "sha256:bc5bfd180c7dbd3118b0ccf5840c5d441f31c46cdb5539b11ffe3fc5202156df"},
 ]
 jinja2 = [
     {file = "Jinja2-2.11.2-py2.py3-none-any.whl", hash = "sha256:f0a4641d3cf955324a89c04f3d94663aa4d638abe8f733ecd3582848e1c37035"},
@@ -936,7 +935,7 @@ packaging = [
     {file = "packaging-20.4.tar.gz", hash = "sha256:4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8"},
 ]
 parse = [
-    {file = "parse-1.15.0.tar.gz", hash = "sha256:a6d4e2c2f1fbde6717d28084a191a052950f758c0cbd83805357e6575c2b95c0"},
+    {file = "parse-1.16.0.tar.gz", hash = "sha256:cd89e57aed38dcf3e0ff8253f53121a3b23e6181758993323658bffc048a5c19"},
 ]
 parse-type = [
     {file = "parse_type-0.5.2-py2.py3-none-any.whl", hash = "sha256:089a471b06327103865dfec2dd844230c3c658a4a1b5b4c8b6c16c8f77577f9e"},
@@ -1058,8 +1057,8 @@ urllib3 = [
     {file = "urllib3-1.25.10.tar.gz", hash = "sha256:91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a"},
 ]
 virtualenv = [
-    {file = "virtualenv-20.0.28-py2.py3-none-any.whl", hash = "sha256:8f582a030156282a9ee9d319984b759a232b07f86048c1d6a9e394afa44e78c8"},
-    {file = "virtualenv-20.0.28.tar.gz", hash = "sha256:688a61d7976d82b92f7906c367e83bb4b3f0af96f8f75bfcd3da95608fe8ac6c"},
+    {file = "virtualenv-20.0.30-py2.py3-none-any.whl", hash = "sha256:8cd7b2a4850b003a11be2fc213e206419efab41115cc14bca20e69654f2ac08e"},
+    {file = "virtualenv-20.0.30.tar.gz", hash = "sha256:7b54fd606a1b85f83de49ad8d80dbec08e983a2d2f96685045b262ebc7481ee5"},
 ]
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
