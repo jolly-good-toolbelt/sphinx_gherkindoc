@@ -94,23 +94,8 @@ def process_args(
         if args.dry_run:
             continue
 
-        toc_file = toctree(
-            current.path_list,
-            new_subdirs,
-            current.files,
-            maxtocdepth,
-            root_path,
-            dir_display_name_converter=dir_display_name_converter,
-        )
-        # Check to see if we are at the last item to be processed
-        # (which has already been popped)
-        # to write the asked for master TOC file name.
-        if not work_to_do:
-            toc_filename = top_level_toc_filename
-        else:
-            toc_filename = output_path / make_flat_name(current.path_list, is_dir=True)
-        toc_file.write_to_file(toc_filename)
-
+        # Make a copy of the list, as some items may be removed.
+        files_for_toc = list(current.files)
         for a_file in current.files:
             a_file_list = current.path_list + [a_file]
             source_name = pathlib.Path().joinpath(*a_file_list)
@@ -130,6 +115,7 @@ def process_args(
                     exclude_tags=args.exclude_tags,
                 )
                 if not feature_rst_file:
+                    files_for_toc.remove(a_file)
                     continue
 
                 verbose(f'converting "{source_name}" to "{dest_name}"')
@@ -140,6 +126,23 @@ def process_args(
                 )
                 verbose(f'copying "{source_name}" to "{dest_name}"')
                 shutil.copy(source_path, dest_name)
+
+        toc_file = toctree(
+            current.path_list,
+            new_subdirs,
+            files_for_toc,
+            maxtocdepth,
+            root_path,
+            dir_display_name_converter=dir_display_name_converter,
+        )
+        # Check to see if we are at the last item to be processed
+        # (which has already been popped)
+        # to write the asked for master TOC file name.
+        if not work_to_do:
+            toc_filename = top_level_toc_filename
+        else:
+            toc_filename = output_path / make_flat_name(current.path_list, is_dir=True)
+        toc_file.write_to_file(toc_filename)
 
     if step_glossary_name:
         glossary_filename = output_path / f"{step_glossary_name}.rst"
