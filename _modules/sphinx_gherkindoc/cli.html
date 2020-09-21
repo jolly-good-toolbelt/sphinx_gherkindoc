@@ -1,0 +1,659 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sphinx_gherkindoc.cli &mdash; sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation 3.6.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../sphinx_gherkindoc.html">sphinx_gherkindoc package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sphinx_gherkindoc.parsers.html">sphinx_gherkindoc.parsers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../sphinx_gherkindoc.parsers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.base">sphinx_gherkindoc.parsers.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.behave">sphinx_gherkindoc.parsers.behave module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.pytest_bdd">sphinx_gherkindoc.parsers.pytest_bdd module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#module-sphinx_gherkindoc.cli">sphinx_gherkindoc.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#module-sphinx_gherkindoc.files">sphinx_gherkindoc.files module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#module-sphinx_gherkindoc.glossary">sphinx_gherkindoc.glossary module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#module-sphinx_gherkindoc.utils">sphinx_gherkindoc.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#module-sphinx_gherkindoc.writer">sphinx_gherkindoc.writer module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../sample-gherkindoc.html">Sample Gherkin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.basic.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tests.basic.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#id1"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.descriptions_with_raw_rst.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Descriptions with raw rST</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.descriptions_with_raw_rst.feature-file.html#scenario-a-scenario-can-be-described-with-rst-too"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">A scenario can be described with rST too</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.tags.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.tags.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.tags.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.tags_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.tags_pytest.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.tags_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../sample-gherkindoc-integrated-background.html">Sample Gherkin With Integrated Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../sample-gherkindoc-integrated-background-default.html">Default Behavior</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../default_format.integrated_backgrounds.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Integrated Backgrounds</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../default_format.integrated_backgrounds.feature-file.html#scenario-first-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">First Scenario</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../default_format.integrated_backgrounds.feature-file.html#scenario-second-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Second Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../sample-gherkindoc-integrated-background-unique-format.html">Unique Background</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../unique_format.integrated_backgrounds_with_unique_format.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Integrated Backgrounds With Unique Format</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../unique_format.integrated_backgrounds_with_unique_format.feature-file.html#scenario-first-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">First Scenario</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../unique_format.integrated_backgrounds_with_unique_format.feature-file.html#scenario-second-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Second Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../sample-gherkindoc-glossary.html">Sample Gherkin Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>sphinx_gherkindoc.cli</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sphinx_gherkindoc.cli</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">&quot;&quot;&quot;Module for running the tool from the CLI.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Set</span>
+
+<span class="kn">import</span> <span class="nn">sphinx</span>
+
+<span class="kn">from</span> <span class="nn">.files</span> <span class="kn">import</span> <span class="n">is_feature_file</span><span class="p">,</span> <span class="n">is_rst_file</span><span class="p">,</span> <span class="n">scan_tree</span>
+<span class="kn">from</span> <span class="nn">.glossary</span> <span class="kn">import</span> <span class="n">make_steps_glossary</span>
+<span class="kn">from</span> <span class="nn">.parsers</span> <span class="kn">import</span> <span class="n">parsers</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">make_flat_name</span><span class="p">,</span> <span class="n">set_dry_run</span><span class="p">,</span> <span class="n">set_verbose</span><span class="p">,</span> <span class="n">verbose</span>
+<span class="kn">from</span> <span class="nn">.writer</span> <span class="kn">import</span> <span class="n">feature_to_rst</span><span class="p">,</span> <span class="n">toctree</span>
+
+<span class="c1"># This is a pretty arbitrary number controlling how much detail</span>
+<span class="c1"># will show up in the various TOCs.</span>
+<span class="n">DEFAULT_TOC_DEPTH</span> <span class="o">=</span> <span class="mi">4</span>
+
+
+<span class="k">def</span> <span class="nf">_get_function_from_command_line_arg</span><span class="p">(</span><span class="n">module_func_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get a function from a module:func string that comes from a command arg.</span>
+
+<span class="sd">    The ``module_func_str`` must be in the form ``{module_name}:{function_name}``.</span>
+
+<span class="sd">    :param module_func_str: The string containing the module and function names.</span>
+<span class="sd">    :return: The imported python function based on the given string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">module_name</span><span class="p">,</span> <span class="n">function_name</span> <span class="o">=</span> <span class="n">module_func_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">function_name</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="process_args"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.cli.process_args">[docs]</a><span class="k">def</span> <span class="nf">process_args</span><span class="p">(</span>
+    <span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">,</span>
+    <span class="n">gherkin_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="n">doc_project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Process the supplied CLI args.&quot;&quot;&quot;</span>
+    <span class="n">work_to_do</span> <span class="o">=</span> <span class="n">scan_tree</span><span class="p">(</span><span class="n">gherkin_path</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">private</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">exclude_patterns</span><span class="p">)</span>
+    <span class="n">maxtocdepth</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">maxtocdepth</span>
+    <span class="n">toc_name</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">toc_name</span>
+    <span class="n">step_glossary_name</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">step_glossary_name</span>
+    <span class="n">doc_project</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">doc_project</span>
+    <span class="n">root_path</span> <span class="o">=</span> <span class="n">gherkin_path</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
+
+    <span class="n">top_level_toc_filename</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">toc_name</span><span class="si">}</span><span class="s2">.rst&quot;</span>
+
+    <span class="n">non_empty_dirs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="n">get_url_from_tag</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">get_url_from_step</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">dir_display_name_converter</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># Set parsers once and pass along where they are needed.</span>
+    <span class="k">for</span> <span class="n">entry_point</span> <span class="ow">in</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">iter_entry_points</span><span class="p">(</span><span class="s2">&quot;parsers&quot;</span><span class="p">):</span>
+        <span class="c1"># `url` is a supported legacy key value for the `tag_url`.</span>
+        <span class="k">if</span> <span class="n">entry_point</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;tag_url&quot;</span><span class="p">):</span>
+            <span class="n">get_url_from_tag</span> <span class="o">=</span> <span class="n">entry_point</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">entry_point</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;step_url&quot;</span><span class="p">:</span>
+            <span class="n">get_url_from_step</span> <span class="o">=</span> <span class="n">entry_point</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">entry_point</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;dir_display_name&quot;</span><span class="p">:</span>
+            <span class="n">dir_display_name_converter</span> <span class="o">=</span> <span class="n">entry_point</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+    <span class="c1"># Override parsers if there is a command line arg</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">url_from_tag</span><span class="p">:</span>
+        <span class="n">get_url_from_tag</span> <span class="o">=</span> <span class="n">_get_function_from_command_line_arg</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">url_from_tag</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">url_from_step</span><span class="p">:</span>
+        <span class="n">get_url_from_step</span> <span class="o">=</span> <span class="n">_get_function_from_command_line_arg</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">url_from_step</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">display_name_from_dir</span><span class="p">:</span>
+        <span class="n">dir_display_name_converter</span> <span class="o">=</span> <span class="n">_get_function_from_command_line_arg</span><span class="p">(</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">display_name_from_dir</span>
+        <span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">work_to_do</span><span class="p">:</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">work_to_do</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">new_subdirs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">subdir</span> <span class="ow">in</span> <span class="n">current</span><span class="o">.</span><span class="n">sub_dirs</span><span class="p">:</span>
+            <span class="n">subdir_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">()</span> <span class="o">/</span> <span class="n">current</span><span class="o">.</span><span class="n">dir_path</span> <span class="o">/</span> <span class="n">subdir</span>
+            <span class="k">if</span> <span class="n">subdir_path</span> <span class="ow">in</span> <span class="n">non_empty_dirs</span><span class="p">:</span>
+                <span class="n">new_subdirs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subdir</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">files</span> <span class="ow">or</span> <span class="n">new_subdirs</span><span class="p">):</span>
+            <span class="k">continue</span>
+
+        <span class="n">non_empty_dirs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">dir_path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">dry_run</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Make a copy of the list, as some items may be removed.</span>
+        <span class="n">files_for_toc</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">files</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">a_file</span> <span class="ow">in</span> <span class="n">current</span><span class="o">.</span><span class="n">files</span><span class="p">:</span>
+            <span class="n">a_file_list</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">path_list</span> <span class="o">+</span> <span class="p">[</span><span class="n">a_file</span><span class="p">]</span>
+            <span class="n">source_name</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="o">*</span><span class="n">a_file_list</span><span class="p">)</span>
+            <span class="n">source_path</span> <span class="o">=</span> <span class="n">root_path</span> <span class="o">/</span> <span class="n">source_name</span>
+            <span class="k">if</span> <span class="n">is_feature_file</span><span class="p">(</span><span class="n">a_file</span><span class="p">):</span>
+                <span class="n">dest_name</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="n">make_flat_name</span><span class="p">(</span><span class="n">a_file_list</span><span class="p">,</span> <span class="n">is_dir</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">feature_rst_file</span> <span class="o">=</span> <span class="n">feature_to_rst</span><span class="p">(</span>
+                    <span class="n">source_path</span><span class="p">,</span>
+                    <span class="n">root_path</span><span class="p">,</span>
+                    <span class="n">feature_parser</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">parser</span><span class="p">,</span>
+                    <span class="n">get_url_from_tag</span><span class="o">=</span><span class="n">get_url_from_tag</span><span class="p">,</span>
+                    <span class="n">get_url_from_step</span><span class="o">=</span><span class="n">get_url_from_step</span><span class="p">,</span>
+                    <span class="n">integrate_background</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">integrate_background</span><span class="p">,</span>
+                    <span class="n">background_step_format</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">background_step_format</span><span class="p">,</span>
+                    <span class="n">raw_descriptions</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">raw_descriptions</span><span class="p">,</span>
+                    <span class="n">include_tags</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">include_tags</span><span class="p">,</span>
+                    <span class="n">exclude_tags</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">exclude_tags</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">feature_rst_file</span><span class="p">:</span>
+                    <span class="n">files_for_toc</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">a_file</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="n">verbose</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;converting &quot;</span><span class="si">{</span><span class="n">source_name</span><span class="si">}</span><span class="s1">&quot; to &quot;</span><span class="si">{</span><span class="n">dest_name</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+                <span class="n">feature_rst_file</span><span class="o">.</span><span class="n">write_to_file</span><span class="p">(</span><span class="n">dest_name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">is_rst_file</span><span class="p">(</span><span class="n">a_file</span><span class="p">):</span>
+                <span class="n">dest_name</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="n">make_flat_name</span><span class="p">(</span>
+                    <span class="n">a_file_list</span><span class="p">,</span> <span class="n">is_dir</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span>
+                <span class="p">)</span>
+                <span class="n">verbose</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;copying &quot;</span><span class="si">{</span><span class="n">source_name</span><span class="si">}</span><span class="s1">&quot; to &quot;</span><span class="si">{</span><span class="n">dest_name</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">dest_name</span><span class="p">)</span>
+
+        <span class="n">toc_file</span> <span class="o">=</span> <span class="n">toctree</span><span class="p">(</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">path_list</span><span class="p">,</span>
+            <span class="n">new_subdirs</span><span class="p">,</span>
+            <span class="n">files_for_toc</span><span class="p">,</span>
+            <span class="n">maxtocdepth</span><span class="p">,</span>
+            <span class="n">root_path</span><span class="p">,</span>
+            <span class="n">dir_display_name_converter</span><span class="o">=</span><span class="n">dir_display_name_converter</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># Check to see if we are at the last item to be processed</span>
+        <span class="c1"># (which has already been popped)</span>
+        <span class="c1"># to write the asked for master TOC file name.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">work_to_do</span><span class="p">:</span>
+            <span class="n">toc_filename</span> <span class="o">=</span> <span class="n">top_level_toc_filename</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">toc_filename</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="n">make_flat_name</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">path_list</span><span class="p">,</span> <span class="n">is_dir</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">toc_file</span><span class="o">.</span><span class="n">write_to_file</span><span class="p">(</span><span class="n">toc_filename</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">step_glossary_name</span><span class="p">:</span>
+        <span class="n">glossary_filename</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">step_glossary_name</span><span class="si">}</span><span class="s2">.rst&quot;</span>
+        <span class="n">glossary</span> <span class="o">=</span> <span class="n">make_steps_glossary</span><span class="p">(</span><span class="n">doc_project</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">dry_run</span><span class="p">:</span>
+            <span class="n">verbose</span><span class="p">(</span><span class="s2">&quot;No glossary generated&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">glossary</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No steps to include in the glossary: no glossary generated&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">verbose</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Writing sphinx glossary: </span><span class="si">{</span><span class="n">glossary_filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">glossary</span><span class="o">.</span><span class="n">write_to_file</span><span class="p">(</span><span class="n">glossary_filename</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.cli.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Convert a directory-tree of Gherkin Feature files to rST files.&quot;&quot;&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;Look recursively in &lt;gherkin_path&gt; for Gherkin files and create one &quot;</span>
+        <span class="s2">&quot;reST file for each. Other rST files found along the way will be included &quot;</span>
+        <span class="s2">&quot;as prologue content above each TOC.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentDefaultsHelpFormatter</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;gherkin_path&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Directory to search for Gherkin files&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;output_path&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Directory to place all output&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;exclude_patterns&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;file and/or directory patterns that will be excluded&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--maxtocdepth&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">DEFAULT_TOC_DEPTH</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Maximum depth of submodules to show in the TOC&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-n&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--dry-run&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run the script without creating files&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-P&quot;</span><span class="p">,</span> <span class="s2">&quot;--private&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Include &quot;_private&quot; folders&#39;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-N&quot;</span><span class="p">,</span> <span class="s2">&quot;--toc-name&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;File name for TOC&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;gherkin&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-H&quot;</span><span class="p">,</span> <span class="s2">&quot;--doc-project&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Project name (default: root module name)&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-q&quot;</span><span class="p">,</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Silence any output to screen&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-G&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--step-glossary-name&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Include steps glossary under the given name.&quot;</span>
+        <span class="s2">&quot; If not specified, no glossary will be created.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--integrate-background&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Remove all references to Background, &quot;</span>
+            <span class="s2">&quot;and integrate the steps into each scenario.&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--background-step-format&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;A format string to use to format integrated background steps. &quot;</span>
+            <span class="s2">&quot;It should contain a single pair of empty curly braces, &quot;</span>
+            <span class="s2">&quot;which is where the contents of the background step will go. &quot;</span>
+            <span class="s2">&quot;NOTE: This flag is only relevant when the --integrate-background flag &quot;</span>
+            <span class="s2">&quot;is also included.&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--parser&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;behave&quot;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">parsers</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Specify an alternate parser to use.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-v&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--verbose&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print files created and actions taken&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--version&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show version information and exit&quot;</span>
+    <span class="p">)</span>
+    <span class="n">url_help</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;A library and method name to call to build a URL from a tag. The string&quot;</span>
+        <span class="s2">&quot; should be &lt;library&gt;:&lt;method_name&gt; and it should accept a single string&quot;</span>
+        <span class="s2">&quot; parameter, the tag.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--url-from-tag&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">url_help</span><span class="p">)</span>
+    <span class="n">step_url_help</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;A library and method name to call to build a URL from a step. The string&quot;</span>
+        <span class="s2">&quot; should be &lt;library&gt;:&lt;method_name&gt; and it should accept a single string&quot;</span>
+        <span class="s2">&quot; parameter, the step name.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--url-from-step&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">step_url_help</span><span class="p">)</span>
+    <span class="n">display_name_from_dir_help</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;A library and method name to call to convert a directory name into a&quot;</span>
+        <span class="s2">&quot; display name. The string should be &lt;library&gt;:&lt;method_name&gt;&quot;</span>
+        <span class="s2">&quot; and it should accept a single string parameter, the directory name.&quot;</span>
+        <span class="s2">&quot; The output of this function will be the same as creating&quot;</span>
+        <span class="s2">&quot; display_name.txt files for each directory, based on the directory name.&quot;</span>
+        <span class="s2">&quot; Any display_name.txt files that exist will take precedence over this flag.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--display-name-from-dir&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">display_name_from_dir_help</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--raw-descriptions&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Treat text from feature and scenario descriptions as raw rST. &quot;</span>
+            <span class="s2">&quot;This allows descriptions to contain rST links, code blocks, etc.&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">include_exclude_tags_caveat</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;If a feature/scenario has both an exclude and and include tag,&quot;</span>
+        <span class="s2">&quot;it will be excluded.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">exclude_tags_help</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;Features and scenarios tagged with these exclude tags &quot;</span>
+        <span class="s2">&quot;will not be included in the build docs. &quot;</span> <span class="o">+</span> <span class="n">include_exclude_tags_caveat</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--exclude-tags&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">exclude_tags_help</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+    <span class="n">include_tags_help</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;Only features and scenarios tagged with at least one of these include tags &quot;</span>
+        <span class="s2">&quot;will be included in the build docs.&quot;</span> <span class="o">+</span> <span class="n">include_exclude_tags_caveat</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--include-tags&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">include_tags_help</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Sphinx (sphinx-gherkindoc) </span><span class="si">{</span><span class="n">sphinx</span><span class="o">.</span><span class="n">__display_version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">set_dry_run</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">dry_run</span><span class="p">)</span>
+    <span class="n">set_verbose</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+
+    <span class="n">gherkin_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gherkin_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">gherkin_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">gherkin_path</span><span class="si">}</span><span class="s2"> is not a directory.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">doc_project</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">doc_project</span> <span class="o">=</span> <span class="n">gherkin_path</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">output_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output_path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">output_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">dry_run</span><span class="p">:</span>
+            <span class="n">verbose</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;creating directory: </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">output_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">process_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">gherkin_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">doc_project</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="config"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.cli.config">[docs]</a><span class="k">def</span> <span class="nf">config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Emit a customized version of the sample sphinx config file.&quot;&quot;&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;Create a default Sphinx configuration for producing nice&quot;</span>
+        <span class="s2">&quot; Gherkin-based documentation&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentDefaultsHelpFormatter</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;project_name&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Your Project Name Here&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Name of your project&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;author&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Your Team Name Here&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Directory to place all output&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--version&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;version of your project, if any&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--release&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;release of your project, if any&quot;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">substitutions</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;</span><span class="si">%%</span><span class="s2">PROJECT</span><span class="si">%%</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">project_name</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="si">%%</span><span class="s2">AUTHOR</span><span class="si">%%</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">author</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="si">%%</span><span class="s2">VERSION</span><span class="si">%%</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="si">%%</span><span class="s2">RELEASE</span><span class="si">%%</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">release</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">source_dir</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">source_dir</span> <span class="o">/</span> <span class="s2">&quot;sample-conf.py&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">conf_fo</span><span class="p">:</span>
+        <span class="n">sample_contents</span> <span class="o">=</span> <span class="n">conf_fo</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">old_value</span><span class="p">,</span> <span class="n">new_value</span> <span class="ow">in</span> <span class="n">substitutions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">sample_contents</span> <span class="o">=</span> <span class="n">sample_contents</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">old_value</span><span class="p">,</span> <span class="n">new_value</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">sample_contents</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Lewis Franklin, Doug Philips
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/sphinx_gherkindoc/tree/c556c8d56dd4248cfac79745829ce74e4c21ade5">c556c8d56dd4248cfac79745829ce74e4c21ade5</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

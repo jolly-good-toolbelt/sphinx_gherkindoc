@@ -1,0 +1,162 @@
+Sample Gherkin Glossary
+=======================
+
+- :term:`Encarnaciooooon`
+- :term:`I put \<thing\> in a blender`
+- :term:`I turn the blender on`
+- :term:`a`
+- :term:`a step with some text`
+- :term:`a test feature`
+- :term:`all the children are gone`
+- :term:`an And step with some text too`
+- :term:`another thing happened`
+- :term:`b`
+- :term:`c`
+- :term:`doodle-doodle-doodle-doo`
+- :term:`how about a table in there too`
+- :term:`it should transform into \<other thing\>`
+- :term:`something`
+- :term:`something deep inside me`
+- :term:`something else`
+- :term:`something else also happened`
+- :term:`something happened`
+- :term:`something happens`
+- :term:`step text`
+- :term:`that this file exists`
+- :term:`the fantasy has ended`
+- :term:`the file is converted into rST`
+- :term:`the suite reaches a scenario`
+- :term:`the suite reaches a scenario table`
+
+.. glossary::
+    the file is converted into rST
+        | tests/basic.feature 15, 43
+        | tests/basic_pytest.feature 19, 43
+        | tests/nobackground_pytest.feature 15, 39
+        | tests/tags.feature 16
+        | tests/tags_pytest.feature 14
+
+    a test feature
+        | tests/basic.feature 13
+        | tests/basic_pytest.feature 17
+        | tests/nobackground_pytest.feature 13
+        | tests/tags.feature 14
+        | tests/tags_pytest.feature 12
+
+    the suite reaches a scenario
+        | tests/basic.feature 14
+        | tests/basic_pytest.feature 18
+        | tests/nobackground_pytest.feature 14
+        | tests/tags.feature 15
+        | tests/tags_pytest.feature 13
+
+    that this file exists
+        | tests/basic.feature 6
+        | tests/basic_pytest.feature 12
+        | tests/tags.feature 7
+        | tests/tags_pytest.feature 7
+
+    I put \<thing\> in a blender
+        | tests/basic.feature 21
+        | tests/basic_pytest.feature 23
+        | tests/nobackground_pytest.feature 19
+
+    I turn the blender on
+        | tests/basic.feature 22
+        | tests/basic_pytest.feature 24
+        | tests/nobackground_pytest.feature 20
+
+    it should transform into \<other thing\>
+        | tests/basic.feature 23
+        | tests/basic_pytest.feature 25
+        | tests/nobackground_pytest.feature 21
+
+    step text
+        | tests/basic.feature 34
+        | tests/basic_pytest.feature 34
+        | tests/nobackground_pytest.feature 30
+
+    the suite reaches a scenario table
+        | tests/basic.feature 38
+        | tests/basic_pytest.feature 38
+        | tests/nobackground_pytest.feature 34
+
+    something
+        | tests/basic.feature 47
+        | tests/basic_pytest.feature 47
+        | tests/nobackground_pytest.feature 43
+
+    something else
+        | tests/basic.feature 48
+        | tests/basic_pytest.feature 48
+        | tests/nobackground_pytest.feature 44
+
+    something happens
+        | tests/basic.feature 49
+        | tests/basic_pytest.feature 49
+        | tests/nobackground_pytest.feature 45
+
+    something happened
+        | tests/basic.feature 50
+        | tests/basic_pytest.feature 50
+        | tests/nobackground_pytest.feature 46
+
+    something else also happened
+        | tests/basic.feature 51
+        | tests/basic_pytest.feature 51
+        | tests/nobackground_pytest.feature 47
+
+    another thing happened
+        | tests/basic.feature 52
+        | tests/basic_pytest.feature 52
+        | tests/nobackground_pytest.feature 48
+
+    a step with some text
+        | tests/basic.feature 56
+        | tests/basic_pytest.feature 56
+        | tests/nobackground_pytest.feature 52
+
+    an And step with some text too
+        | tests/basic.feature 60
+        | tests/basic_pytest.feature 60
+        | tests/nobackground_pytest.feature 56
+
+    how about a table in there too
+        | tests/basic.feature 64
+        | tests/basic_pytest.feature 64
+        | tests/nobackground_pytest.feature 60
+
+    the fantasy has ended
+        | tests/basic.feature 69
+        | tests/basic_pytest.feature 69
+        | tests/nobackground_pytest.feature 65
+
+    all the children are gone
+        | tests/basic.feature 70
+        | tests/basic_pytest.feature 70
+        | tests/nobackground_pytest.feature 66
+
+    something deep inside me
+        | tests/basic.feature 71
+        | tests/basic_pytest.feature 71
+        | tests/nobackground_pytest.feature 67
+
+    Encarnaciooooon
+        | tests/basic.feature 75
+        | tests/basic_pytest.feature 75
+        | tests/nobackground_pytest.feature 71
+
+    doodle-doodle-doodle-doo
+        | tests/basic.feature 76
+        | tests/basic_pytest.feature 76
+        | tests/nobackground_pytest.feature 72
+
+    a
+        | tests/descriptions_with_raw_rst.feature 26
+
+    b
+        | tests/descriptions_with_raw_rst.feature 27
+
+    c
+        | tests/descriptions_with_raw_rst.feature 28
+

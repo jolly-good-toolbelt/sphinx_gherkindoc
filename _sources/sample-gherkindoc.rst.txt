@@ -1,0 +1,18 @@
+Sample Gherkin
+==============
+
+This Gherkin is used for our self-tests,
+but also appears in the built documentation
+in order to be an example of how this package
+will format your Gherkin.
+
+
+.. toctree::
+    :maxdepth: 4
+
+    tests.basic.feature-file
+    tests.basic_pytest.feature-file
+    tests.descriptions_with_raw_rst.feature-file
+    tests.nobackground_pytest.feature-file
+    tests.tags.feature-file
+    tests.tags_pytest.feature-file

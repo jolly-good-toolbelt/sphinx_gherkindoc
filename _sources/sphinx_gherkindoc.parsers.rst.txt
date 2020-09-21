@@ -1,0 +1,34 @@
+sphinx\_gherkindoc.parsers package
+==================================
+
+.. automodule:: sphinx_gherkindoc.parsers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+sphinx\_gherkindoc.parsers.base module
+--------------------------------------
+
+.. automodule:: sphinx_gherkindoc.parsers.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sphinx\_gherkindoc.parsers.behave module
+----------------------------------------
+
+.. automodule:: sphinx_gherkindoc.parsers.behave
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sphinx\_gherkindoc.parsers.pytest\_bdd module
+---------------------------------------------
+
+.. automodule:: sphinx_gherkindoc.parsers.pytest_bdd
+   :members:
+   :undoc-members:
+   :show-inheritance:

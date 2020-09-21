@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sphinx_gherkindoc.utils &mdash; sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation 3.6.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../sphinx_gherkindoc.html">sphinx_gherkindoc package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sphinx_gherkindoc.parsers.html">sphinx_gherkindoc.parsers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../sphinx_gherkindoc.parsers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.base">sphinx_gherkindoc.parsers.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.behave">sphinx_gherkindoc.parsers.behave module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.pytest_bdd">sphinx_gherkindoc.parsers.pytest_bdd module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#module-sphinx_gherkindoc.cli">sphinx_gherkindoc.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#module-sphinx_gherkindoc.files">sphinx_gherkindoc.files module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#module-sphinx_gherkindoc.glossary">sphinx_gherkindoc.glossary module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#module-sphinx_gherkindoc.utils">sphinx_gherkindoc.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sphinx_gherkindoc.html#module-sphinx_gherkindoc.writer">sphinx_gherkindoc.writer module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../sample-gherkindoc.html">Sample Gherkin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.basic.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tests.basic.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#id1"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.basic_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.descriptions_with_raw_rst.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Descriptions with raw rST</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.descriptions_with_raw_rst.feature-file.html#scenario-a-scenario-can-be-described-with-rst-too"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">A scenario can be described with rST too</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.nobackground_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.tags.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.tags.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.tags.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tests.tags_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.tags_pytest.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tests.tags_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../sample-gherkindoc-integrated-background.html">Sample Gherkin With Integrated Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../sample-gherkindoc-integrated-background-default.html">Default Behavior</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../default_format.integrated_backgrounds.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Integrated Backgrounds</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../default_format.integrated_backgrounds.feature-file.html#scenario-first-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">First Scenario</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../default_format.integrated_backgrounds.feature-file.html#scenario-second-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Second Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../sample-gherkindoc-integrated-background-unique-format.html">Unique Background</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../unique_format.integrated_backgrounds_with_unique_format.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Integrated Backgrounds With Unique Format</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../unique_format.integrated_backgrounds_with_unique_format.feature-file.html#scenario-first-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">First Scenario</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../unique_format.integrated_backgrounds_with_unique_format.feature-file.html#scenario-second-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Second Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../sample-gherkindoc-glossary.html">Sample Gherkin Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>sphinx_gherkindoc.utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sphinx_gherkindoc.utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Generic utils used throughout the module.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">sphinx.util</span>
+
+<span class="kn">from</span> <span class="nn">sphinx_gherkindoc.parsers</span> <span class="kn">import</span> <span class="n">ScenarioClass</span><span class="p">,</span> <span class="n">FeatureClass</span><span class="p">,</span> <span class="n">ExamplesTableClass</span>
+
+<span class="c1"># Increments of how much we indent Sphinx rST content when indenting.</span>
+<span class="n">INDENT_DEPTH</span> <span class="o">=</span> <span class="mi">4</span>
+
+
+<span class="n">MAIN_STEP_KEYWORDS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Given&quot;</span><span class="p">,</span> <span class="s2">&quot;When&quot;</span><span class="p">,</span> <span class="s2">&quot;Then&quot;</span><span class="p">]</span>
+
+<span class="c1"># The csv-table parser for restructuredtext does not allow for escaping so use</span>
+<span class="c1"># a unicode character that looks like a quote but will not be in any Gherkin</span>
+<span class="n">QUOTE</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\u201C</span><span class="s2">&quot;</span>
+
+
+<span class="c1"># DRY_RUN and VERBOSE are global states for all the code.</span>
+<span class="c1"># By making these into global variables, the code &quot;admits that&quot; they are global;</span>
+<span class="c1"># rather than cluttering up method parameters passing these values around,</span>
+<span class="c1"># and having to track if any particular method/function needs or no-longer needs them.</span>
+<span class="n">DRY_RUN</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">VERBOSE</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="verbose"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.verbose">[docs]</a><span class="k">def</span> <span class="nf">verbose</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Print message only if VERBOSE, with a DRY_RUN prefix as appropriate.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">VERBOSE</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="n">DRY_RUN</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;dry-run: &quot;</span> <span class="o">+</span> <span class="n">message</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="set_dry_run"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.set_dry_run">[docs]</a><span class="k">def</span> <span class="nf">set_dry_run</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Set the value for DRY_RUN outside this module.&quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">DRY_RUN</span>
+    <span class="n">DRY_RUN</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="set_verbose"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.set_verbose">[docs]</a><span class="k">def</span> <span class="nf">set_verbose</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Set the value for VERBOSE outside this module.&quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">VERBOSE</span>
+    <span class="n">VERBOSE</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+<span class="c1"># Build up dictionary of characters that need escaping</span>
+<span class="n">_escape_mappings</span> <span class="o">=</span> <span class="p">{</span><span class="nb">ord</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\\</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">)}</span>
+<span class="n">_advanced_escape_mappings</span> <span class="o">=</span> <span class="n">_escape_mappings</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">_advanced_escape_mappings</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\\\\\</span><span class="s2">&quot;</span>
+
+
+<div class="viewcode-block" id="rst_escape"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.rst_escape">[docs]</a><span class="k">def</span> <span class="nf">rst_escape</span><span class="p">(</span><span class="n">unescaped</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">slash_escape</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Escape reST-ful characters to prevent parsing errors.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        unescaped: A string that potentially contains characters needing escaping</span>
+<span class="sd">        slash_escape: if True, escape slashes found in ``unescaped``</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A string which has reST-ful characters appropriately escaped</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">unescaped</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="n">_advanced_escape_mappings</span> <span class="k">if</span> <span class="n">slash_escape</span> <span class="k">else</span> <span class="n">_escape_mappings</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="make_flat_name"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.make_flat_name">[docs]</a><span class="k">def</span> <span class="nf">make_flat_name</span><span class="p">(</span>
+    <span class="n">path_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">filename_root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">is_dir</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">ext</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;.rst&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build a flat file name from the provided information.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path_list: Directory hierarchy to flatten</span>
+<span class="sd">        filename_root: If provided, the root of the filename to flatten (no extension)</span>
+<span class="sd">        is_dir: If True, mark the new filename as a table of contents</span>
+<span class="sd">        ext: Optional extension for the new file name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A filename containing the full path, separated by periods</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">filename_root</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">path_list</span> <span class="o">=</span> <span class="n">path_list</span> <span class="o">+</span> <span class="p">[</span><span class="n">filename_root</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_list</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ext</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">result</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;-toc&quot;</span> <span class="k">if</span> <span class="n">is_dir</span> <span class="k">else</span> <span class="s2">&quot;-file&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">ext</span></div>
+
+
+<div class="viewcode-block" id="SphinxWriter"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.SphinxWriter">[docs]</a><span class="k">class</span> <span class="nc">SphinxWriter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Easy Sphinx-format file creator.&quot;&quot;&quot;</span>
+
+    <span class="n">sections</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="SphinxWriter.add_output"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.SphinxWriter.add_output">[docs]</a>    <span class="k">def</span> <span class="nf">add_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">line_breaks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">indent_by</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Add output to be written to file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            line: The line to be written</span>
+<span class="sd">            line_breaks: The number of line breaks to include</span>
+<span class="sd">            indenty_by: The number of spaces to indent the line.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">line_breaks_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="n">line_breaks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">indent_by</span><span class="si">}{</span><span class="n">line</span><span class="si">}{</span><span class="n">line_breaks_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SphinxWriter.blank_line"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.SphinxWriter.blank_line">[docs]</a>    <span class="k">def</span> <span class="nf">blank_line</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Write a single blank line.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_output</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SphinxWriter.create_section"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.SphinxWriter.create_section">[docs]</a>    <span class="k">def</span> <span class="nf">create_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">section</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a reST-formatted section header based on the provided level.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            level: The level depth of the section header (1-10 supported)</span>
+<span class="sd">            section: The section title</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_output</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="n">level</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">section</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()),</span> <span class="n">line_breaks</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SphinxWriter.write_to_file"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.SphinxWriter.write_to_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Write the provided output to the given filename.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename: The full path to write the output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">verbose</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Writing </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">sphinx</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">osutil</span><span class="o">.</span><span class="n">FileAvoidWrite</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="c1"># All version of Sphinx will accept a string-type,</span>
+            <span class="c1"># but &gt;=2.0 accepts _only_ strings (not bytes)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="display_name"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.display_name">[docs]</a><span class="k">def</span> <span class="nf">display_name</span><span class="p">(</span>
+    <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="n">package_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">dir_display_name_converter</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a human-readable name for a given project.</span>
+
+<span class="sd">    Determine the display name for a project given a path and (optional) package name.</span>
+<span class="sd">    If a display_name.txt file is found, the first line is returned. Otherwise, return a</span>
+<span class="sd">    title-cased string from either the base directory or package_name (if provided).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: Path for searching</span>
+<span class="sd">        package_name: Sphinx-style, dot-delimited package name (optional)</span>
+<span class="sd">        dir_display_name_converter: A function for converting a dir to a display name.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A display name for the provided path</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name_path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;display_name.txt&quot;</span>
+    <span class="k">if</span> <span class="n">name_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">name_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">name_fo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">name_fo</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">raw_name</span> <span class="o">=</span> <span class="n">package_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">package_name</span> <span class="k">else</span> <span class="n">path</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">if</span> <span class="n">dir_display_name_converter</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dir_display_name_converter</span><span class="p">(</span><span class="n">raw_name</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">string</span><span class="o">.</span><span class="n">capwords</span><span class="p">(</span><span class="n">raw_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span></div>
+
+
+<span class="k">def</span> <span class="nf">_examples_table_if_included</span><span class="p">(</span>
+    <span class="n">examples_table</span><span class="p">:</span> <span class="n">ExamplesTableClass</span><span class="p">,</span>
+    <span class="n">scenario_has_include_tag</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">include_tags_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span>
+    <span class="n">exclude_tags_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ExamplesTableClass</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return an examples table if it should be included.&quot;&quot;&quot;</span>
+    <span class="n">examples_table_tags_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">examples_table</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+    <span class="n">examples_table_has_include_tag</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">examples_table_tags_set</span> <span class="o">&amp;</span> <span class="n">include_tags_set</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
+        <span class="c1"># Exclude the examples table if:</span>
+        <span class="p">[</span>
+            <span class="c1"># Examples table has an exclude tag</span>
+            <span class="p">(</span><span class="n">examples_table_tags_set</span> <span class="o">&amp;</span> <span class="n">exclude_tags_set</span><span class="p">),</span>
+            <span class="c1"># Neither the scenario,</span>
+            <span class="c1"># nor any scenario outline examples tables</span>
+            <span class="c1"># have an include tag</span>
+            <span class="p">(</span><span class="ow">not</span> <span class="n">scenario_has_include_tag</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">examples_table_has_include_tag</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">examples_table</span>
+
+
+<span class="k">def</span> <span class="nf">_scenario_if_included</span><span class="p">(</span>
+    <span class="n">scenario</span><span class="p">:</span> <span class="n">ScenarioClass</span><span class="p">,</span>
+    <span class="n">feature_has_include_tag</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">include_tags_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span>
+    <span class="n">exclude_tags_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ScenarioClass</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return a (possibly modified) scenario if it should be included.&quot;&quot;&quot;</span>
+    <span class="n">scenario_tags_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">scenario</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+    <span class="n">scenario_examples</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">scenario</span><span class="p">,</span> <span class="s2">&quot;examples&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="c1"># If there are no include tags,</span>
+    <span class="c1"># then treat it the same as if the scenario has an include tag.</span>
+    <span class="c1"># If include tags exist, that will affect whether or not</span>
+    <span class="c1"># any examples tables need to have an include tag.</span>
+    <span class="c1"># If the feature has an include tag, then the scenario inherits it.</span>
+    <span class="n">scenario_has_include_tag</span> <span class="o">=</span> <span class="n">feature_has_include_tag</span> <span class="ow">or</span> <span class="p">(</span>
+        <span class="nb">bool</span><span class="p">(</span><span class="n">scenario_tags_set</span> <span class="o">&amp;</span> <span class="n">include_tags_set</span><span class="p">)</span> <span class="k">if</span> <span class="n">include_tags_set</span> <span class="k">else</span> <span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">included_examples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="nb">filter</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="n">_examples_table_if_included</span><span class="p">(</span>
+                    <span class="n">examples_table</span><span class="p">,</span>
+                    <span class="n">scenario_has_include_tag</span><span class="p">,</span>
+                    <span class="n">include_tags_set</span><span class="p">,</span>
+                    <span class="n">exclude_tags_set</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">examples_table</span> <span class="ow">in</span> <span class="n">scenario_examples</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># This is the default, even if the scenario has no examples tables.</span>
+    <span class="n">all_examples_tables_have_exclude_tag</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">scenario_examples</span><span class="p">:</span>
+        <span class="n">all_examples_tables_have_exclude_tag</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">examples_table</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">exclude_tags_set</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">examples_table</span> <span class="ow">in</span> <span class="n">scenario_examples</span>
+        <span class="p">)</span>
+
+    <span class="n">at_least_one_examples_table_included</span> <span class="o">=</span> <span class="n">scenario_examples</span> <span class="ow">and</span> <span class="n">included_examples</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
+        <span class="c1"># Exclude if:</span>
+        <span class="p">[</span>
+            <span class="c1"># Scenario has an exclude tag</span>
+            <span class="p">(</span><span class="n">scenario_tags_set</span> <span class="o">&amp;</span> <span class="n">exclude_tags_set</span><span class="p">),</span>
+            <span class="c1"># Neither the scenario, nor any scenario examples tables are included</span>
+            <span class="p">(</span><span class="ow">not</span> <span class="n">scenario_has_include_tag</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">at_least_one_examples_table_included</span><span class="p">),</span>
+            <span class="c1"># All examples tables in the scenario have at least one exclude tag</span>
+            <span class="n">all_examples_tables_have_exclude_tag</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Only include examples tables that are included</span>
+    <span class="k">if</span> <span class="n">scenario_examples</span><span class="p">:</span>
+        <span class="n">scenario</span><span class="o">.</span><span class="n">examples</span> <span class="o">=</span> <span class="n">included_examples</span>
+
+    <span class="k">return</span> <span class="n">scenario</span>
+
+
+<div class="viewcode-block" id="get_all_included_scenarios"><a class="viewcode-back" href="../../sphinx_gherkindoc.html#sphinx_gherkindoc.utils.get_all_included_scenarios">[docs]</a><span class="k">def</span> <span class="nf">get_all_included_scenarios</span><span class="p">(</span>
+    <span class="n">feature</span><span class="p">:</span> <span class="n">FeatureClass</span><span class="p">,</span>
+    <span class="n">include_tags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude_tags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ScenarioClass</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get all scenarios to include in the docs based on the include/exclude tags.</span>
+
+<span class="sd">    This is designed to match what tests would be run if you ran a test suite</span>
+<span class="sd">    with something like this (pytest-bdd format)::</span>
+
+<span class="sd">        -m include_this_tag -m &quot;not exclude_this_tag&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        feature: The feature whose scenarios are to be filtered.</span>
+<span class="sd">        include_tags: Tags for which scenarios should be included.</span>
+<span class="sd">        exclude_tags: Tags for which scenarios should be excluded.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">         All scenarios to include.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># If there&#39;s no exclude/include logic return all scenarios</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_tags</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">exclude_tags</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">feature</span><span class="o">.</span><span class="n">scenarios</span>
+
+    <span class="n">include_tags_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">include_tags</span><span class="p">)</span> <span class="k">if</span> <span class="n">include_tags</span> <span class="k">else</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">exclude_tags_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">exclude_tags</span><span class="p">)</span> <span class="k">if</span> <span class="n">exclude_tags</span> <span class="k">else</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">feature_tags_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">feature</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">feature_tags_set</span> <span class="o">&amp;</span> <span class="n">exclude_tags_set</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="c1"># If there are no include tags,</span>
+    <span class="c1"># then treat it the same as if the feature has an include tag.</span>
+    <span class="c1"># If include tags exist, that will affect whether or not</span>
+    <span class="c1"># the scenario needs to have an include tag.</span>
+    <span class="n">feature_has_include_tag</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">bool</span><span class="p">(</span><span class="n">feature_tags_set</span> <span class="o">&amp;</span> <span class="n">include_tags_set</span><span class="p">)</span> <span class="k">if</span> <span class="n">include_tags</span> <span class="k">else</span> <span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="nb">filter</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="n">_scenario_if_included</span><span class="p">(</span>
+                    <span class="n">scenario</span><span class="p">,</span>
+                    <span class="n">feature_has_include_tag</span><span class="p">,</span>
+                    <span class="n">include_tags_set</span><span class="p">,</span>
+                    <span class="n">exclude_tags_set</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">feature</span><span class="o">.</span><span class="n">scenarios</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Lewis Franklin, Doug Philips
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/sphinx_gherkindoc/tree/c556c8d56dd4248cfac79745829ce74e4c21ade5">c556c8d56dd4248cfac79745829ce74e4c21ade5</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

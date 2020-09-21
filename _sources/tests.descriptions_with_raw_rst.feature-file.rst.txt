@@ -1,0 +1,52 @@
+.. role:: gherkin-step-keyword
+.. role:: gherkin-step-content
+.. role:: gherkin-feature-description
+.. role:: gherkin-scenario-description
+.. role:: gherkin-feature-keyword
+.. role:: gherkin-feature-content
+.. role:: gherkin-background-keyword
+.. role:: gherkin-background-content
+.. role:: gherkin-scenario-keyword
+.. role:: gherkin-scenario-content
+.. role:: gherkin-scenario-outline-keyword
+.. role:: gherkin-scenario-outline-content
+.. role:: gherkin-examples-keyword
+.. role:: gherkin-examples-content
+.. role:: gherkin-tag-keyword
+.. role:: gherkin-tag-content
+
+:gherkin-feature-keyword:`Feature:` :gherkin-feature-content:`Descriptions with raw rST`
+========================================================================================
+
+  Sometimes we want to describe a feature, but it is also helpful to
+  put in a code block like this:
+
+  .. code-block::
+
+          North
+      West  *  East
+          South
+
+  Or sometimes we may want to put in a link to something
+  like `Python <http://www.python.org/>`__.
+
+
+:gherkin-scenario-keyword:`Scenario:` :gherkin-scenario-content:`A scenario can be described with rST too`
+----------------------------------------------------------------------------------------------------------
+
+    We might want the same thing in a scenario.
+
+    .. code-block::
+
+            North
+        West  *  East
+            South
+
+    Or sometimes we may want to put in a link to something
+    like `Python <http://www.python.org/>`__.
+
+
+| :gherkin-step-keyword:`Given` a
+| :gherkin-step-keyword:`When` b
+| :gherkin-step-keyword:`Then` c
+

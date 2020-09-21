@@ -1,0 +1,11 @@
+Default Behavior
+================
+
+This Gherkin is used exclusively to demonstrate the ``--integrate-background`` flag
+when used without with the ``--background-step-format`` flag.
+
+
+.. toctree::
+    :maxdepth: 4
+
+    default_format.integrated_backgrounds.feature-file

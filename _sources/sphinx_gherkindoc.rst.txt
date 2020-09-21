@@ -1,0 +1,58 @@
+sphinx\_gherkindoc package
+==========================
+
+.. automodule:: sphinx_gherkindoc
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   sphinx_gherkindoc.parsers
+
+Submodules
+----------
+
+sphinx\_gherkindoc.cli module
+-----------------------------
+
+.. automodule:: sphinx_gherkindoc.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sphinx\_gherkindoc.files module
+-------------------------------
+
+.. automodule:: sphinx_gherkindoc.files
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sphinx\_gherkindoc.glossary module
+----------------------------------
+
+.. automodule:: sphinx_gherkindoc.glossary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sphinx\_gherkindoc.utils module
+-------------------------------
+
+.. automodule:: sphinx_gherkindoc.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sphinx\_gherkindoc.writer module
+--------------------------------
+
+.. automodule:: sphinx_gherkindoc.writer
+   :members:
+   :undoc-members:
+   :show-inheritance:

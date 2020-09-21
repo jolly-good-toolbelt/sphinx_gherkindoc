@@ -1,0 +1,729 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sphinx_gherkindoc.parsers package &mdash; sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation 3.6.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sample Gherkin" href="sample-gherkindoc.html" />
+    <link rel="prev" title="sphinx_gherkindoc package" href="sphinx_gherkindoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Library</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="sphinx_gherkindoc.html">sphinx_gherkindoc package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sphinx_gherkindoc.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">sphinx_gherkindoc.parsers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sphinx_gherkindoc.parsers.base">sphinx_gherkindoc.parsers.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sphinx_gherkindoc.parsers.behave">sphinx_gherkindoc.parsers.behave module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sphinx_gherkindoc.parsers.pytest_bdd">sphinx_gherkindoc.parsers.pytest_bdd module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.cli">sphinx_gherkindoc.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.files">sphinx_gherkindoc.files module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.glossary">sphinx_gherkindoc.glossary module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.utils">sphinx_gherkindoc.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.writer">sphinx_gherkindoc.writer module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc.html">Sample Gherkin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tests.basic.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.basic.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.basic_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.basic_pytest.feature-file.html#id1"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.descriptions_with_raw_rst.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Descriptions with raw rST</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.descriptions_with_raw_rst.feature-file.html#scenario-a-scenario-can-be-described-with-rst-too"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">A scenario can be described with rST too</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.tags.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.tags_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags_pytest.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc-integrated-background.html">Sample Gherkin With Integrated Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sample-gherkindoc-integrated-background-default.html">Default Behavior</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="default_format.integrated_backgrounds.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Integrated Backgrounds</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="default_format.integrated_backgrounds.feature-file.html#scenario-first-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">First Scenario</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="default_format.integrated_backgrounds.feature-file.html#scenario-second-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Second Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sample-gherkindoc-integrated-background-unique-format.html">Unique Background</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="unique_format.integrated_backgrounds_with_unique_format.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Integrated Backgrounds With Unique Format</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="unique_format.integrated_backgrounds_with_unique_format.feature-file.html#scenario-first-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">First Scenario</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="unique_format.integrated_backgrounds_with_unique_format.feature-file.html#scenario-second-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Second Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc-glossary.html">Sample Gherkin Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="sphinx_gherkindoc.html">sphinx_gherkindoc package</a> &raquo;</li>
+        
+      <li>sphinx_gherkindoc.parsers package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sphinx_gherkindoc.parsers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-sphinx_gherkindoc.parsers">
+<span id="sphinx-gherkindoc-parsers-package"></span><h1>sphinx_gherkindoc.parsers package<a class="headerlink" href="#module-sphinx_gherkindoc.parsers" title="Permalink to this headline">¶</a></h1>
+<p>Sphinx-Gherkindoc Parsers.</p>
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.ExamplesTableClass">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.</code><code class="sig-name descname">ExamplesTableClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers.html#ExamplesTableClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.ExamplesTableClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing_extensions.Protocol</span></code></p>
+<p>Protocol for an examples table class model.</p>
+<dl class="py attribute">
+<dt id="sphinx_gherkindoc.parsers.ExamplesTableClass.tags">
+<code class="sig-name descname">tags</code><em class="property">: List<span class="p">[</span>str<span class="p">]</span></em><a class="headerlink" href="#sphinx_gherkindoc.parsers.ExamplesTableClass.tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.FeatureClass">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.</code><code class="sig-name descname">FeatureClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers.html#FeatureClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.FeatureClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing_extensions.Protocol</span></code></p>
+<p>Protocol for a feature class model.</p>
+<dl class="py attribute">
+<dt id="sphinx_gherkindoc.parsers.FeatureClass.examples">
+<code class="sig-name descname">examples</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="#sphinx_gherkindoc.parsers.ExamplesTableClass" title="sphinx_gherkindoc.parsers.ExamplesTableClass">sphinx_gherkindoc.parsers.ExamplesTableClass</a><span class="p">]</span></em><a class="headerlink" href="#sphinx_gherkindoc.parsers.FeatureClass.examples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="sphinx_gherkindoc.parsers.FeatureClass.scenarios">
+<code class="sig-name descname">scenarios</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="#sphinx_gherkindoc.parsers.ScenarioClass" title="sphinx_gherkindoc.parsers.ScenarioClass">sphinx_gherkindoc.parsers.ScenarioClass</a><span class="p">]</span></em><a class="headerlink" href="#sphinx_gherkindoc.parsers.FeatureClass.scenarios" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="sphinx_gherkindoc.parsers.FeatureClass.tags">
+<code class="sig-name descname">tags</code><em class="property">: List<span class="p">[</span>str<span class="p">]</span></em><a class="headerlink" href="#sphinx_gherkindoc.parsers.FeatureClass.tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.ScenarioClass">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.</code><code class="sig-name descname">ScenarioClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers.html#ScenarioClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.ScenarioClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing_extensions.Protocol</span></code></p>
+<p>Protocol for a scenario class model.</p>
+<dl class="py attribute">
+<dt id="sphinx_gherkindoc.parsers.ScenarioClass.examples">
+<code class="sig-name descname">examples</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="#sphinx_gherkindoc.parsers.ExamplesTableClass" title="sphinx_gherkindoc.parsers.ExamplesTableClass">sphinx_gherkindoc.parsers.ExamplesTableClass</a><span class="p">]</span></em><a class="headerlink" href="#sphinx_gherkindoc.parsers.ScenarioClass.examples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="sphinx_gherkindoc.parsers.ScenarioClass.steps">
+<code class="sig-name descname">steps</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="#sphinx_gherkindoc.parsers.StepClass" title="sphinx_gherkindoc.parsers.StepClass">sphinx_gherkindoc.parsers.StepClass</a><span class="p">]</span></em><a class="headerlink" href="#sphinx_gherkindoc.parsers.ScenarioClass.steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="sphinx_gherkindoc.parsers.ScenarioClass.tags">
+<code class="sig-name descname">tags</code><em class="property">: List<span class="p">[</span>str<span class="p">]</span></em><a class="headerlink" href="#sphinx_gherkindoc.parsers.ScenarioClass.tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.StepClass">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.</code><code class="sig-name descname">StepClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers.html#StepClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.StepClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing_extensions.Protocol</span></code></p>
+<p>Protocol for a step class model.</p>
+<dl class="py attribute">
+<dt id="sphinx_gherkindoc.parsers.StepClass.keyword">
+<code class="sig-name descname">keyword</code><em class="property">: str</em><a class="headerlink" href="#sphinx_gherkindoc.parsers.StepClass.keyword" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="sphinx_gherkindoc.parsers.StepClass.name">
+<code class="sig-name descname">name</code><em class="property">: str</em><a class="headerlink" href="#sphinx_gherkindoc.parsers.StepClass.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sphinx_gherkindoc.parsers.base">
+<span id="sphinx-gherkindoc-parsers-base-module"></span><h2>sphinx_gherkindoc.parsers.base module<a class="headerlink" href="#module-sphinx_gherkindoc.parsers.base" title="Permalink to this headline">¶</a></h2>
+<p>Base classes for parsing.</p>
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.base.BaseModel">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.base.</code><code class="sig-name descname">BaseModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers/base.html#BaseModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.base.BaseModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base model for parsers.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-sphinx_gherkindoc.parsers.behave">
+<span id="sphinx-gherkindoc-parsers-behave-module"></span><h2>sphinx_gherkindoc.parsers.behave module<a class="headerlink" href="#module-sphinx_gherkindoc.parsers.behave" title="Permalink to this headline">¶</a></h2>
+<p>Helper functions for writing rST files with behave parser.</p>
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.behave.BehaveModel">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.behave.</code><code class="sig-name descname">BehaveModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers/behave.html#BehaveModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.behave.BehaveModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sphinx_gherkindoc.parsers.base.BaseModel" title="sphinx_gherkindoc.parsers.base.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sphinx_gherkindoc.parsers.base.BaseModel</span></code></a></p>
+<p>Custom model for Behave-parsed objects.</p>
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.behave.BehaveModel.description">
+<em class="property">property </em><code class="sig-name descname">description</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.behave.BehaveModel.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add some reasonable assumptions about line breaks into descriptions.</p>
+<p>Any line that ends in a period will have a newline added for separation.</p>
+<p>Additionally, a newline will be added after the final line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.behave.Feature">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.behave.</code><code class="sig-name descname">Feature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_path</span></em>, <em class="sig-param"><span class="n">source_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers/behave.html#Feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.behave.Feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sphinx_gherkindoc.parsers.behave.BehaveModel" title="sphinx_gherkindoc.parsers.behave.BehaveModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sphinx_gherkindoc.parsers.behave.BehaveModel</span></code></a></p>
+<p>Feature model for Behave.</p>
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.behave.Feature.examples">
+<em class="property">property </em><code class="sig-name descname">examples</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.behave.Feature.examples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supports dummy feature-level examples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Examples</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.behave.Feature.scenarios">
+<em class="property">property </em><code class="sig-name descname">scenarios</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.behave.Feature.scenarios" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrap Behave Scenarios to include description processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="#sphinx_gherkindoc.parsers.behave.Scenario" title="sphinx_gherkindoc.parsers.behave.Scenario"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scenario</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.behave.Scenario">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.behave.</code><code class="sig-name descname">Scenario</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers/behave.html#Scenario"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.behave.Scenario" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sphinx_gherkindoc.parsers.behave.BehaveModel" title="sphinx_gherkindoc.parsers.behave.BehaveModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sphinx_gherkindoc.parsers.behave.BehaveModel</span></code></a></p>
+<p>Make Scenarios inherit the <code class="docutils literal notranslate"><span class="pre">BehaveModel</span></code> description property.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-sphinx_gherkindoc.parsers.pytest_bdd">
+<span id="sphinx-gherkindoc-parsers-pytest-bdd-module"></span><h2>sphinx_gherkindoc.parsers.pytest_bdd module<a class="headerlink" href="#module-sphinx_gherkindoc.parsers.pytest_bdd" title="Permalink to this headline">¶</a></h2>
+<p>Helper functions for writing rST files.</p>
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Background">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.pytest_bdd.</code><code class="sig-name descname">Background</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers/pytest_bdd.html#Background"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.PytestModel" title="sphinx_gherkindoc.parsers.pytest_bdd.PytestModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sphinx_gherkindoc.parsers.pytest_bdd.PytestModel</span></code></a></p>
+<p>Background model for Pytest-Bdd.</p>
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Background.steps">
+<em class="property">property </em><code class="sig-name descname">steps</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Background.steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the steps from the background.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.Step" title="sphinx_gherkindoc.parsers.pytest_bdd.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Example">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.pytest_bdd.</code><code class="sig-name descname">Example</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers/pytest_bdd.html#Example"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Example" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.PytestModel" title="sphinx_gherkindoc.parsers.pytest_bdd.PytestModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sphinx_gherkindoc.parsers.pytest_bdd.PytestModel</span></code></a></p>
+<p>Example model for Pytest-Bdd.</p>
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Example.table">
+<em class="property">property </em><code class="sig-name descname">table</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Example.table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Example table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.InlineTable" title="sphinx_gherkindoc.parsers.pytest_bdd.InlineTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">InlineTable</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Example.tags">
+<em class="property">property </em><code class="sig-name descname">tags</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Example.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an empty list of tags, as Pytest-Bdd does not support example tags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Feature">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.pytest_bdd.</code><code class="sig-name descname">Feature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_path</span></em>, <em class="sig-param"><span class="n">source_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers/pytest_bdd.html#Feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.PytestModel" title="sphinx_gherkindoc.parsers.pytest_bdd.PytestModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sphinx_gherkindoc.parsers.pytest_bdd.PytestModel</span></code></a></p>
+<p>Feature model for Pytest-Bdd.</p>
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Feature.background">
+<em class="property">property </em><code class="sig-name descname">background</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Feature.background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the background for the feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.Background" title="sphinx_gherkindoc.parsers.pytest_bdd.Background"><code class="xref py py-class docutils literal notranslate"><span class="pre">Background</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Feature.examples">
+<em class="property">property </em><code class="sig-name descname">examples</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Feature.examples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return feature-level examples, if any exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.Example" title="sphinx_gherkindoc.parsers.pytest_bdd.Example"><code class="xref py py-class docutils literal notranslate"><span class="pre">Example</span></code></a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Feature.scenarios">
+<em class="property">property </em><code class="sig-name descname">scenarios</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Feature.scenarios" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all scenarios for the feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.Scenario" title="sphinx_gherkindoc.parsers.pytest_bdd.Scenario"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scenario</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.InlineTable">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.pytest_bdd.</code><code class="sig-name descname">InlineTable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">headings</span></em>, <em class="sig-param"><span class="n">rows</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.InlineTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Create new instance of InlineTable(headings, rows)</p>
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.InlineTable.headings">
+<em class="property">property </em><code class="sig-name descname">headings</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.InlineTable.headings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.InlineTable.rows">
+<em class="property">property </em><code class="sig-name descname">rows</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.InlineTable.rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.PytestModel">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.pytest_bdd.</code><code class="sig-name descname">PytestModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers/pytest_bdd.html#PytestModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.PytestModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sphinx_gherkindoc.parsers.base.BaseModel" title="sphinx_gherkindoc.parsers.base.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sphinx_gherkindoc.parsers.base.BaseModel</span></code></a></p>
+<p>Base Model for Pytest-Bdd objects.</p>
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.PytestModel.description">
+<em class="property">property </em><code class="sig-name descname">description</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.PytestModel.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return description as a list of lines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.PytestModel.keyword">
+<em class="property">property </em><code class="sig-name descname">keyword</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.PytestModel.keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the keyword for a given item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.PytestModel.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.PytestModel.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name for a given item, if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Scenario">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.pytest_bdd.</code><code class="sig-name descname">Scenario</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers/pytest_bdd.html#Scenario"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Scenario" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.PytestModel" title="sphinx_gherkindoc.parsers.pytest_bdd.PytestModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sphinx_gherkindoc.parsers.pytest_bdd.PytestModel</span></code></a></p>
+<p>Scenario model for Pytest-Bdd.</p>
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Scenario.examples">
+<em class="property">property </em><code class="sig-name descname">examples</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Scenario.examples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return examples from the scenario, if any exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.Example" title="sphinx_gherkindoc.parsers.pytest_bdd.Example"><code class="xref py py-class docutils literal notranslate"><span class="pre">Example</span></code></a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Scenario.steps">
+<em class="property">property </em><code class="sig-name descname">steps</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Scenario.steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return (non-background) steps for the scenario.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.Step" title="sphinx_gherkindoc.parsers.pytest_bdd.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Step">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx_gherkindoc.parsers.pytest_bdd.</code><code class="sig-name descname">Step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinx_gherkindoc/parsers/pytest_bdd.html#Step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.PytestModel" title="sphinx_gherkindoc.parsers.pytest_bdd.PytestModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sphinx_gherkindoc.parsers.pytest_bdd.PytestModel</span></code></a></p>
+<p>Step model for Pytest-Bdd.</p>
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Step.filename">
+<em class="property">property </em><code class="sig-name descname">filename</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Step.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the source file path for the step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Step.line">
+<em class="property">property </em><code class="sig-name descname">line</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Step.line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the line number from the source file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Step.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Step.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return text after keyword.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Step.step_type">
+<em class="property">property </em><code class="sig-name descname">step_type</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Step.step_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the step type/keyword.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Step.table">
+<em class="property">property </em><code class="sig-name descname">table</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Step.table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the step table, if present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="#sphinx_gherkindoc.parsers.pytest_bdd.InlineTable" title="sphinx_gherkindoc.parsers.pytest_bdd.InlineTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">InlineTable</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sphinx_gherkindoc.parsers.pytest_bdd.Step.text">
+<em class="property">property </em><code class="sig-name descname">text</code><a class="headerlink" href="#sphinx_gherkindoc.parsers.pytest_bdd.Step.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (non-table) multi-line text from a step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sample-gherkindoc.html" class="btn btn-neutral float-right" title="Sample Gherkin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sphinx_gherkindoc.html" class="btn btn-neutral float-left" title="sphinx_gherkindoc package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Lewis Franklin, Doug Philips
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/sphinx_gherkindoc/tree/c556c8d56dd4248cfac79745829ce74e4c21ade5">c556c8d56dd4248cfac79745829ce74e4c21ade5</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

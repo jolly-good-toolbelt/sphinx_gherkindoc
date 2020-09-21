@@ -1,0 +1,744 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sphinx-gherkindoc &mdash; sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation 3.6.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="sphinx_gherkindoc package" href="sphinx_gherkindoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sphinx_gherkindoc.html">sphinx_gherkindoc package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gherkindoc.parsers.html">sphinx_gherkindoc.parsers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sphinx_gherkindoc.parsers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.base">sphinx_gherkindoc.parsers.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.behave">sphinx_gherkindoc.parsers.behave module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.pytest_bdd">sphinx_gherkindoc.parsers.pytest_bdd module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.cli">sphinx_gherkindoc.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.files">sphinx_gherkindoc.files module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.glossary">sphinx_gherkindoc.glossary module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.utils">sphinx_gherkindoc.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.writer">sphinx_gherkindoc.writer module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc.html">Sample Gherkin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tests.basic.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.basic.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.basic_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.basic_pytest.feature-file.html#id1"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.descriptions_with_raw_rst.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Descriptions with raw rST</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.descriptions_with_raw_rst.feature-file.html#scenario-a-scenario-can-be-described-with-rst-too"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">A scenario can be described with rST too</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.tags.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.tags_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags_pytest.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc-integrated-background.html">Sample Gherkin With Integrated Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sample-gherkindoc-integrated-background-default.html">Default Behavior</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="default_format.integrated_backgrounds.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Integrated Backgrounds</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="default_format.integrated_backgrounds.feature-file.html#scenario-first-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">First Scenario</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="default_format.integrated_backgrounds.feature-file.html#scenario-second-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Second Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sample-gherkindoc-integrated-background-unique-format.html">Unique Background</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="unique_format.integrated_backgrounds_with_unique_format.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Integrated Backgrounds With Unique Format</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="unique_format.integrated_backgrounds_with_unique_format.feature-file.html#scenario-first-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">First Scenario</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="unique_format.integrated_backgrounds_with_unique_format.feature-file.html#scenario-second-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Second Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc-glossary.html">Sample Gherkin Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>sphinx-gherkindoc</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sphinx-gherkindoc">
+<h1>sphinx-gherkindoc<a class="headerlink" href="#sphinx-gherkindoc" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span></code> brings Gherkin goodness
+into the Sphinx/reStructuredText (rST) world.</p>
+<div class="section" id="why-should-i-use-it">
+<h2>Why should I use it?<a class="headerlink" href="#why-should-i-use-it" title="Permalink to this headline">¶</a></h2>
+<p><strong>Share your requirements with your larger team.</strong>
+Gherkin makes it easy for anyone to read requirements.
+Sphinx makes Gherkin pretty enough to be readable.
+<code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span></code> handles converting flat-text feature files
+into easy to read documents you won’t cringe to share with your larger team.</p>
+<p><strong>Easily see what steps you have and where you are using them.</strong>
+<code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span></code> can create a glossary of your steps.
+This helps makes it easy to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>find steps to reuse</p></li>
+<li><p>notice similar steps that might be duplicates or unintended variations</p></li>
+<li><p>see patterns that you might exploit to reduce the number of steps you have</p></li>
+<li><p>find out where and which feature files would be affected
+if a step’s wording or implementation changes</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="how-does-it-do-that">
+<h2>How does it do that?<a class="headerlink" href="#how-does-it-do-that" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span></code> recursively scans a given directory
+to find all the feature and markup files,
+and converts them into files
+that can be included in Sphinx-based documentation.
+This script was inspired by <code class="docutils literal notranslate"><span class="pre">sphinx-apidoc</span></code>
+which does a similar thing for source code.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tool only creates the rST inputs for a sphinx document run,
+you still need to fit these files
+in to your larger documentation building process yourself.</p>
+</div>
+<p>For specific details on the command line options,
+please consult the <code class="docutils literal notranslate"><span class="pre">--help</span></code> output.
+Most command line options mirror their counterpart in <code class="docutils literal notranslate"><span class="pre">sphinx-apidoc</span></code>.</p>
+<p>For the most basic usage, an input (<code class="docutils literal notranslate"><span class="pre">&lt;gherkin_path&gt;</span></code>)
+and output (<code class="docutils literal notranslate"><span class="pre">&lt;output_path&gt;</span></code>) path must be provided.
+The files put in to the <code class="docutils literal notranslate"><span class="pre">&lt;output_path&gt;</span></code>
+can be incorporated into any larger documentation,
+created by any means.</p>
+<p>Additionally, a list of <code class="docutils literal notranslate"><span class="pre">fnmatch</span></code>-compatible patterns can be added
+to the command line,
+to indicate directories to be excluded from processing.</p>
+<p>One notable addition is the step glossary(<code class="docutils literal notranslate"><span class="pre">-G</span></code>, <code class="docutils literal notranslate"><span class="pre">--step-glossary</span></code>).
+The step glossary command line option causes <code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span></code>
+to create the named file in the <code class="docutils literal notranslate"><span class="pre">&lt;output_path&gt;</span></code> directory.
+The step glossary content is formatted into two lists:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A list of all the steps found, in alphabetical order.
+Each item in this list is a link to its details in the second list.</p></li>
+<li><p>A list of the steps showing the file names and line numbers
+where they are used.
+This list is in order by the most number of uses first.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="how-are-my-files-converted">
+<h2>How are my files converted?<a class="headerlink" href="#how-are-my-files-converted" title="Permalink to this headline">¶</a></h2>
+<p>When scanning the <code class="docutils literal notranslate"><span class="pre">&lt;gherkin_path&gt;</span></code> directory tree,
+<code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span></code> will do the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Feature files found
+are processed into rST files in the <code class="docutils literal notranslate"><span class="pre">&lt;output_path&gt;</span></code> directory.</p></li>
+<li><p>Directories will be converted to Sphinx Table of Contents (TOC) files that
+link to any feature files in the same directory,
+and to any TOC files from direct subdirectories.</p></li>
+<li><p>Any rST files found in a directory have their contents copied
+to the front of the TOC file for that directory.
+If more than one rST file is found in a directory,
+they are processed in sort order.</p></li>
+<li><p>If no rST files are found in a directory,
+then a header for the TOC is created based
+on the contents of a <code class="docutils literal notranslate"><span class="pre">display_name.txt</span></code> file, if present,
+or the name of the directory.</p></li>
+<li><p>Any MarkDown (md) files are referenced
+from the TOC file for the directory they are in.</p></li>
+<li><p>Directories with no feature, rST, or md files are pruned,
+recursively upwards.</p></li>
+</ul>
+</div></blockquote>
+<p>The meat’n’potatoes will be your feature files.
+Put rST files next to your feature files
+to present context and additional helpful material.
+If any rST files are in the same directory,
+they should also contain any appropriate headers
+and other such formatting.
+<code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span></code> will only create (minimal) headers when
+there are no rST files present at all.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Disclaimer: This <cite>is not</cite> a tutorial on how to use or configure Sphinx.
+It <cite>is</cite> some common ways you can use <code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span></code>
+as part of your documentation generation.
+Reminder if you skipped all that stuff above:
+<code class="docutils literal notranslate"><span class="pre">--help</span></code> will show you the default values
+when command line options aren’t used.</p>
+<p>Conventions - Sphinx-based document production usually uses two directories:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_docs</span></code> - the working directory where we put all the rST files
+from the various tools as we are building documents.
+This directory shoud not be checked in to version control
+and should only contain files created by a documentation run.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs</span></code> - the output directory for a documentation run.
+For example, this is where <code class="docutils literal notranslate"><span class="pre">index.html</span></code> is found
+when building HTML docs, etc.
+This directory should not be checked in to version control
+as it contains only derived and processed files.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic">
+<li><p>Convert feature files to rST;
+process all feature and document files
+in/under <code class="docutils literal notranslate"><span class="pre">feature/root/directory-here</span></code> into the <code class="docutils literal notranslate"><span class="pre">_docs</span></code> directory
+using all the defaults:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">gherkindoc</span> <span class="n">feature</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">directory</span><span class="o">-</span><span class="n">here</span> <span class="n">_docs</span>
+</pre></div>
+</div>
+</li>
+<li><p>Same as above,
+but also create a step glossary file <code class="docutils literal notranslate"><span class="pre">my_step_glossary</span></code> in <code class="docutils literal notranslate"><span class="pre">_docs</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">gherkindoc</span> <span class="o">-</span><span class="n">G</span> <span class="n">my_step_glossary</span> <span class="n">feature</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">directory</span><span class="o">-</span><span class="n">here</span> <span class="n">_docs</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>3. Experiment!
+Once you have the 2nd step working
+and integrated in to your document building process,
+you may find you want to tweak the results some.
+It’s a lot easier to do that <cite>after</cite> you have the basic process working.
+Experiment with the other optional parameters
+to get the effect(s) you want.</p>
+</div>
+<div class="section" id="special-instructions-for-user-integrated-functionality">
+<h2>Special Instructions for User Integrated Functionality<a class="headerlink" href="#special-instructions-for-user-integrated-functionality" title="Permalink to this headline">¶</a></h2>
+<p>There are certain parts of <code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span></code>
+that can be controlled by external, user defined code.
+This can be done via a plugin or command-line argument.</p>
+<p>Here are the places where this can be used:</p>
+<ul class="simple">
+<li><p>Any tag or step can be converted into an anonymous link.
+The converter needs to be a single function
+that accepts a single string parameter
+(the tag or full step with keyword)
+and returns a URL if the entry should include a link
+or an empty string if not.
+Note that, in the case of steps,
+only the step text after the keyword
+will be converted into a link.
+In addition to examples below,
+there is legacy support for a <code class="docutils literal notranslate"><span class="pre">url</span></code> plugin key
+that is equivalent to the <code class="docutils literal notranslate"><span class="pre">tag_url</span></code> key.</p></li>
+<li><p>Directory names can be converted into display names
+similarly to how <code class="docutils literal notranslate"><span class="pre">display_name.txt</span></code> works.
+This converter also needs to be a single function
+that accepts a single string parameter, the directory name,
+and returns a display name string for that directory.</p></li>
+</ul>
+<p>In order to register the plugin for a <code class="docutils literal notranslate"><span class="pre">poetry</span></code>-based project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">tools</span><span class="o">.</span><span class="n">poetry</span><span class="o">.</span><span class="n">plugins</span><span class="o">.</span><span class="s2">&quot;parsers&quot;</span><span class="p">]</span>
+<span class="n">tag_url</span> <span class="o">=</span> <span class="s2">&quot;my_custom_library.parse:optional_url_from_tag&quot;</span>
+<span class="n">step_url</span> <span class="o">=</span> <span class="s2">&quot;my_custom_library.parse:optional_url_from_step&quot;</span>
+<span class="n">dir_display_name</span> <span class="o">=</span> <span class="s2">&quot;my_custom_library.parse:optional_display_name_from_dir&quot;</span>
+</pre></div>
+</div>
+<p>In order to register the plugin for a <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>-based project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span>
+    <span class="o">...</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;parsers&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;tag_url = my_custom_library.parse:optional_url_from_tag&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;step_url = my_custom_library.parse:optional_url_from_step&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dir_display_name = my_custom_library.parse:optional_display_name_from_dir&#39;</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>In order to use the parser via command line,
+the <code class="docutils literal notranslate"><span class="pre">--url_from-tag</span></code> and <code class="docutils literal notranslate"><span class="pre">--display-name-from-dir</span></code> flags should be used.
+The provided string should be be formatted <code class="docutils literal notranslate"><span class="pre">&lt;library&gt;:&lt;method_name&gt;</span></code></p>
+</div>
+<div class="section" id="filtering-included-features-scenarios-by-tag">
+<h2>Filtering Included Features/Scenarios By Tag<a class="headerlink" href="#filtering-included-features-scenarios-by-tag" title="Permalink to this headline">¶</a></h2>
+<p>If you’d like to build documentation for only a subset of features/scenarios,
+you can include and exclude them by tags.</p>
+<p>Just use the <code class="docutils literal notranslate"><span class="pre">--include-tags</span></code> and/or <code class="docutils literal notranslate"><span class="pre">--exclude-tags</span></code> flags.
+Run <code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span> <span class="pre">--help</span></code> for usage info.</p>
+</div>
+<div class="section" id="formatting-options">
+<h2>Formatting Options<a class="headerlink" href="#formatting-options" title="Permalink to this headline">¶</a></h2>
+<p>If you connect a <code class="docutils literal notranslate"><span class="pre">.css</span></code> file to your generated documentation,
+via the <code class="docutils literal notranslate"><span class="pre">_static</span></code> folder that is supported by Sphinx,
+you can make use of certain classes to format parts of the Gherkin
+however you so choose!</p>
+<p>Here are the available CSS classes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-step-keyword</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-feature-keyword</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-feature-content</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-feature-description</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-background-keyword</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-background-content</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-scenario-keyword</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-scenario-content</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-scenario-description</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-scenario-outline-keyword</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-scenario-outline-content</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-scenario-outline-description</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-examples-keyword</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-examples-content</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gherkin-tag-keyword</span></code></p></li>
+</ul>
+<p>Example <code class="docutils literal notranslate"><span class="pre">.css</span></code> File:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">step</span><span class="o">-</span><span class="n">keyword</span> <span class="p">{</span>
+    <span class="n">font</span><span class="o">-</span><span class="n">weight</span><span class="p">:</span> <span class="n">bold</span><span class="p">;</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">red</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">feature</span><span class="o">-</span><span class="n">keyword</span><span class="p">,</span> <span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">background</span><span class="o">-</span><span class="n">keyword</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">yellow</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">feature</span><span class="o">-</span><span class="n">content</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">green</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">feature</span><span class="o">-</span><span class="n">description</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">blue</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">scenario</span><span class="o">-</span><span class="n">keyword</span><span class="p">,</span> <span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">scenario</span><span class="o">-</span><span class="n">outline</span><span class="o">-</span><span class="n">keyword</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">indigo</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">scenario</span><span class="o">-</span><span class="n">content</span><span class="p">,</span> <span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">scenario</span><span class="o">-</span><span class="n">outline</span><span class="o">-</span><span class="n">content</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">violet</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">scenario</span><span class="o">-</span><span class="n">description</span><span class="p">,</span> <span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">scenario</span><span class="o">-</span><span class="n">outline</span><span class="o">-</span><span class="n">description</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">purple</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">examples</span><span class="o">-</span><span class="n">keyword</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">gold</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">examples</span><span class="o">-</span><span class="n">content</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">goldenrod</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">.</span><span class="n">gherkin</span><span class="o">-</span><span class="n">tag</span><span class="o">-</span><span class="n">keyword</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">salmon</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your <code class="docutils literal notranslate"><span class="pre">.css</span></code> can have any name. As long as it is in the <code class="docutils literal notranslate"><span class="pre">_static</span></code> folder,
+Sphinx will integrate it into the generated HTML.
+Sphinx officially documents <a class="reference external" href="https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.add_css_file">adding a CSS file via the Application API</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="beyond-the-quick-start">
+<h1>Beyond The Quick Start<a class="headerlink" href="#beyond-the-quick-start" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-use-it-module-documentation">
+<span id="api-documentation"></span><h2>How To Use It - Module Documentation<a class="headerlink" href="#how-to-use-it-module-documentation" title="Permalink to this headline">¶</a></h2>
+<p>For users of this package, the nitty gritty coding and configuration details.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sphinx_gherkindoc.html">sphinx_gherkindoc package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gherkindoc.parsers.html">sphinx_gherkindoc.parsers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sphinx_gherkindoc.parsers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.base">sphinx_gherkindoc.parsers.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.behave">sphinx_gherkindoc.parsers.behave module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sphinx_gherkindoc.parsers.html#module-sphinx_gherkindoc.parsers.pytest_bdd">sphinx_gherkindoc.parsers.pytest_bdd module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.cli">sphinx_gherkindoc.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.files">sphinx_gherkindoc.files module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.glossary">sphinx_gherkindoc.glossary module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.utils">sphinx_gherkindoc.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx_gherkindoc.html#module-sphinx_gherkindoc.writer">sphinx_gherkindoc.writer module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="command-line-utility-documentation">
+<span id="cli-docs"></span><h1>Command-Line/Utility Documentation<a class="headerlink" href="#command-line-utility-documentation" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">sphinx_gherkindoc</span></code> supplies command-line utilities:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx-gherkindoc</span></code>: Convert a directory-tree of Gherkin Feature files to
+rST files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx-gherkinconfig</span></code>: Emit a customized version of the sample sphinx
+config file.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the <code class="docutils literal notranslate"><span class="pre">--help</span></code> flag for full command arguments.</p>
+</div>
+</div>
+<div class="section" id="sample-gherkin">
+<h1>Sample Gherkin<a class="headerlink" href="#sample-gherkin" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc.html">Sample Gherkin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tests.basic.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.basic.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.basic_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.basic_pytest.feature-file.html#id1"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.descriptions_with_raw_rst.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Descriptions with raw rST</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.descriptions_with_raw_rst.feature-file.html#scenario-a-scenario-can-be-described-with-rst-too"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">A scenario can be described with rST too</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-outline-test-a-scenario-outline"><span class="gherkin-scenario-outline-keyword">Scenario Outline:</span> <span class="gherkin-scenario-outline-content">Test a Scenario Outline</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#examples"><span class="gherkin-examples-keyword">Examples:</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-text-and-table-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Text and Table Scenario</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-normal-scenarios-with-add-on-steps-and-but"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Normal scenarios with add on steps (And, But)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.nobackground_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.tags.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.tags_pytest.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags_pytest.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.tags_pytest.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc-integrated-background.html">Sample Gherkin With Integrated Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sample-gherkindoc-integrated-background-default.html">Default Behavior</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="default_format.integrated_backgrounds.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Integrated Backgrounds</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="default_format.integrated_backgrounds.feature-file.html#scenario-first-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">First Scenario</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="default_format.integrated_backgrounds.feature-file.html#scenario-second-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Second Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sample-gherkindoc-integrated-background-unique-format.html">Unique Background</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="unique_format.integrated_backgrounds_with_unique_format.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Integrated Backgrounds With Unique Format</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="unique_format.integrated_backgrounds_with_unique_format.feature-file.html#scenario-first-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">First Scenario</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="unique_format.integrated_backgrounds_with_unique_format.feature-file.html#scenario-second-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Second Scenario</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="sample-gherkin-glossary">
+<h1>Sample Gherkin Glossary<a class="headerlink" href="#sample-gherkin-glossary" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc-glossary.html">Sample Gherkin Glossary</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="maintainer-s-documentation">
+<h1>Maintainer’s Documentation<a class="headerlink" href="#maintainer-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sphinx_gherkindoc.html" class="btn btn-neutral float-right" title="sphinx_gherkindoc package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Lewis Franklin, Doug Philips
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/sphinx_gherkindoc/tree/c556c8d56dd4248cfac79745829ce74e4c21ade5">c556c8d56dd4248cfac79745829ce74e4c21ade5</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+.. role:: gherkin-step-keyword
+.. role:: gherkin-step-content
+.. role:: gherkin-feature-description
+.. role:: gherkin-scenario-description
+.. role:: gherkin-feature-keyword
+.. role:: gherkin-feature-content
+.. role:: gherkin-background-keyword
+.. role:: gherkin-background-content
+.. role:: gherkin-scenario-keyword
+.. role:: gherkin-scenario-content
+.. role:: gherkin-scenario-outline-keyword
+.. role:: gherkin-scenario-outline-content
+.. role:: gherkin-examples-keyword
+.. role:: gherkin-examples-content
+.. role:: gherkin-tag-keyword
+.. role:: gherkin-tag-content
+
+:gherkin-feature-keyword:`Feature:` :gherkin-feature-content:`Testing Sphinx Writer`
+====================================================================================
+
+
+    Test the ability to write Gherkin data to a SphinxWriter object
+
+
+:gherkin-examples-keyword:`Examples:`
+-------------------------------------
+
+.. csv-table::
+    :header: "item"
+    :quote: “
+
+    “apple“
+    “tree“
+    “dog“
+
+:gherkin-background-keyword:`Background:`
+-----------------------------------------
+
+| :gherkin-step-keyword:`Given` that this file exists
+
+:gherkin-scenario-keyword:`Scenario:` :gherkin-scenario-content:`Test a Scenario`
+---------------------------------------------------------------------------------
+
+.. pull-quote::
+
+    :gherkin-tag-keyword:`Tagged:` JIRA-1234, quarantined
+
+| :gherkin-step-keyword:`Given` a test feature
+| :gherkin-step-keyword:`When` the suite reaches a scenario
+| :gherkin-step-keyword:`Then` the file is converted into rST
+
+:gherkin-scenario-outline-keyword:`Scenario Outline:` :gherkin-scenario-outline-content:`Test a Scenario Outline`
+-----------------------------------------------------------------------------------------------------------------
+
+| :gherkin-step-keyword:`Given` I put **\<thing\>** in a blender
+| :gherkin-step-keyword:`When` I turn the blender on
+| :gherkin-step-keyword:`Then` it should transform into **\<other thing\>**
+
+:gherkin-examples-keyword:`Examples:`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. csv-table::
+    :header: "thing", "other thing"
+    :quote: “
+
+    “apple“, “apple sauce“
+    “banana“, “smoothie“
+
+:gherkin-scenario-keyword:`Scenario:` :gherkin-scenario-content:`Text and Table Scenario`
+-----------------------------------------------------------------------------------------
+
+| :gherkin-step-keyword:`Given` step text
+
+::
+
+    Lorum ipsum solor sit amet.
+
+| :gherkin-step-keyword:`When` the suite reaches a scenario table
+
+    .. csv-table::
+        :header: "name", "department"
+        :quote: “
+
+        “Barry“, “Beer Cans“
+        “Pudey“, “Silly Walks“
+        “Two-Lumps“, “Silly Walks“
+
+| :gherkin-step-keyword:`Then` the file is converted into rST
+
+:gherkin-scenario-keyword:`Scenario:` :gherkin-scenario-content:`Normal scenarios with add on steps (And, But)`
+---------------------------------------------------------------------------------------------------------------
+
+| :gherkin-step-keyword:`Given` something
+| :gherkin-step-keyword:`And` something else
+| :gherkin-step-keyword:`When` something happens
+| :gherkin-step-keyword:`Then` something happened
+| :gherkin-step-keyword:`And` something else also happened
+| :gherkin-step-keyword:`And` another thing happened
+
+:gherkin-scenario-keyword:`Scenario:` :gherkin-scenario-content:`Indentation is ignored when any step in the scenario has text or a table`
+------------------------------------------------------------------------------------------------------------------------------------------
+
+| :gherkin-step-keyword:`Given` a step with some text
+
+::
+
+    Here be that said text!
+
+| :gherkin-step-keyword:`And` an And step with some text too
+
+::
+
+    Hello again!
+
+| :gherkin-step-keyword:`And` how about a table in there too
+
+    .. csv-table::
+        :header: "position", "name"
+        :quote: “
+
+        “first“, “Who“
+        “second“, “What“
+        “third“, “I don't know“
+
+| :gherkin-step-keyword:`When` the fantasy has ended
+| :gherkin-step-keyword:`And` all the children are gone
+| :gherkin-step-keyword:`Then` something deep inside me
+
+::
+
+    Helps me to carry on
+
+| :gherkin-step-keyword:`And` Encarnaciooooon
+| :gherkin-step-keyword:`And` doodle-doodle-doodle-doo
+

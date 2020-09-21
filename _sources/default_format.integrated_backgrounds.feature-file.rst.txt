@@ -1,0 +1,40 @@
+.. role:: gherkin-step-keyword
+.. role:: gherkin-step-content
+.. role:: gherkin-feature-description
+.. role:: gherkin-scenario-description
+.. role:: gherkin-feature-keyword
+.. role:: gherkin-feature-content
+.. role:: gherkin-background-keyword
+.. role:: gherkin-background-content
+.. role:: gherkin-scenario-keyword
+.. role:: gherkin-scenario-content
+.. role:: gherkin-scenario-outline-keyword
+.. role:: gherkin-scenario-outline-content
+.. role:: gherkin-examples-keyword
+.. role:: gherkin-examples-content
+.. role:: gherkin-tag-keyword
+.. role:: gherkin-tag-content
+
+:gherkin-feature-keyword:`Feature:` :gherkin-feature-content:`Integrated Backgrounds`
+=====================================================================================
+
+:gherkin-scenario-keyword:`Scenario:` :gherkin-scenario-content:`First Scenario`
+--------------------------------------------------------------------------------
+
+| :gherkin-step-keyword:`Given` a step that is from the background
+| :gherkin-step-keyword:`But` the step actually appears with the scenario steps in the sphinx docs
+| :gherkin-step-keyword:`Given` a step that is defined in the scenario
+| :gherkin-step-keyword:`And` one more for good measure
+| :gherkin-step-keyword:`When` I use sphinx-gherkindoc with the --integrate-background flag
+| :gherkin-step-keyword:`Then` the background steps should be integrated with the scenario steps
+
+:gherkin-scenario-keyword:`Scenario:` :gherkin-scenario-content:`Second Scenario`
+---------------------------------------------------------------------------------
+
+| :gherkin-step-keyword:`Given` a step that is from the background
+| :gherkin-step-keyword:`But` the step actually appears with the scenario steps in the sphinx docs
+| :gherkin-step-keyword:`Given` a step from scenario 2 that is defined in the scenario
+| :gherkin-step-keyword:`And` one more from scenario 2 for good measure
+| :gherkin-step-keyword:`When` I use sphinx-gherkindoc with the --integrate-background flag
+| :gherkin-step-keyword:`Then` the background steps should be integrated with the scenario steps
+
