@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sphinx_gherkindoc"
-version = "3.5.1"
+version = "3.6.0"
 description = "A tool to convert Gherkin into Sphinx documentation"
 authors = ["Lewis Franklin <lewis.franklin@gmail.com>", "Doug Philips <dgou@mac.com>"]
 readme = "README.rst"
@@ -18,16 +18,13 @@ recommonmark = ">=0.4.0"
 typing_extensions = { version = "^3.7.4", python = "<3.8" }
 
 [tool.poetry.dev-dependencies]
-pre-commit = "^1.15"
-ghp-import = "^0.5.5"
-tomlkit = "^0.5.3"
 sphinx-autodoc-typehints = "^1.6"
-pytest = "^4.6"
 # branch: scenario-descriptions
 # This branch is still active, so we lock to a specific commit in the branch
 # to prevent unexpected issues if that branch is pushed to.
 pytest-bdd = {git = "https://github.com/rbcasperson/pytest-bdd.git", rev = "b3d464bef1af2accbef493c6be85fc6232c318ed"}
 pytest-cov = "^2.7"
+jgt_tools = "^0.4.0"
 
 [tool.poetry.scripts]
 sphinx-gherkindoc = 'sphinx_gherkindoc.cli:main'
@@ -36,3 +33,18 @@ sphinx-gherkinconfig = 'sphinx_gherkindoc.cli:config'
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+
+[tool.jgt_tools]
+build_docs_commands = [
+    "echo 'Building {PACKAGE_NAME} docs'",
+    "find . -maxdepth 1 -name \\*.rst -exec cp {{}} {DOCS_WORKING_DIRECTORY} \\;",
+    "cp {BASE_DIR}/.jgt_tools.index {BASE_DIR}/{DOCS_WORKING_DIRECTORY}/index.rst",
+    "poetry run sphinx-apidoc --output-dir {DOCS_WORKING_DIRECTORY} --no-toc --force --module-first {PACKAGE_NAME} '*sample-conf*'",
+    "poetry run sphinx-gherkindoc --doc-project 'Sample Gherkin' --toc-name sample-gherkindoc --step-glossary-name sample-gherkindoc-glossary --parser pytest_bdd --raw-descriptions tests {DOCS_WORKING_DIRECTORY}",
+    "poetry run sphinx-gherkindoc --doc-project 'Sample Gherkin With Integrated Background' --toc-name sample-gherkindoc-integrated-background-default tests_for_integrated_background/default_format {DOCS_WORKING_DIRECTORY} --integrate-background",
+    "poetry run sphinx-gherkindoc --doc-project 'Sample Gherkin With Integrated Background And A Unique Background Step Format' --toc-name sample-gherkindoc-integrated-background-unique-format tests_for_integrated_background/unique_format {DOCS_WORKING_DIRECTORY} --integrate-background --background-step-format '{{}} *(Background)*'",
+    "poetry run sphinx-build -c {DOCS_WORKING_DIRECTORY} -aEW {DOCS_WORKING_DIRECTORY} {DOCS_OUTPUT_DIRECTORY}"
+]
+run_tests_commands = [
+    "poetry run pytest -vv --cov sphinx_gherkindoc --cov-report term-missing"
+]
