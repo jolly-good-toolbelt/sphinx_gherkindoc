@@ -1,0 +1,38 @@
+name: pr-checks
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  pr-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6
+
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@v2
+        id: poetry-cache
+        with:
+          path: ~/.cache/pypoetry
+          key: poetry-3.6-${{ hashFiles('poetry.lock', 'pyproject.toml') }}
+          restore-keys: poetry-3.6-
+
+      - name: Install App and Dependencies
+        if: steps.poetry-cache.outputs.cache-hit != 'true'
+        run: python env_setup.py
+
+      - name: Run Checks
+        run: |
+          poetry run self-check --check-version
+          poetry run run-tests
+          poetry run build-docs
