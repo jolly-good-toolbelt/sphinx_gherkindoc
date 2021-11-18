@@ -260,8 +260,9 @@ def _scenario_if_included(
     ):
         return None
 
-    # Only include examples tables that are included
-    if scenario_examples:
+    # Only include examples tables that are included,
+    # and only overwrite the examples attribute on the `scenario` object if necessary.
+    if scenario_examples and len(scenario_examples) != len(included_examples):
         scenario.examples = included_examples
 
     return scenario

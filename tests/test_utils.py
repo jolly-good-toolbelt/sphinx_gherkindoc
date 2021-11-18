@@ -500,5 +500,5 @@ def test_get_all_included_scenarios(
         actual_scenario = actual_scenarios[i]
 
         assert actual_scenario.tags == expected_scenario.tags, err_msg
-        if hasattr(expected_scenario, "tags"):
-            assert actual_scenario.tags == expected_scenario.tags, err_msg
+        if hasattr(expected_scenario, "examples"):
+            assert actual_scenario.examples == expected_scenario.examples, err_msg
