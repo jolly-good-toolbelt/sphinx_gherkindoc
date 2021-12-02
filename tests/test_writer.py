@@ -158,4 +158,4 @@ def test_filter_by_tags_logic_is_triggered(tags_feature_file):
 
 def test_empty_feature_to_rst(empty_feature_file):
     results = writer.feature_to_rst(empty_feature_file, empty_feature_file.parent)
-    assert results == None
+    assert results is None

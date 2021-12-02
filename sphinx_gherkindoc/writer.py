@@ -368,8 +368,8 @@ def feature_to_rst(
     # but not having scenarios in it,
     # only exclude the feature (and its description, etc)
     # if include/exclude logic has been activated.
-    # or in the event that there is an enmpty feature file.
-    if (not included_scenarios and (include_tags or exclude_tags)) or not included_scenarios:
+    # or in the event that there is an empty feature file.
+    if not included_scenarios:
         return None
 
     section(1, feature)

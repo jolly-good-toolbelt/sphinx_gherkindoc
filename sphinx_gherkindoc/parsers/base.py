@@ -22,4 +22,4 @@ class BaseModel:
             # Workaround for current pytest-bdd release (3.2.1),
             # which does not have a scenario.description attribute.
             return getattr(self._data, key, None)
-        return getattr(self._data, key)
+        return getattr(self._data, key, [])
