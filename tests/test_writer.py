@@ -37,6 +37,15 @@ def tags_feature_file(tmp_path):
     return tags_feature
 
 
+@pytest.fixture()
+def empty_feature_file(tmp_path):
+    empty_feature = tmp_path / "empty.feature"
+    test_dir = pathlib.Path(__file__).parent
+    with open(test_dir / "empty.feature") as feature_fo:
+        empty_feature.write_text(feature_fo.read())
+    return empty_feature
+
+
 # writer.toctree
 def test_toctree(feature_tree):
     expected_results = [
@@ -145,3 +154,8 @@ def test_filter_by_tags_logic_is_triggered(tags_feature_file):
         include_tags=["some-tag-no-scenario-or-feature-has"],
     )
     assert results is None
+
+
+def test_empty_feature_to_rst(empty_feature_file):
+    results = writer.feature_to_rst(empty_feature_file, empty_feature_file.parent)
+    assert results == None

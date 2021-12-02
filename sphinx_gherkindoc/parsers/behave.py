@@ -41,7 +41,9 @@ class Feature(BehaveModel):
     @property
     def scenarios(self) -> List[Scenario]:
         """Wrap Behave Scenarios to include description processing."""
-        return [Scenario(s) for s in self._data.scenarios]
+        if hasattr(self._data, "scenarios"):
+            return [Scenario(s) for s in self._data.scenarios]
+        return []
 
     @property
     def examples(self) -> Union[behave.model.Examples, List]:
