@@ -39,7 +39,7 @@ def empty_non_feature(tmp_path):
 
 @pytest.fixture()
 def empty_feature(tmp_path):
-    return read_file(tmp_path, "empty.txt")
+    return read_file(tmp_path, "empty.feature")
 
 @pytest.fixture()
 def commented_feature(tmp_path):
