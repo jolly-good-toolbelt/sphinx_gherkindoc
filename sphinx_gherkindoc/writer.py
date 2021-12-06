@@ -362,14 +362,15 @@ def feature_to_rst(
             f" options are: {list(parsers.keys())}"
         )
     feature = feature_class(root_path, source_path)
+    if not feature.exists:
+        return None
 
     included_scenarios = get_all_included_scenarios(feature, include_tags, exclude_tags)
     # In the event of a feature existing,
     # but not having scenarios in it,
     # only exclude the feature (and its description, etc)
     # if include/exclude logic has been activated.
-    # or in the event that there is an empty feature file.
-    if not included_scenarios:
+    if not included_scenarios and (include_tags or exclude_tags):
         return None
 
     section(1, feature)

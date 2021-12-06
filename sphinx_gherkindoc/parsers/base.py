@@ -22,4 +22,9 @@ class BaseModel:
             # Workaround for current pytest-bdd release (3.2.1),
             # which does not have a scenario.description attribute.
             return getattr(self._data, key, None)
-        return getattr(self._data, key, [])
+        return getattr(self._data, key)
+
+    @property
+    def exists(self) -> bool:
+        """Return True if the feature exists."""
+        return self._data is not None
