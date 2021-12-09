@@ -1,7 +1,7 @@
 name: publish-library
 on:
   push:
-    branches: [main]
+    branches: [master]
 jobs:
   publish-library:
     runs-on: ubuntu-latest
