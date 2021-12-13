@@ -168,7 +168,7 @@ def test_empty_non_feature(empty_non_feature):
     results = writer.feature_to_rst(empty_non_feature, empty_non_feature.parent)
     assert results is None
 
-def test_empty_non_feature(commented_feature):
+def test_commented_feature(commented_feature):
     results = writer.feature_to_rst(commented_feature, commented_feature.parent)
     assert results is None
 
