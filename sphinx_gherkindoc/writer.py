@@ -362,6 +362,8 @@ def feature_to_rst(
             f" options are: {list(parsers.keys())}"
         )
     feature = feature_class(root_path, source_path)
+    if not feature.exists:
+        return None
 
     included_scenarios = get_all_included_scenarios(feature, include_tags, exclude_tags)
     # In the event of a feature existing,
