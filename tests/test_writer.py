@@ -18,6 +18,7 @@ def feature_tree(tmp_path_factory):
     (subdir / "another_test.feature").touch()
     return root.resolve()
 
+
 def read_file(tmp_path, _file):
     basic_feature = tmp_path / _file
     test_dir = pathlib.Path(__file__).parent
@@ -25,25 +26,31 @@ def read_file(tmp_path, _file):
         basic_feature.write_text(feature_fo.read())
     return basic_feature
 
+
 @pytest.fixture()
 def feature_file(tmp_path):
     return read_file(tmp_path, "basic.feature")
+
 
 @pytest.fixture()
 def tags_feature_file(tmp_path):
     return read_file(tmp_path, "tags.feature")
 
+
 @pytest.fixture()
 def empty_non_feature(tmp_path):
     return read_file(tmp_path, "empty.txt")
+
 
 @pytest.fixture()
 def empty_feature(tmp_path):
     return read_file(tmp_path, "empty.feature")
 
+
 @pytest.fixture()
 def commented_feature(tmp_path):
     return read_file(tmp_path, "commented.feature")
+
 
 @pytest.fixture()
 def no_scenarios_feature(tmp_path):
@@ -164,13 +171,16 @@ def test_empty_feature(empty_feature):
     results = writer.feature_to_rst(empty_feature, empty_feature.parent)
     assert results is None
 
+
 def test_empty_non_feature(empty_non_feature):
     results = writer.feature_to_rst(empty_non_feature, empty_non_feature.parent)
     assert results is None
 
+
 def test_commented_feature(commented_feature):
     results = writer.feature_to_rst(commented_feature, commented_feature.parent)
     assert results is None
+
 
 def test_no_scenarios(no_scenarios_feature):
     results = writer.feature_to_rst(no_scenarios_feature, no_scenarios_feature.parent)
