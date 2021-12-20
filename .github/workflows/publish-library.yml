@@ -27,8 +27,7 @@ jobs:
           restore-keys: poetry-3.6-
 
       - name: Install App and Dependencies
-        if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: ./bootstrap.sh
+        run: poetry install
 
       - name: Publish Library
         run: poetry publish -u ${{ secrets.PYPI_USER }} -p ${{ secrets.PYPI_PASS }} --build

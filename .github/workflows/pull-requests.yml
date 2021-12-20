@@ -31,7 +31,7 @@ jobs:
 
       - name: Install App and Dependencies
         if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: ./bootstrap.sh
+        run: poetry install
 
       - name: Run Checks
         run: |
