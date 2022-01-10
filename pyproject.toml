@@ -24,7 +24,7 @@ sphinx-autodoc-typehints = "^1.6"
 # to prevent unexpected issues if that branch is pushed to.
 pytest-bdd = {git = "https://github.com/rbcasperson/pytest-bdd.git", rev = "b3d464bef1af2accbef493c6be85fc6232c318ed"}
 pytest-cov = "^2.7"
-jgt_tools = {git = "https://github.com/dsayling/jgt_tools", branch = "support-actions", extras = [ "env_setup", "run_tests" ]}
+jgt_tools = {version = "^0.5", extras = [ "env_setup", "run_tests" ]}
 
 [tool.poetry.scripts]
 sphinx-gherkindoc = 'sphinx_gherkindoc.cli:main'
