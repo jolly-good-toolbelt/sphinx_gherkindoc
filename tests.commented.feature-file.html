@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maintainer’s Documentation &mdash; sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation 3.6.2 documentation</title>
+  <title>Feature: &mdash; sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation 3.6.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Contributors" href="CONTRIBUTORS.html" />
-    <link rel="prev" title="Sample Gherkin Glossary" href="sample-gherkindoc-glossary.html" /> 
+    <link rel="next" title="Feature: Descriptions with raw rST" href="tests.descriptions_with_raw_rst.feature-file.html" />
+    <link rel="prev" title="Feature: Testing Sphinx Writer" href="tests.basic_pytest.feature-file.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -63,8 +63,8 @@
 </ul>
 </li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc.html">Sample Gherkin</a><ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="sample-gherkindoc.html">Sample Gherkin</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="tests.basic.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Testing Sphinx Writer</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#background"><span class="gherkin-background-keyword">Background:</span></a></li>
 <li class="toctree-l3"><a class="reference internal" href="tests.basic.feature-file.html#scenario-test-a-scenario"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Test a Scenario</span></a></li>
@@ -90,7 +90,7 @@
 <li class="toctree-l3"><a class="reference internal" href="tests.basic_pytest.feature-file.html#scenario-indentation-is-ignored-when-any-step-in-the-scenario-has-text-or-a-table"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">Indentation is ignored when any step in the scenario has text or a table</span></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="tests.commented.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><span class="gherkin-feature-keyword">Feature:</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="tests.descriptions_with_raw_rst.feature-file.html"><span class="gherkin-feature-keyword">Feature:</span> <span class="gherkin-feature-content">Descriptions with raw rST</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tests.descriptions_with_raw_rst.feature-file.html#scenario-a-scenario-can-be-described-with-rst-too"><span class="gherkin-scenario-keyword">Scenario:</span> <span class="gherkin-scenario-content">A scenario can be described with rST too</span></a></li>
 </ul>
@@ -144,10 +144,10 @@
 <li class="toctree-l1"><a class="reference internal" href="sample-gherkindoc-glossary.html">Sample Gherkin Glossary</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Maintainers</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Maintainer’s Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#top-level-scripts">Top-level scripts:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#jgt-tools-scripts">JGT Tools scripts:</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
@@ -167,9 +167,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Maintainer’s Documentation</li>
+          <li><a href="sample-gherkindoc.html">Sample Gherkin</a> &raquo;</li>
+      <li><span class="gherkin-feature-keyword">Feature:</span></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/MAINTAINER.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/tests.commented.feature-file.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -177,33 +178,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="maintainer-s-documentation">
-<h1>Maintainer’s Documentation<a class="headerlink" href="#maintainer-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Scripts and utilities for maintainers of this package.</p>
-<section id="top-level-scripts">
-<h2>Top-level scripts:<a class="headerlink" href="#top-level-scripts" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">bootstrap.sh</span></code> - downloads and runs the python bootstrap <code class="docutils literal notranslate"><span class="pre">env_setup.py</span></code>
-script from the <code class="docutils literal notranslate"><span class="pre">jgt_tools</span></code> GitHub repo,
-to set up your environment fully
-when you do not yet have <code class="docutils literal notranslate"><span class="pre">jgt_tools</span></code> installed in your virtual environment.</p></li>
-</ul>
-</div></blockquote>
-</section>
-<section id="jgt-tools-scripts">
-<h2>JGT Tools scripts:<a class="headerlink" href="#jgt-tools-scripts" title="Permalink to this headline">¶</a></h2>
-<p>This repo uses the scripts provided by <a class="reference external" href="https://jolly-good-toolbelt.github.io/jgt_tools/">jgt_tools</a>.
-See linked documentation for reference.</p>
-</section>
+  <section id="feature">
+<h1><span class="gherkin-feature-keyword">Feature:</span><a class="headerlink" href="#feature" title="Permalink to this headline">¶</a></h1>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="sample-gherkindoc-glossary.html" class="btn btn-neutral float-left" title="Sample Gherkin Glossary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="CONTRIBUTORS.html" class="btn btn-neutral float-right" title="Contributors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tests.basic_pytest.feature-file.html" class="btn btn-neutral float-left" title="Feature: Testing Sphinx Writer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tests.descriptions_with_raw_rst.feature-file.html" class="btn btn-neutral float-right" title="Feature: Descriptions with raw rST" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

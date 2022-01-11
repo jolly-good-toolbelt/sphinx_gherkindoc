@@ -32,7 +32,7 @@
 
 .. pull-quote::
 
-    :gherkin-tag-keyword:`Tagged:` JIRA-1234, quarantined
+    :gherkin-tag-keyword:`Tagged:` quarantined, JIRA-1234
 
 
         A scenario is quicker to write than a outline but less robust.

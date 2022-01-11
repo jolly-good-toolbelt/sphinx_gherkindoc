@@ -12,7 +12,10 @@ will format your Gherkin.
 
     tests.basic.feature-file
     tests.basic_pytest.feature-file
+    tests.commented.feature-file
     tests.descriptions_with_raw_rst.feature-file
+    tests.empty.feature-file
+    tests.no_scenarios.feature-file
     tests.nobackground_pytest.feature-file
     tests.tags.feature-file
     tests.tags_pytest.feature-file
