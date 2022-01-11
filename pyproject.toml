@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sphinx_gherkindoc"
-version = "3.6.1"
+version = "3.6.2"
 description = "A tool to convert Gherkin into Sphinx documentation"
 authors = ["Lewis Franklin <lewis.franklin@gmail.com>", "Doug Philips <dgou@mac.com>"]
 readme = "README.rst"
@@ -24,7 +24,7 @@ sphinx-autodoc-typehints = "^1.6"
 # to prevent unexpected issues if that branch is pushed to.
 pytest-bdd = {git = "https://github.com/rbcasperson/pytest-bdd.git", rev = "b3d464bef1af2accbef493c6be85fc6232c318ed"}
 pytest-cov = "^2.7"
-jgt_tools = "^0.5.0"
+jgt_tools = {version = "^0.5", extras = [ "env_setup", "run_tests" ]}
 
 [tool.poetry.scripts]
 sphinx-gherkindoc = 'sphinx_gherkindoc.cli:main'
