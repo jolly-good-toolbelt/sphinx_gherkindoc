@@ -1,9 +1,9 @@
 """Helper functions for writing rST files."""
 from collections import namedtuple
+from packaging import version
 from typing import List, Optional, Union
-import pathlib
 import importlib.metadata
-import packaging
+import pathlib
 
 import pytest_bdd.feature
 
@@ -135,9 +135,9 @@ class Feature(PytestModel):
     """Feature model for Pytest-Bdd."""
 
     def __init__(self, root_path: str, source_path: str):
-        pytest_bdd_version = packaging.version.parse(importlib.metadata.version("pytest-bdd"))
+        pytest_bdd_version = version.parse(importlib.metadata.version("pytest-bdd"))
 
-        if pytest_bdd_version >= packaging.version.parse("4.0.2"):
+        if pytest_bdd_version >= version.parse("4.0.2"):
             self._data = pytest_bdd.feature.parse_feature(
                 root_path, pathlib.Path(source_path).resolve().relative_to(root_path)
             )
