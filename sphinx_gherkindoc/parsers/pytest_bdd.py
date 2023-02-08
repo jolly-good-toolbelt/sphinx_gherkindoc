@@ -135,14 +135,14 @@ class Feature(PytestModel):
     """Feature model for Pytest-Bdd."""
 
     def __init__(self, root_path: str, source_path: str):
-        pytest_bdd_version = version.parse(importlib.metadata.version("pytest-bdd"))
+        self.pytest_bdd_version = version.parse(importlib.metadata.version("pytest-bdd"))
 
-        if pytest_bdd_version >= version.parse("4.0.2"):
-            self._data = pytest_bdd.feature.parse_feature(
+        if self.pytest_bdd_version < version.parse("4.0.2"):
+            self._data = pytest_bdd.feature.Feature(
                 root_path, pathlib.Path(source_path).resolve().relative_to(root_path)
             )
         else:
-            self._data = pytest_bdd.feature.Feature(
+            self._data = pytest_bdd.feature.parse_feature(
                 root_path, pathlib.Path(source_path).resolve().relative_to(root_path)
             )
 
@@ -160,6 +160,6 @@ class Feature(PytestModel):
     @property
     def examples(self) -> List[Optional[Example]]:
         """Return feature-level examples, if any exist."""
-        if self._data.examples.examples:
+        if self.pytest_bdd_version < version.parse("4.0.2") and self._data.examples.examples:
             return [Example(self._data.examples)]
         return []
