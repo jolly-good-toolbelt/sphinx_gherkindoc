@@ -133,17 +133,22 @@ class Feature(PytestModel):
     """Feature model for Pytest-Bdd."""
 
     def __init__(self, root_path: str, source_path: str):
-        print(f"Parsing: {pathlib.Path(source_path).resolve().relative_to(root_path)}")
+        relative_file_path = pathlib.Path(source_path).resolve().relative_to(root_path)
+
         # If the version of pytest-bdd implements the parse_feature method then use it
         pytest_bdd_parse_feature = getattr(pytest_bdd.feature, "parse_feature", None)
-        if callable(pytest_bdd_parse_feature):
-            self._data = pytest_bdd.feature.parse_feature(
-                root_path, pathlib.Path(source_path).resolve().relative_to(root_path)
-            )
-        else:
-            self._data = pytest_bdd.feature.Feature(
-                root_path, pathlib.Path(source_path).resolve().relative_to(root_path)
-            )
+        try:
+            if callable(pytest_bdd_parse_feature):
+                self._data = pytest_bdd.feature.parse_feature(
+                    root_path, relative_file_path
+                )
+            else:
+                self._data = pytest_bdd.feature.Feature(
+                    root_path, relative_file_path
+                )
+        except:
+            print(f"Failed to parse feature file: {relative_file_path}")
+            raise
 
     @property
     def scenarios(self) -> List[Scenario]:
