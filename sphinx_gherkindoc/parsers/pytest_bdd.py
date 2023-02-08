@@ -32,6 +32,8 @@ class PytestModel(BaseModel):
         )
         if keyword == "Scenario" and self._data.examples.examples:
             return "Scenario Outline"
+        elif keyword == "ScenarioTemplate":
+            return "Scenario"
         return keyword
 
     @property
