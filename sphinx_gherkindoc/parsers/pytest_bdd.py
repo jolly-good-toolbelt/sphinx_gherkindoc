@@ -30,9 +30,10 @@ class PytestModel(BaseModel):
         keyword = getattr(
             self._data, "keyword", self._data.__class__.__name__.rsplit(".", 1)[-1]
         )
-        if keyword == "Scenario" and self._data.examples.examples:
-            return "Scenario Outline"
-        elif keyword == "ScenarioTemplate":
+        # Match Scenario or ScenarioTemplate
+        if keyword.startswith("Scenario"):
+            if self._data.examples.examples:
+                return "Scenario Outline"
             return "Scenario"
         return keyword
 
