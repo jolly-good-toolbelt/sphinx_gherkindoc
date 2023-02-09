@@ -6,12 +6,12 @@ jobs:
   pr-checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.6.15
 
@@ -19,7 +19,7 @@ jobs:
         uses: ts-graphviz/setup-graphviz@v1
 
       - name: Install Poetry
-        run: pip install poetry
+        run: pip install poetry==1.1.15
 
       - name: Cache Poetry virtualenv
         uses: actions/cache@v2
