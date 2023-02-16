@@ -146,11 +146,11 @@ class Feature(PytestModel):
                     root_path, relative_file_path
                 )
             else:
-                self._data = pytest_bdd.feature.Feature(
-                    root_path, relative_file_path
-                )
+                self._data = pytest_bdd.feature.Feature(root_path, relative_file_path)
         except Exception as e:
-            raise ValueError(f"Failed to parse feature file: {relative_file_path}") from e
+            raise ValueError(
+                f"Failed to parse feature file: {relative_file_path}"
+            ) from e
 
     @property
     def scenarios(self) -> List[Scenario]:
