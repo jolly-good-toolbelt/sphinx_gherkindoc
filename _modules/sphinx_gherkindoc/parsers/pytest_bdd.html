@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sphinx_gherkindoc.parsers.pytest_bdd &mdash; sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation 3.6.2 documentation</title>
+  <title>sphinx_gherkindoc.parsers.pytest_bdd &mdash; sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation 3.6.3 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -28,7 +28,7 @@
             <a href="../../../index.html" class="icon icon-home"> sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation
           </a>
               <div class="version">
-                3.6.2
+                3.6.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -208,8 +208,11 @@
         <span class="n">keyword</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="n">keyword</span> <span class="o">==</span> <span class="s2">&quot;Scenario&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">examples</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;Scenario Outline&quot;</span>
+        <span class="c1"># Match Scenario or ScenarioTemplate</span>
+        <span class="k">if</span> <span class="n">keyword</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Scenario&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">examples</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Scenario Outline&quot;</span>
+            <span class="k">return</span> <span class="s2">&quot;Scenario&quot;</span>
         <span class="k">return</span> <span class="n">keyword</span>
 
     <span class="nd">@property</span>
@@ -311,9 +314,21 @@
     <span class="sd">&quot;&quot;&quot;Feature model for Pytest-Bdd.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">pytest_bdd</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span>
-            <span class="n">root_path</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="n">relative_file_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
+
+        <span class="c1"># If the version of pytest-bdd implements the parse_feature method then use it</span>
+        <span class="n">pytest_bdd_parse_feature</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">pytest_bdd</span><span class="o">.</span><span class="n">feature</span><span class="p">,</span> <span class="s2">&quot;parse_feature&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">pytest_bdd_parse_feature</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">pytest_bdd</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">parse_feature</span><span class="p">(</span>
+                    <span class="n">root_path</span><span class="p">,</span> <span class="n">relative_file_path</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">pytest_bdd</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="n">relative_file_path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Failed to parse feature file: </span><span class="si">{</span><span class="n">relative_file_path</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">scenarios</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Scenario</span><span class="p">]:</span>
@@ -329,7 +344,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">examples</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Return feature-level examples, if any exist.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">examples</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="s2">&quot;examples&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">examples</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">Example</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">examples</span><span class="p">)]</span>
         <span class="k">return</span> <span class="p">[]</span></div>
 </pre></div>
@@ -341,8 +356,8 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Lewis Franklin, Doug Philips.
-      <span class="build">Build<a href="https://github.com//github/tree/99a2d0f1acebe2c2bdc4570e7bd92ac173d58710">99a2d0f1acebe2c2bdc4570e7bd92ac173d58710</a>.
+    <p>&#169; Copyright 2023, Lewis Franklin, Doug Philips.
+      <span class="build">Build<a href="https://github.com//github/tree/58c454c95c2f17da24395c8db4a273b1aaa3c07f">58c454c95c2f17da24395c8db4a273b1aaa3c07f</a>.
       </span></p>
   </div>
 
