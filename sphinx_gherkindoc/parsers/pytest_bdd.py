@@ -30,8 +30,11 @@ class PytestModel(BaseModel):
         keyword = getattr(
             self._data, "keyword", self._data.__class__.__name__.rsplit(".", 1)[-1]
         )
-        if keyword == "Scenario" and self._data.examples.examples:
-            return "Scenario Outline"
+        # Match Scenario or ScenarioTemplate
+        if keyword.startswith("Scenario"):
+            if self._data.examples.examples:
+                return "Scenario Outline"
+            return "Scenario"
         return keyword
 
     @property
@@ -133,9 +136,21 @@ class Feature(PytestModel):
     """Feature model for Pytest-Bdd."""
 
     def __init__(self, root_path: str, source_path: str):
-        self._data = pytest_bdd.feature.Feature(
-            root_path, pathlib.Path(source_path).resolve().relative_to(root_path)
-        )
+        relative_file_path = pathlib.Path(source_path).resolve().relative_to(root_path)
+
+        # If the version of pytest-bdd implements the parse_feature method then use it
+        pytest_bdd_parse_feature = getattr(pytest_bdd.feature, "parse_feature", None)
+        try:
+            if callable(pytest_bdd_parse_feature):
+                self._data = pytest_bdd.feature.parse_feature(
+                    root_path, relative_file_path
+                )
+            else:
+                self._data = pytest_bdd.feature.Feature(root_path, relative_file_path)
+        except Exception as e:
+            raise ValueError(
+                f"Failed to parse feature file: {relative_file_path}"
+            ) from e
 
     @property
     def scenarios(self) -> List[Scenario]:
@@ -151,6 +166,6 @@ class Feature(PytestModel):
     @property
     def examples(self) -> List[Optional[Example]]:
         """Return feature-level examples, if any exist."""
-        if self._data.examples.examples:
+        if hasattr(self._data, "examples") and self._data.examples.examples:
             return [Example(self._data.examples)]
         return []
