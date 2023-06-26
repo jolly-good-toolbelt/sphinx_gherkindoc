@@ -9,7 +9,7 @@ import behave.model
 import behave.model_core
 
 from .files import is_rst_file
-from .glossary import step_glossary
+from .glossary import step_glossary, step_glossary_grouped
 from .parsers import parsers, ClassWithExamples
 from .utils import (
     display_name,
@@ -308,6 +308,11 @@ def feature_to_rst(
                 pathlib.Path(step.filename).resolve().relative_to(root_path),
                 step.line,
             )
+            step_glossary_grouped[step.step_type][step.name.lower()].add_reference(
+                step.name,
+                pathlib.Path(step.filename).resolve().relative_to(root_path),
+                step.line,
+            )
             formatted_step = format_step(step, step_format)
             output_file.add_output(f"| {formatted_step}")
             if step.table:
@@ -388,6 +393,7 @@ def feature_to_rst(
         if integrate_background and feature.background:
             steps(feature.background.steps, step_format=background_step_format)
         steps(scenario.steps)
+        print([step.step_type for step in scenario.steps])
         output_file.blank_line()
         examples(scenario, feature)
 

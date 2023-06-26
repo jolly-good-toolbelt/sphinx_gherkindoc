@@ -29,6 +29,23 @@ def step_glossary():
     yield
     glossary.step_glossary = old_value
 
+@pytest.fixture()
+def step_glossary_grouped():
+    old_value = copy.deepcopy(glossary.step_glossary_grouped)
+    glossary.step_glossary_grouped = defaultdict(lambda : defaultdict(glossary.GlossaryEntry))
+    glossary.step_glossary_grouped["given"]["Step one"].add_reference(
+        "Step one", pathlib.Path("filename.feature"), 12
+    )
+    glossary.step_glossary_grouped["given"]["Step one"].add_reference(
+        "Step one", pathlib.Path("filename2.feature"), 2
+    )
+    glossary.step_glossary_grouped["when"]["Step two"].add_reference(
+        "Step two", pathlib.Path("filename.feature"), 13
+    )
+    yield
+    glossary.step_glossary_grouped = old_value
+
+
 
 @pytest.fixture()
 def empty_step_glossary():
@@ -89,4 +106,31 @@ def test_make_steps_glossary():
         "        | filename.feature 13\n",
         "\n",
     ]
-    assert glossary.make_steps_glossary("Test")._output == glossary_output
+    assert glossary.make_steps_glossary("Test", False)._output == glossary_output
+
+@pytest.mark.usefixtures("step_glossary_grouped")
+def test_make_steps_glossary_group_by():
+    glossary_output = [
+        "Test Glossary\n",
+        "=============\n\n",
+        "Group By\n",
+        "--------\n\n",
+        "given\n",
+        "~~~~~\n\n",
+        "- :term:`Step one`\n",
+        "\n",
+        ".. glossary::\n",
+        "    Step one\n",
+        "        | filename.feature 12\n",
+        "        | filename2.feature 2\n",
+        "\n",
+        "when\n",
+        "~~~~\n\n",
+        "- :term:`Step two`\n",
+        "\n",
+        ".. glossary::\n",
+        "    Step two\n",
+        "        | filename.feature 13\n",
+        "\n",
+    ]
+    assert glossary.make_steps_glossary("Test", True)._output == glossary_output
