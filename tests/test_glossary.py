@@ -29,10 +29,13 @@ def step_glossary():
     yield
     glossary.step_glossary = old_value
 
+
 @pytest.fixture()
 def step_glossary_grouped():
     old_value = copy.deepcopy(glossary.step_glossary_grouped)
-    glossary.step_glossary_grouped = defaultdict(lambda : defaultdict(glossary.GlossaryEntry))
+    glossary.step_glossary_grouped = defaultdict(
+        lambda: defaultdict(glossary.GlossaryEntry)
+    )
     glossary.step_glossary_grouped["given"]["Step one"].add_reference(
         "Step one", pathlib.Path("filename.feature"), 12
     )
@@ -44,7 +47,6 @@ def step_glossary_grouped():
     )
     yield
     glossary.step_glossary_grouped = old_value
-
 
 
 @pytest.fixture()
@@ -107,6 +109,7 @@ def test_make_steps_glossary():
         "\n",
     ]
     assert glossary.make_steps_glossary("Test", False)._output == glossary_output
+
 
 @pytest.mark.usefixtures("step_glossary_grouped")
 def test_make_steps_glossary_group_by():

@@ -208,11 +208,12 @@ def main() -> None:
         help="Include steps glossary under the given name."
         " If not specified, no glossary will be created.",
     )
-    parser.add_argument("-T",
-                        "--group-step-glossary",
-                        action="store_true",
-                        default=None,
-                        help="Group step glossary by step type",
+    parser.add_argument(
+        "-T",
+        "--group-step-glossary",
+        action="store_true",
+        default=False,
+        help="Group step glossary by step type",
     )
     parser.add_argument(
         "--integrate-background",

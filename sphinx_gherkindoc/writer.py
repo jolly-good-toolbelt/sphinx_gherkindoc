@@ -393,7 +393,6 @@ def feature_to_rst(
         if integrate_background and feature.background:
             steps(feature.background.steps, step_format=background_step_format)
         steps(scenario.steps)
-        print([step.step_type for step in scenario.steps])
         output_file.blank_line()
         examples(scenario, feature)
 
