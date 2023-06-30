@@ -147,7 +147,7 @@ def process_args(
 
     if step_glossary_name:
         glossary_filename = output_path / f"{step_glossary_name}.rst"
-        glossary = make_steps_glossary(doc_project, group_step_glossary)
+        glossary = make_steps_glossary(doc_project, group_by=group_step_glossary)
 
         if args.dry_run:
             verbose("No glossary generated")
