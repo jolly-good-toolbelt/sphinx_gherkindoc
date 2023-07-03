@@ -32,7 +32,7 @@
 
 .. pull-quote::
 
-    :gherkin-tag-keyword:`Tagged:` quarantined, JIRA-1234
+    :gherkin-tag-keyword:`Tagged:` JIRA-1234, quarantined
 
 | :gherkin-step-keyword:`Given` a test feature
 | :gherkin-step-keyword:`When` the suite reaches a scenario

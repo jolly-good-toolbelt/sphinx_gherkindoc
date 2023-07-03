@@ -32,7 +32,7 @@
 
 .. pull-quote::
 
-    :gherkin-tag-keyword:`Tagged:` api, tag_with_url (Inherited from Feature: positive )
+    :gherkin-tag-keyword:`Tagged:` tag_with_url, api (Inherited from Feature: positive )
 
 | :gherkin-step-keyword:`Given` a test feature
 | :gherkin-step-keyword:`When` the suite reaches a scenario

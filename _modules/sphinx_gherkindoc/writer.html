@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sphinx_gherkindoc.writer &mdash; sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation 3.6.3 documentation</title>
+  <title>sphinx_gherkindoc.writer &mdash; sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation 3.6.4 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -28,7 +28,7 @@
             <a href="../../index.html" class="icon icon-home"> sphinx_gherkindoc - A tool to convert Gherkin into Sphinx documentation
           </a>
               <div class="version">
-                3.6.3
+                3.6.4
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -186,7 +186,7 @@
 <span class="kn">import</span> <span class="nn">behave.model_core</span>
 
 <span class="kn">from</span> <span class="nn">.files</span> <span class="kn">import</span> <span class="n">is_rst_file</span>
-<span class="kn">from</span> <span class="nn">.glossary</span> <span class="kn">import</span> <span class="n">step_glossary</span>
+<span class="kn">from</span> <span class="nn">.glossary</span> <span class="kn">import</span> <span class="n">step_glossary</span><span class="p">,</span> <span class="n">step_glossary_grouped</span>
 <span class="kn">from</span> <span class="nn">.parsers</span> <span class="kn">import</span> <span class="n">parsers</span><span class="p">,</span> <span class="n">ClassWithExamples</span>
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">display_name</span><span class="p">,</span>
@@ -485,6 +485,11 @@
                 <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">),</span>
                 <span class="n">step</span><span class="o">.</span><span class="n">line</span><span class="p">,</span>
             <span class="p">)</span>
+            <span class="n">step_glossary_grouped</span><span class="p">[</span><span class="n">step</span><span class="o">.</span><span class="n">step_type</span><span class="p">][</span><span class="n">step</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">.</span><span class="n">add_reference</span><span class="p">(</span>
+                <span class="n">step</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">),</span>
+                <span class="n">step</span><span class="o">.</span><span class="n">line</span><span class="p">,</span>
+            <span class="p">)</span>
             <span class="n">formatted_step</span> <span class="o">=</span> <span class="n">format_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">step_format</span><span class="p">)</span>
             <span class="n">output_file</span><span class="o">.</span><span class="n">add_output</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">formatted_step</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">step</span><span class="o">.</span><span class="n">table</span><span class="p">:</span>
@@ -579,7 +584,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023, Lewis Franklin, Doug Philips.
-      <span class="build">Build<a href="https://github.com//github/tree/58c454c95c2f17da24395c8db4a273b1aaa3c07f">58c454c95c2f17da24395c8db4a273b1aaa3c07f</a>.
+      <span class="build">Build<a href="https://github.com//github/tree/6e21711d773e0b532a2776d0857159795bc0db0c">6e21711d773e0b532a2776d0857159795bc0db0c</a>.
       </span></p>
   </div>
 
