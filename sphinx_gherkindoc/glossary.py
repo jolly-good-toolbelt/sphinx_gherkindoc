@@ -45,34 +45,50 @@ class GlossaryEntry(object):
 
 
 step_glossary: DefaultDict[str, GlossaryEntry] = defaultdict(GlossaryEntry)
+step_glossary_grouped: DefaultDict[str, DefaultDict[str, GlossaryEntry]] = defaultdict(
+    lambda: defaultdict(GlossaryEntry)
+)
 
 
-def make_steps_glossary(project_name: str) -> Optional[SphinxWriter]:
+def make_steps_glossary(
+    project_name: str, group_by: bool = False
+) -> Optional[SphinxWriter]:
     """Return SphinxWriter containing the step glossary information, if any."""
 
-    if not step_glossary:
+    if not step_glossary and not step_glossary_grouped:
         return None
 
     glossary = SphinxWriter()
     glossary.create_section(1, f"{project_name} Glossary")
 
-    master_step_names = {
-        name for gloss in step_glossary.values() for name in gloss.step_set
-    }
-    for term in sorted(master_step_names):
+    if group_by:
+        glossary.create_section(2, "Group By")
+
+        for step_type, glossary_group in step_glossary_grouped.items():
+            glossary.create_section(3, f"{step_type}")
+            _step_glossary(glossary, glossary_group)
+    else:
+        _step_glossary(glossary, step_glossary)
+
+    return glossary
+
+
+def _step_glossary(
+    glossary: SphinxWriter, glossary_group: DefaultDict[str, GlossaryEntry]
+) -> None:
+    step_names = {name for gloss in glossary_group.values() for name in gloss.step_set}
+    for term in sorted(step_names):
         glossary.add_output(f"- :term:`{rst_escape(term, slash_escape=True)}`")
 
     glossary.blank_line()
     glossary.add_output(".. glossary::")
-    for entry in sorted(step_glossary.values(), reverse=True):
+    for entry in sorted(glossary_group.values(), reverse=True):
         for term in sorted(entry.step_set):
             glossary.add_output(
                 rst_escape(term, slash_escape=True), indent_by=INDENT_DEPTH
             )
 
-        for location, line_numbers in sorted(entry.locations.items()):
-            definition = f"| {location} {', '.join(map(str, sorted(line_numbers)))}"
-            glossary.add_output(definition, indent_by=INDENT_DEPTH * 2)
-        glossary.blank_line()
-
-    return glossary
+            for location, line_numbers in sorted(entry.locations.items()):
+                definition = f"| {location} {', '.join(map(str, sorted(line_numbers)))}"
+                glossary.add_output(definition, indent_by=INDENT_DEPTH * 2)
+            glossary.blank_line()

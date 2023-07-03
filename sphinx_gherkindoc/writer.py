@@ -9,7 +9,7 @@ import behave.model
 import behave.model_core
 
 from .files import is_rst_file
-from .glossary import step_glossary
+from .glossary import step_glossary, step_glossary_grouped
 from .parsers import parsers, ClassWithExamples
 from .utils import (
     display_name,
@@ -304,6 +304,11 @@ def feature_to_rst(
     def steps(steps: List[behave.model.Step], step_format: str = "{}") -> None:
         for step in steps:
             step_glossary[step.name.lower()].add_reference(
+                step.name,
+                pathlib.Path(step.filename).resolve().relative_to(root_path),
+                step.line,
+            )
+            step_glossary_grouped[step.step_type][step.name.lower()].add_reference(
                 step.name,
                 pathlib.Path(step.filename).resolve().relative_to(root_path),
                 step.line,

@@ -44,6 +44,7 @@ def process_args(
     maxtocdepth = args.maxtocdepth
     toc_name = args.toc_name
     step_glossary_name = args.step_glossary_name
+    group_step_glossary = args.group_step_glossary
     doc_project = args.doc_project
     root_path = gherkin_path.resolve().parent
 
@@ -146,7 +147,7 @@ def process_args(
 
     if step_glossary_name:
         glossary_filename = output_path / f"{step_glossary_name}.rst"
-        glossary = make_steps_glossary(doc_project)
+        glossary = make_steps_glossary(doc_project, group_by=group_step_glossary)
 
         if args.dry_run:
             verbose("No glossary generated")
@@ -206,6 +207,13 @@ def main() -> None:
         default=None,
         help="Include steps glossary under the given name."
         " If not specified, no glossary will be created.",
+    )
+    parser.add_argument(
+        "-T",
+        "--group-step-glossary",
+        action="store_true",
+        default=False,
+        help="Group step glossary by step type",
     )
     parser.add_argument(
         "--integrate-background",

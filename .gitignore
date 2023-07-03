@@ -4,3 +4,4 @@
 /_docs
 /.mypy_cache
 .coverage
+*.pyc
