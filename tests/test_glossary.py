@@ -108,7 +108,7 @@ def test_make_steps_glossary():
         "        | filename.feature 13\n",
         "\n",
     ]
-    assert glossary.make_steps_glossary("Test", False)._output == glossary_output
+    assert glossary.make_steps_glossary("Test", group_by=False)._output == glossary_output
 
 
 @pytest.mark.usefixtures("step_glossary_grouped")
@@ -136,4 +136,4 @@ def test_make_steps_glossary_group_by():
         "        | filename.feature 13\n",
         "\n",
     ]
-    assert glossary.make_steps_glossary("Test", True)._output == glossary_output
+    assert glossary.make_steps_glossary("Test", group_by=True)._output == glossary_output
