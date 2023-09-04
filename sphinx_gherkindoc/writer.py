@@ -246,7 +246,7 @@ def feature_to_rst(
 
     def tags(tags: List[str], *parent_objs: behave.model_core.BasicStatement) -> None:
         # this appends the tags to the previous set
-        tag_set.update(set(tags))
+        tag_set.update(tags)
         parent_with_tags = tuple(x for x in parent_objs if x.tags)
         if not (tags or parent_with_tags):
             return
