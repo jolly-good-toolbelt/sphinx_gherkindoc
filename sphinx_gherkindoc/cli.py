@@ -11,6 +11,7 @@ import sphinx
 
 from .files import is_feature_file, is_rst_file, scan_tree
 from .glossary import make_steps_glossary
+from .tag_management import make_tag_list
 from .parsers import parsers
 from .utils import make_flat_name, set_dry_run, set_verbose, verbose
 from .writer import feature_to_rst, toctree
@@ -47,7 +48,7 @@ def process_args(
     group_step_glossary = args.group_step_glossary
     doc_project = args.doc_project
     root_path = gherkin_path.resolve().parent
-
+    tag_list_name = args.tag_list_name
     top_level_toc_filename = output_path / f"{toc_name}.rst"
 
     non_empty_dirs: Set[pathlib.Path] = set()
@@ -160,6 +161,20 @@ def process_args(
         verbose(f"Writing sphinx glossary: {glossary_filename}")
         glossary.write_to_file(glossary_filename)
 
+    if tag_list_name:
+        taglist_dox = make_tag_list(doc_project)
+        if args.dry_run:
+            verbose("No taglist generated")
+            return
+
+        if taglist_dox is None:
+            print("No tags to include in the tag list: no tag list generated")
+            return
+
+        taglist_filename = output_path / f"{tag_list_name}.rst"
+        verbose(f"Writing sphinx tag list: {taglist_filename}")
+        taglist_dox.write_to_file(taglist_filename)
+
 
 def main() -> None:
     """Convert a directory-tree of Gherkin Feature files to rST files."""
@@ -233,6 +248,12 @@ def main() -> None:
             "NOTE: This flag is only relevant when the --integrate-background flag "
             "is also included."
         ),
+    )
+    parser.add_argument(
+        "-L",
+        "--tag-list-name",
+        default=None,
+        help=("Print a list of all tags available for use"),
     )
     parser.add_argument(
         "--parser",

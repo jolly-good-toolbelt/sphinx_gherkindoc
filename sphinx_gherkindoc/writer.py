@@ -10,6 +10,7 @@ import behave.model_core
 
 from .files import is_rst_file
 from .glossary import step_glossary, step_glossary_grouped
+from .tag_management import tag_set
 from .parsers import parsers, ClassWithExamples
 from .utils import (
     display_name,
@@ -244,6 +245,8 @@ def feature_to_rst(
         return _value_with_url(tag, url) if url else tag
 
     def tags(tags: List[str], *parent_objs: behave.model_core.BasicStatement) -> None:
+        # this appends the tags to the previous set
+        tag_set.update(tags)
         parent_with_tags = tuple(x for x in parent_objs if x.tags)
         if not (tags or parent_with_tags):
             return
